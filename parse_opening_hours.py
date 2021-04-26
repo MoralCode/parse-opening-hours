@@ -123,3 +123,57 @@ def expand_day_range(start_day, end_day):
 		days.append(Weekday(index))
 	return days
 
+def parse_times(result):
+	# assumes that all three (hours, minutes, am_pm) are the same length
+	hours=None
+	minutes=result.get("minute")
+	is_24_hr=None
+	am_pm=None
+	if (result.get("hour_12")):
+		is_24_hr=False
+		hours = result.get("hour_12")
+		am_pm = result.get("am_pm")
+
+	elif (result.get("hour_24")):
+		is_24_hr=True
+		hours = result.get("hour_24")
+
+	hours = join_parsed_parts(hours)
+	minutes = join_parsed_parts(minutes)
+	hours = [int(t, 10) for t in hours]
+	minutes = [int(t, 10) for t in minutes]
+	print(hours)
+	print(minutes)
+
+	if not is_24_hr:
+		am_pm = join_parsed_parts(am_pm)
+		is_pm = [s == "pm" for s in am_pm]
+
+		hours = [militarize_hours(hours[t], am_pm[t]) for t in range(len(hours)+1)]
+	print(hours)
+	print(minutes)
+	return [(hours[t], minutes[t]) for t in range(len(hours)+1)]
+
+
+
+def join_parsed_parts(parsed):
+	if parsed is None:
+		return
+	times = [] 
+	for time in parsed:
+		times.append("".join(time))
+	
+	return times
+
+
+
+def militarize_hours(hours, is_pm):
+	# hours = int(hours, 10)
+	if is_pm:
+		hours = hours + 12
+	
+	return hours
+
+def stringify_time(time):
+	return str(time[0]) + ":" + str(time[1])
+
