@@ -13,7 +13,7 @@ from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 class JsonOpeningHours():
 
 	@classmethod
-	def parse(hours_string):
+	def parse(self, hours_string):
 		opening_hours_json = []
 
 		greet = Word(alphas) + "," + Word(alphas) + "!"
