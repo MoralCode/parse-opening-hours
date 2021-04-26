@@ -80,6 +80,40 @@ def create_entry(day, opening, closing):
 		"closes": closing
 	}
 
+def str_to_day(day_string):
+	day = day_string.lower()
+	if day in ["m", "mon", "monday"]:
+		return Weekday.MONDAY
+	elif day in ["t", "tue", "tues", "tuesday"]:
+		return Weekday.TUESDAY
+	elif day in ["w", "wed", "wednesday"]:
+		return Weekday.WEDNESDAY
+	elif day in ["th", "thu", "thurs", "thusday"]:
+		return Weekday.THURSDAY
+	elif day in ["f", "fri", "friday"]:
+		return Weekday.FRIDAY
+	elif day in ["sa", "sat", "saturday"]:
+		return Weekday.SATURDAY
+	elif day in ["su", "sun", "sunday"]:
+		return Weekday.SUNDAY
+
+def day_to_str(day):
+	if day == Weekday.MONDAY:
+		return "monday"
+	elif day == Weekday.TUESDAY:
+		return "tuesday"
+	elif day == Weekday.WEDNESDAY:
+		return "wednesday"
+	elif day == Weekday.THURSDAY:
+		return "thursday"
+	elif day == Weekday.FRIDAY:
+		return "friday"
+	elif day == Weekday.SATURDAY:
+		return "saturday"
+	elif day == Weekday.SUNDAY:
+		return "sunday"
+
+
 def expand_day_range(start_day, end_day):
 	days = []
 	start_index = start_day.value
