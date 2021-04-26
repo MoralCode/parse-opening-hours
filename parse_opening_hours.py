@@ -25,7 +25,6 @@ class JsonOpeningHours():
 
 	@classmethod
 	def parse(self, hours_string):
-		opening_hours_json = []
 
 		greet = Word(alphas) + "," + Word(alphas) + "!"
 		range_separator = oneOf("- to thru through")
@@ -69,6 +68,10 @@ class JsonOpeningHours():
 			OneOrMore(daterange + timerange + section_separator),
 			OneOrMore(timerange + daterange + section_separator)
 		])	
+		parsed = opening_hours_format.parseString(hours_string)
+		opening_hours_json = convert_to_dict(parsed)
+
+
 		return opening_hours_json
 
 
@@ -177,3 +180,24 @@ def militarize_hours(hours, is_pm):
 def stringify_time(time):
 	return str(time[0]) + ":" + str(time[1])
 
+def convert_to_dict(result):
+
+	opening_hours_json = []
+
+	start_day = str_to_day(result["startday"][0])
+	end_day = str_to_day(result["endday"][0])
+	times = parse_times(result)
+	start_time = times[0]
+	end_time = times[1]
+	days = expand_day_range(start_day, end_day)
+
+	for day in days:
+		opening_hours_json.append(
+			create_entry(
+				day_to_str(day),
+				stringify_time(start_time),
+				stringify_time(end_time)
+			)
+		)
+
+	return opening_hours_json
