@@ -9,12 +9,55 @@
 #     ...
 #   ]
 
+from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 class JsonOpeningHours():
 
 	@classmethod
 	def parse(hours_string):
 		opening_hours_json = []
 
+		greet = Word(alphas) + "," + Word(alphas) + "!"
+		range_separator = oneOf("- to thru through")
+		section_separator = Optional(",")
+		time_separator = Optional(":")
+		day = Word(alphas)
+		am_or_pm = Optional(
+			Or([
+				Char("Aa"),
+				Char("Pp")
+			]) +
+			Char("Mm")
+		)
+
+		hour = Or([
+			Char(nums),
+			"0" + Char(nums),
+			"1" + Char("012")
+		])
+		milhour = Or([
+			hour,
+			Or([
+				"1" + Char("3456789"),
+				"2" + Char("0123")
+			])	
+		])
+		# twelve_hr =  hour
+		minute = Char("012345") + Char(nums)
+		time_minutes = Optional(time_separator + minute.setResultsName('minute'))
+		miltime = milhour.setResultsName('hour_24') + time_minutes
+		
+		time_12hr = hour.setResultsName('hour_12') + time_minutes + am_or_pm
+
+		daterange = day.setResultsName('startday') + range_separator + day.setResultsName('endday')
+
+		anytime = Or([ miltime, time_12hr])
+
+		timerange = anytime.setResultsName('starttime') + range_separator + anytime.setResultsName('endtime')
+
+		opening_hours_format = Or([
+			OneOrMore(daterange + timerange + section_separator),
+			OneOrMore(timerange + daterange + section_separator)
+		])	
 		return opening_hours_json
 
 
