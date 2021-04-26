@@ -38,7 +38,7 @@ class JsonOpeningHours():
 				Char("Pp")
 			]) +
 			Char("Mm")
-		)
+		).setResultsName('am_pm')
 
 		hour = Or([
 			Char(nums),
