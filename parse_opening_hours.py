@@ -10,6 +10,17 @@
 #   ]
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
+import enum
+
+class Weekday(enum.Enum):
+    MONDAY = 1
+    TUESDAY = 2
+    WEDNESDAY = 3
+    THURSDAY = 4
+    FRIDAY = 5
+    SATURDAY = 6
+    SUNDAY = 7
+
 class JsonOpeningHours():
 
 	@classmethod
@@ -68,4 +79,13 @@ def create_entry(day, opening, closing):
 		"opens": opening,
 		"closes": closing
 	}
+
+def expand_day_range(start_day, end_day):
+	days = []
+	start_index = start_day.value
+	end_index = end_day.value
+
+	for index in range(start_index, end_index+1, 1):
+		days.append(Weekday(index))
+	return days
 
