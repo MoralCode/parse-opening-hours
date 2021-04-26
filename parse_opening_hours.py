@@ -63,7 +63,7 @@ class JsonOpeningHours():
 
 		anytime = Or([ miltime, time_12hr])
 
-		timerange = anytime.setResultsName('starttime') + range_separator + anytime.setResultsName('endtime')
+		timerange = anytime + range_separator + anytime
 
 		opening_hours_format = Or([
 			OneOrMore(daterange + timerange + section_separator),
