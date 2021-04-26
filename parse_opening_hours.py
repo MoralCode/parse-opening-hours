@@ -19,3 +19,10 @@ class JsonOpeningHours():
 
 
 
+def create_entry(day, opening, closing):
+	return {
+		"day": day,
+		"opens": opening,
+		"closes": closing
+	}
+
