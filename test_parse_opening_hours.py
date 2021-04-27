@@ -66,8 +66,7 @@ class TestHoursParsing(unittest.TestCase):
 			"M 9-5"
 		]
 		expected_result = [ self.mon_9_to_5 ]
-		for input_str in input_strings:
-			self.assertEqual(JsonOpeningHours.parse(input_str), expected_result)
+		self.run_tests(input_strings,expected_result)
 
 
 
@@ -79,8 +78,7 @@ class TestHoursParsing(unittest.TestCase):
 			"M 9:00am - 5:00pm"
 		]
 		expected_result = [ self.mon_9_to_5 ]
-		for input_str in input_strings:
-			self.assertEqual(JsonOpeningHours.parse(input_str), expected_result)
+		self.run_tests(input_strings,expected_result)
 
 	def test_time_formatting(self):
 		# TODO: implement assumption of pm if end time <= start time
@@ -95,8 +93,7 @@ class TestHoursParsing(unittest.TestCase):
 			"Monday 9am through 5pm"
 		]
 		expected_result = [ self.mon_9_to_5 ]
-		for input_str in input_strings:
-			self.assertEqual(JsonOpeningHours.parse(input_str), expected_result)
+		self.run_tests(input_strings,expected_result)
 	
 	
 	def test_multi_day(self):
@@ -113,8 +110,7 @@ class TestHoursParsing(unittest.TestCase):
 
 		]
 		expected_result = [ self.mon_9_to_5, self.tue_9_to_5, self.wed_9_to_5 ]
-		for input_str in input_strings:
-			self.assertEqual(JsonOpeningHours.parse(input_str), expected_result)
+		self.run_tests(input_strings,expected_result)
 
 	def test_allweek(self):
 		# TODO: implement assumption of pm if end time <= start time
@@ -132,8 +128,7 @@ class TestHoursParsing(unittest.TestCase):
 			"9:00am - 5:00pm Every Day"
 		]
 		expected_result = self.allweek_9_to_5
-		for input_str in input_strings:
-			self.assertEqual(JsonOpeningHours.parse(input_str), expected_result)
+		self.run_tests(input_strings,expected_result)
 
 	def test_workweek(self):
 		# TODO: implement assumption of pm if end time <= start time
@@ -148,8 +143,7 @@ class TestHoursParsing(unittest.TestCase):
 			"9:00am - 5:00pm Business Days"
 		]
 		expected_result = self.workweek_9_to_5
-		for input_str in input_strings:
-			self.assertEqual(JsonOpeningHours.parse(input_str), expected_result)
+		self.run_tests(input_strings,expected_result)
 
 	def test_create_entry(self):
 		self.assertEqual(
@@ -162,6 +156,11 @@ class TestHoursParsing(unittest.TestCase):
 			expand_day_range(Weekday.MONDAY, Weekday.FRIDAY),
 			[Weekday.MONDAY, Weekday.TUESDAY, Weekday.WEDNESDAY, Weekday.THURSDAY, Weekday.FRIDAY]
 		)
+
+	def run_tests(self, input_strings, expected_result):
+		for input_str in input_strings:
+			print("Testing String: ", input_str)
+			self.assertEqual(JsonOpeningHours.parse(input_str), expected_result)
 
 if __name__ == '__main__':
 	unittest.main()
