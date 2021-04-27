@@ -31,38 +31,19 @@ class JsonOpeningHours():
 		section_separator = Optional(",")
 		time_separator = Optional(":")
 		day = Word(alphas)
-		am_or_pm = Optional(
-			Or([
-				Char("Aa"),
-				Char("Pp")
-			]) +
-			Char("Mm")
-		).setResultsName('am_pm')
+		time_number = Word(nums, max=2)
+		am_or_pm = Word("AaPpMm").setResultsName('am_pm', listAllMatches=True)
 
-		hour = Or([
-			Char(nums),
-			"0" + Char(nums),
-			"1" + Char("012")
-		])
-		milhour = Or([
-			hour,
-			Or([
-				"1" + Char("3456789"),
-				"2" + Char("0123")
-			])	
-		])
-		# twelve_hr =  hour
-		minute = Char("012345") + Char(nums)
-		time_minutes = Optional(time_separator + minute.setResultsName('minute'))
-		miltime = milhour.setResultsName('hour_24') + time_minutes
+		hour = time_number("hour*")
+		minute = time_number("minute*")
+		time_minutes = Optional(time_separator + minute)
+		# miltime = milhour.setResultsName('hour_24') + time_minutes
 		
-		time_12hr = hour.setResultsName('hour_12') + time_minutes + am_or_pm
+		time = hour + time_minutes + am_or_pm
 
-		daterange = day.setResultsName('startday') + range_separator + day.setResultsName('endday')
+		daterange = day.setResultsName('startday', listAllMatches=True) + range_separator + day.setResultsName('endday', listAllMatches=True)
 
-		anytime = Or([ miltime, time_12hr])
-
-		timerange = anytime + range_separator + anytime
+		timerange = time.setResultsName('starttime', listAllMatches=True) + range_separator + time.setResultsName('endtime', listAllMatches=True)
 
 		opening_hours_format = Or([
 			OneOrMore(daterange + timerange + section_separator),
@@ -128,46 +109,27 @@ def expand_day_range(start_day, end_day):
 
 def parse_times(result):
 	# assumes that all three (hours, minutes, am_pm) are the same length
-	hours=None
-	minutes=result.get("minute")
+	hours=result.get("hour")
+	minutes=result["minute"]
 	is_24_hr=None
-	am_pm=None
-	if (result.get("hour_12")):
+	am_pm=result.get("am_pm")
+
+	if (am_pm is not None):
 		is_24_hr=False
-		hours = result.get("hour_12")
-		am_pm = result.get("am_pm")
-
-	elif (result.get("hour_24")):
+	else:
 		is_24_hr=True
-		hours = result.get("hour_24")
 
-	hours = join_parsed_parts(hours)
-	minutes = join_parsed_parts(minutes)
 	hours = [int(t, 10) for t in hours]
 	minutes = [int(t, 10) for t in minutes]
-	print(hours)
-	print(minutes)
+
 
 	if not is_24_hr:
-		am_pm = join_parsed_parts(am_pm)
 		is_pm = [s == "pm" for s in am_pm]
 
 		hours = [militarize_hours(hours[t], am_pm[t]) for t in range(len(hours)+1)]
 	print(hours)
 	print(minutes)
 	return [(hours[t], minutes[t]) for t in range(len(hours)+1)]
-
-
-
-def join_parsed_parts(parsed):
-	if parsed is None:
-		return
-	times = [] 
-	for time in parsed:
-		times.append("".join(time))
-	
-	return times
-
 
 
 def militarize_hours(hours, is_pm):
