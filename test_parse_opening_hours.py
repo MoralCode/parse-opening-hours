@@ -147,7 +147,7 @@ class TestHoursParsing(unittest.TestCase):
 
 	def test_create_entry(self):
 		self.assertEqual(
-			create_entry("monday", "9:00", "5:00"),
+			create_entry("monday", "9:00", "17:00"),
 			self.mon_9_to_5
 		)
 
