@@ -127,8 +127,6 @@ def parse_times(result):
 		is_pm = [s.lower() == "pm" for s in am_pm]
 
 		hours = [militarize_hours(hours[t], is_pm[t]) for t in range(len(hours))]
-	print(hours)
-	print(minutes)
 	return [(hours[t], minutes[t]) for t in range(len(hours))]
 
 
