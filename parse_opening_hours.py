@@ -32,7 +32,7 @@ class JsonOpeningHours():
 		time_separator = Optional(":")
 		day = Word(alphas)
 		time_number = Word(nums, max=2)
-		am_or_pm = Word("AaPpMm").setResultsName('am_pm', listAllMatches=True)
+		am_or_pm = Optional(Word("AaPpMm", max=2).setResultsName('am_pm', listAllMatches=True))
 
 		hour = time_number("hour*")
 		minute = time_number("minute*")
@@ -41,9 +41,9 @@ class JsonOpeningHours():
 		
 		time = hour + time_minutes + am_or_pm
 
-		daterange = day.setResultsName('startday', listAllMatches=True) + range_separator + day.setResultsName('endday', listAllMatches=True)
+		daterange = day.setResultsName('startday', listAllMatches=True) + Optional(range_separator + day.setResultsName('endday', listAllMatches=True))
 
-		timerange = time.setResultsName('starttime', listAllMatches=True) + range_separator + time.setResultsName('endtime', listAllMatches=True)
+		timerange = time.setResultsName('starttime', listAllMatches=True) + Optional(range_separator + time.setResultsName('endtime', listAllMatches=True))
 
 		opening_hours_format = Or([
 			OneOrMore(daterange + timerange + section_separator),
