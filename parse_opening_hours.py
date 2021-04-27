@@ -27,7 +27,7 @@ class JsonOpeningHours():
 	def parse(self, hours_string):
 
 		greet = Word(alphas) + "," + Word(alphas) + "!"
-		range_separator = oneOf("- to thru through")
+		range_separator = Or([Word(" –—‐-"), oneOf("to thru through until")])
 		section_separator = Optional(",")
 		time_separator = Optional(":")
 		day = Word(alphas)
