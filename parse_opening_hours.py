@@ -140,7 +140,7 @@ def militarize_hours(hours, is_pm):
 	return hours
 
 def stringify_time(time):
-	return str(time[0]) + ":" + str(time[1])
+	return '{:d}:{:02d}'.format(time[0], time[1])
 
 def convert_to_dict(result):
 
