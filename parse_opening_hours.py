@@ -129,7 +129,7 @@ def parse_times(result):
 	if not is_24_hr:
 		is_pm = [s.lower() == "pm" for s in am_pm]
 
-		hours = [militarize_hours(hours[t], is_pm[t]) for t in range(len(hours))]
+		hours = [militarize_hours(hours[t], is_pm[t]) for t in range(len(hours)-1)]
 
 	if minutes is not None:
 		minutes = [int(t, 10) for t in minutes]
