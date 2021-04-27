@@ -65,6 +65,8 @@ def create_entry(day, opening, closing):
 	}
 
 def str_to_day(day_string):
+	if day_string is None:
+		return None
 	day = day_string.lower()
 	if day in ["m", "mon", "monday"]:
 		return Weekday.MONDAY
@@ -99,6 +101,8 @@ def day_to_str(day):
 
 
 def expand_day_range(start_day, end_day):
+	if end_day is None:
+		return [start_day]
 	days = []
 	start_index = start_day.value
 	end_index = end_day.value
@@ -110,7 +114,7 @@ def expand_day_range(start_day, end_day):
 def parse_times(result):
 	# assumes that all three (hours, minutes, am_pm) are the same length
 	hours=result.get("hour")
-	minutes=result["minute"]
+	minutes=result.get("minute")
 	is_24_hr=None
 	am_pm=result.get("am_pm")
 
@@ -120,14 +124,18 @@ def parse_times(result):
 		is_24_hr=True
 
 	hours = [int(t, 10) for t in hours]
-	minutes = [int(t, 10) for t in minutes]
 
 
 	if not is_24_hr:
 		is_pm = [s.lower() == "pm" for s in am_pm]
 
 		hours = [militarize_hours(hours[t], is_pm[t]) for t in range(len(hours))]
-	return [(hours[t], minutes[t]) for t in range(len(hours))]
+
+	if minutes is not None:
+		minutes = [int(t, 10) for t in minutes]
+		return [(hours[t], minutes[t]) for t in range(len(hours)-1)]
+	else:
+		return [(t, 0) for t in hours]
 
 
 def militarize_hours(hours, is_pm):
@@ -145,7 +153,8 @@ def convert_to_dict(result):
 	opening_hours_json = []
 
 	start_day = str_to_day(result["startday"][0])
-	end_day = str_to_day(result["endday"][0])
+	end_day = result.get("endday")
+	end_day = str_to_day(end_day[0]) if end_day is not None else end_day
 	times = parse_times(result)
 	start_time = times[0]
 	end_time = times[1]
