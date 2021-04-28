@@ -26,7 +26,6 @@ class JsonOpeningHours():
 	@classmethod
 	def parse(self, hours_string):
 
-		greet = Word(alphas) + "," + Word(alphas) + "!"
 		range_separator = Or([Word(" –—‐-"), oneOf("to thru through until")])
 		#TODO: support multiple sections like M 8am-2pm, W 9am-2pm
 		# section_separator = Optional(",")
