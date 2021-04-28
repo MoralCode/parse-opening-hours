@@ -154,6 +154,16 @@ class TestHoursParsing(unittest.TestCase):
 			create_entry("monday", "9:00", "17:00"),
 			self.mon_9_to_5
 		)
+		notestest = {
+			"day": "monday",
+			"opens": "9:00",
+			"closes": "17:00",
+			"notes": "hi"
+		}
+		self.assertEqual(
+			create_entry("monday", "9:00", "17:00", notes="hi"),
+			notestest
+		)
 
 	def test_expand_day_range(self):
 		self.assertEqual(

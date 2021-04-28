@@ -59,12 +59,15 @@ class JsonOpeningHours():
 
 
 
-def create_entry(day, opening, closing):
-	return {
+def create_entry(day, opening, closing, notes=None):
+	entry = {
 		"day": day,
 		"opens": opening,
 		"closes": closing
 	}
+	if notes:
+		entry["notes"] = notes
+	return entry
 
 def str_to_day(day_string):
 	if day_string is None:
