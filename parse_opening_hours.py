@@ -114,28 +114,21 @@ def expand_day_range(start_day, end_day):
 def parse_times(result):
 	# assumes that all three (hours, minutes, am_pm) are the same length
 	hours=result.get("hour")
-	minutes=result.get("minute")
-	is_24_hr=None
+	minutes=result.get("minute") or [0,0] # if no minutes provided, assume 0 minutes
 	am_pm=result.get("am_pm")
-
-	if (am_pm is not None):
-		is_24_hr=False
-	else:
-		is_24_hr=True
+	is_24_hr=(am_pm is None)
 
 	hours = [int(t, 10) for t in hours]
-
 
 	if not is_24_hr:
 		is_pm = [s.lower() == "pm" for s in am_pm]
 
 		hours = [militarize_hours(hours[t], is_pm[t]) for t in range(len(hours))]
 
-	if minutes is not None:
-		minutes = [int(t, 10) for t in minutes]
-		return [(hours[t], minutes[t]) for t in range(len(hours))]
-	else:
-		return [(t, 0) for t in hours]
+	minutes = [int(t, 10) for t in minutes]
+		
+	return [(hours[t], minutes[t]) for t in range(len(hours))]
+
 
 
 def militarize_hours(hours, is_pm):
