@@ -111,6 +111,9 @@ def expand_day_range(start_day, end_day):
 		days.append(Weekday(index))
 	return days
 
+def detect_if_pm(string):
+	return "p" in string.lower()
+
 def parse_times(result):
 	# assumes that all three (hours, minutes, am_pm) are the same length
 	hours=result.get("hour")
@@ -121,7 +124,7 @@ def parse_times(result):
 	hours = [int(t, 10) for t in hours]
 
 	if not is_24_hr:
-		is_pm = [s.lower() == "pm" for s in am_pm]
+		is_pm = [detect_if_pm(s) for s in am_pm]
 
 		hours = [militarize_hours(hours[t], is_pm[t]) for t in range(len(hours))]
 
