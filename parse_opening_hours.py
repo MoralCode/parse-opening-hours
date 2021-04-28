@@ -28,7 +28,7 @@ class JsonOpeningHours():
 
 		range_separator = Or([Word(" –—‐-"), oneOf("to thru through until")])
 		#TODO: support multiple sections like M 8am-2pm, W 9am-2pm
-		# section_separator = Optional(",")
+		section_separator = Optional(",")
 		time_separator = Optional(":")
 		day = Word(alphas)
 		time_number = Word(nums, max=2)
@@ -45,7 +45,7 @@ class JsonOpeningHours():
 
 		timerange = time.setResultsName('starttime', listAllMatches=True) + Optional(range_separator + time.setResultsName('endtime', listAllMatches=True))
 
-		notes = Optional(OneOrMore(Word(alphas))).setResultsName('notes', listAllMatches=True)
+		notes = section_separator + Optional(OneOrMore(Word(alphas))).setResultsName('notes', listAllMatches=True)
 
 		opening_hours_format = Or([
 			OneOrMore(daterange + timerange + notes),
