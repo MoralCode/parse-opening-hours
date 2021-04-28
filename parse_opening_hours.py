@@ -33,7 +33,7 @@ class JsonOpeningHours():
 		time_separator = Optional(":")
 		day = Word(alphas)
 		time_number = Word(nums, max=2)
-		am_or_pm = Optional(Word("AaPpMm", max=2).setResultsName('am_pm', listAllMatches=True))
+		am_or_pm = Optional(Word("AaPpMm.").setResultsName('am_pm', listAllMatches=True))
 
 		hour = time_number("hour*")
 		minute = time_number("minute*")
