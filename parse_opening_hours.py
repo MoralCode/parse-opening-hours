@@ -45,9 +45,11 @@ class JsonOpeningHours():
 
 		timerange = time.setResultsName('starttime', listAllMatches=True) + Optional(range_separator + time.setResultsName('endtime', listAllMatches=True))
 
+		notes = Optional(OneOrMore(Word(alphas))).setResultsName('notes', listAllMatches=True)
+
 		opening_hours_format = Or([
-			OneOrMore(daterange + timerange),
-			OneOrMore(timerange + daterange)
+			OneOrMore(daterange + timerange + notes),
+			OneOrMore(timerange + daterange + notes)
 		])	
 		parsed = opening_hours_format.parseString(hours_string)
 		opening_hours_json = convert_to_dict(parsed)
