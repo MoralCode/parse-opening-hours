@@ -11,7 +11,7 @@
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 from patterns import *
-from helpers import detect_if_pm, str_to_day, day_to_str, expand_day_range, value_from_parsed
+from helpers import detect_if_pm, str_to_day, day_to_str, expand_day_range, value_from_parsed, str_from_parsed
 from models.time import Time
 
 
@@ -59,8 +59,8 @@ def convert_to_dict(result, assume_type=None):
 
 	opening_hours_json = []
 
-	start_day = str_to_day(result["startday"][0])
-	end_day = result.get("endday")
+	start_day = str_to_day(str_from_parsed(result, "startday"))
+	end_day = str_from_parsed(result, "endday", default=None)
 	end_day = str_to_day(end_day[0]) if end_day is not None else end_day
 	start_time, end_time = parse_times(result, assume_type=assume_type)
 	days = expand_day_range(start_day, end_day)
