@@ -1,5 +1,5 @@
 import enum
-from ..patterns import *
+from patterns import *
 from helpers import int_from_parsed, str_from_parsed
 
 class TimeType(enum.Enum):
