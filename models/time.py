@@ -82,7 +82,7 @@ class Time:
 		hours = self.hours
 
 		if self.is_unknown():
-			raise TypeError("Cannot convert a time of unknown type without assuming its type.")
+			raise TypeError("Cannot convert a time of unknown type (AM, PM or 24H) without assuming its type.")
 
 		elif self.is_24_hr():
 			return self
