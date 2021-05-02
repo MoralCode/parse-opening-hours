@@ -6,13 +6,13 @@ class TestTime(unittest.TestCase):
 
 	def test_stringify_time(self):
 		self.assertEqual(
-			new Time(11,17,TimeType.MILITARY),
+			Time(11,17,TimeType.MILITARY),
 			"11:17"
 		)
 	
 	def test_militarize_hours(self):
-		testTimeMil = new Time(11,17,TimeType.MILITARY)
-		testTimePm = new Time(11,17,TimeType.PM)
+		testTimeMil = Time(11,17,TimeType.MILITARY)
+		testTimePm = Time(11,17,TimeType.PM)
 		self.assertEqual(
 			testTimeMil.get_as_military_time().get_hours(),
 			11

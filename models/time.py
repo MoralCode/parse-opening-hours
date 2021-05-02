@@ -87,7 +87,7 @@ class Time:
 		elif self.is_pm():
 			hours = hours + 12
 		
-		return new Time(hours, self.minutes, time_type=TimeType.MILITARY)
+		return Time(hours, self.minutes, time_type=TimeType.MILITARY)
 			
 	
 	def to_string(self, format_str='{:d}:{:02d}'):
