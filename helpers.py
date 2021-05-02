@@ -62,6 +62,9 @@ def expand_day_range(start_day, end_day):
 	return days
 
 def int_from_parsed(parsed, key, default=0):
+	if parsed is None:
+		return default
+
 	num = result.get("hour")
 	if num is None:
 		return default
