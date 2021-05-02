@@ -65,7 +65,7 @@ def value_from_parsed(parsed, key, default=None):
 	if parsed is None:
 		return default
 
-	val = parsed.get("hour")
+	val = parsed.get(key)
 	if val is None:
 		return default
 	
