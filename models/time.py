@@ -2,7 +2,7 @@ import enum
 from ..patterns import *
 
 class TimeType(enum.Enum):
-    UNKNOWN = 0
+	UNKNOWN = 0
 	AM = 1
 	PM = 2
 	MILITARY = 3
@@ -25,7 +25,7 @@ class Time:
 		
 		time_obj = cls(hours, minutes)
 		time_obj.set_type_from_string(am_pm)
-		
+
 		return time_obj
 
 	def __init__(self, hours, minutes, time_type=TimeType.UNKNOWN):
