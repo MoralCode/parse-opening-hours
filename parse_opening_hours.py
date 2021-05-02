@@ -55,17 +55,6 @@ def parse_times(result):
 		end.get_as_military_time().to_string()
 		)
 
-
-def militarize_hours(hours, is_pm):
-	# hours = int(hours, 10)
-	if is_pm:
-		hours = hours + 12
-	
-	return hours
-
-def stringify_time(time):
-	return '{:d}:{:02d}'.format(time[0], time[1])
-
 def convert_to_dict(result):
 
 	opening_hours_json = []
