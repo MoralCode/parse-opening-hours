@@ -31,7 +31,7 @@ class Time:
 
 	def __init__(self, hours, minutes, time_type=TimeType.UNKNOWN):
 		self.hours = hours
-		self.minutes = minutes
+		self.minutes = minutes or 0
 		self.time_type = time_type or TimeType.UNKNOWN
 
 		# automatically detect the time as military time if the hours are set to a value > 12
