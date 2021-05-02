@@ -1,6 +1,6 @@
 import enum
 from ..patterns import *
-from helpers import int_from_parsed
+from helpers import int_from_parsed, str_from_parsed
 
 class TimeType(enum.Enum):
 	UNKNOWN = 0
@@ -22,7 +22,7 @@ class Time:
 		result = time.parseString(string)
 		hours = int_from_parsed(result, "hour")
 		minutes = int_from_parsed(result, "minute")
-		am_pm = result.get("am_pm")
+		am_pm = str_from_parsed(result, "am_pm")
 		
 		time_obj = cls(hours, minutes)
 		time_obj.set_type_from_string(am_pm)
