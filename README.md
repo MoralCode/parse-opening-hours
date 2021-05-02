@@ -15,6 +15,11 @@ opening_hours = [
 
 ## Usage
 
+The simplest example is just printing the JSON for an opening hours string:
+```python
+print(JsonOpeningHours.parse("Mon- Fri 9:00am - 5:30pm"))
+```
+
 
 ## Tests
 
