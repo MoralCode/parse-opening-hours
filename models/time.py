@@ -27,6 +27,9 @@ class Time:
 		time_obj = cls(hours, minutes)
 		time_obj.set_type_from_string(am_pm)
 
+		if time_obj.is_unknown() and assume_type is not None:
+			time_obj.set_type_from_string(assume_type)
+
 		return time_obj
 
 	def __init__(self, hours, minutes, time_type=TimeType.UNKNOWN):
