@@ -14,15 +14,19 @@ class Time:
 	time_type = TimeType.UNKNOWN
 
 	@classmethod
-	def from_string(self, string, assume_type=None):
+	def from_string(cls, string, assume_type=None):
 		"""
 		create a time object from a string
 		"""
 		result = time.parseString(string)
 		hours = int(result.get("hour"), 10)
 		minutes = int(result.get("minute"), 10)
-
-		return new Time(hours, minutes, time_type=)
+		am_pm = result.get("am_pm")
+		
+		time_obj = cls(hours, minutes)
+		time_obj.set_type_from_string(am_pm)
+		
+		return time_obj
 
 	def __init__(self, hours, minutes, time_type=TimeType.UNKNOWN):
 		self.hours = hours
