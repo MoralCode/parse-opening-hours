@@ -95,3 +95,9 @@ class Time:
 	
 	def to_string(self, format_str='{:d}:{:02d}'):
 		return format_str.format(self.hours, self.minutes)
+	
+	def __eq__(self, other):
+		if not isinstance(other, Time):
+			# don't attempt to compare against unrelated types
+			raise NotImplementedError()
+		return self.hours == other.hours and self.minutes == other.minutes and self.time_type == other.time_type
