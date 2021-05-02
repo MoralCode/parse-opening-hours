@@ -10,6 +10,7 @@
 #   ]
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
+from helpers import detect_if_pm
 import enum
 
 class Weekday(enum.Enum):
@@ -115,9 +116,6 @@ def expand_day_range(start_day, end_day):
 	for index in range(start_index, end_index+1, 1):
 		days.append(Weekday(index))
 	return days
-
-def detect_if_pm(string):
-	return "p" in string.lower()
 
 def parse_times(result):
 	# assumes that all three (hours, minutes, am_pm) are the same length
