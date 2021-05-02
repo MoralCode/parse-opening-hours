@@ -109,8 +109,8 @@ class TestHoursParsing(unittest.TestCase):
 			"Monday-Wednesday 9:00 - 5:00",
 			"Mon-Wed 9:00 - 5:00",
 			"M-W 9:00 - 5:00",
-			"Monday through Friday 9:00 - 5:00",
-			"Monday to Friday 9:00 - 5:00",
+			"Monday through Wednesday 9:00 - 5:00",
+			"Monday to Wednesday 9:00 - 5:00",
 
 		]
 		expected_result = [ self.mon_9_to_5, self.tue_9_to_5, self.wed_9_to_5 ]
