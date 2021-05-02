@@ -165,17 +165,6 @@ class TestHoursParsing(unittest.TestCase):
 			notestest
 		)
 
-	
-	def test_stringify_time(self):
-		self.assertEqual(
-			stringify_time((11,17)),
-			"11:17"
-		)
-	
-	def test_militarize_hours(self):
-		self.assertEqual( militarize_hours(11, False), 11)
-		self.assertEqual( militarize_hours(11, True), 23)
-
 	def run_tests(self, input_strings, expected_result):
 		for input_str in input_strings:
 			print("Testing String: ", input_str)

@@ -3,11 +3,24 @@ import unittest
 from time import *
 
 class TestTime(unittest.TestCase):
-	# def test_expand_day_range(self):
-	# 	self.assertEqual(
-	# 		expand_day_range(Weekday.MONDAY, Weekday.FRIDAY),
-	# 		[Weekday.MONDAY, Weekday.TUESDAY, Weekday.WEDNESDAY, Weekday.THURSDAY, Weekday.FRIDAY]
-	# 	)
+
+	def test_stringify_time(self):
+		self.assertEqual(
+			new Time(11,17,TimeType.MILITARY),
+			"11:17"
+		)
+	
+	def test_militarize_hours(self):
+		testTimeMil = new Time(11,17,TimeType.MILITARY)
+		testTimePm = new Time(11,17,TimeType.PM)
+		self.assertEqual(
+			testTimeMil.get_as_military_time().get_hours(),
+			11
+		)
+		self.assertEqual(
+			testTimePm.get_as_military_time().get_hours(),
+			23
+		)
 
 if __name__ == '__main__':
 	unittest.main()
