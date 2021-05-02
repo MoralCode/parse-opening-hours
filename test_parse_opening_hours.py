@@ -66,7 +66,7 @@ class TestHoursParsing(unittest.TestCase):
 			"M 9-5"
 		]
 		expected_result = [ self.mon_9_to_5 ]
-		self.run_tests(input_strings,expected_result)
+		self.run_tests(input_strings,expected_result, assume_type=TimeType.AM)
 
 
 
@@ -78,7 +78,7 @@ class TestHoursParsing(unittest.TestCase):
 			"M 9:00am - 5:00pm"
 		]
 		expected_result = [ self.mon_9_to_5 ]
-		self.run_tests(input_strings,expected_result)
+		self.run_tests(input_strings,expected_result, assume_type=TimeType.AM)
 
 	def test_time_formatting(self):
 		# TODO: implement assumption of pm if end time <= start time
@@ -97,7 +97,7 @@ class TestHoursParsing(unittest.TestCase):
 			"Monday 9am through 5pm"
 		]
 		expected_result = [ self.mon_9_to_5 ]
-		self.run_tests(input_strings,expected_result)
+		self.run_tests(input_strings,expected_result, assume_type=TimeType.AM)
 	
 	
 	def test_multi_day(self):
@@ -165,10 +165,10 @@ class TestHoursParsing(unittest.TestCase):
 			notestest
 		)
 
-	def run_tests(self, input_strings, expected_result):
+	def run_tests(self, input_strings, expected_result, **kwargs):
 		for input_str in input_strings:
 			print("Testing String: ", input_str)
-			self.assertEqual(JsonOpeningHours.parse(input_str), expected_result)
+			self.assertEqual(JsonOpeningHours.parse(input_str, **kwargs), expected_result)
 
 if __name__ == '__main__':
 	unittest.main()
