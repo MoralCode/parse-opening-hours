@@ -8,12 +8,7 @@ day = Word(alphas)
 time_number = Word(nums, max=2)
 am_or_pm = Optional(Word("AaPpMm.").setResultsName('am_pm', listAllMatches=True))
 
-hour = time_number("hour*")
-minute = time_number("minute*")
-time_minutes = Optional(time_separator + minute)
-# miltime = milhour.setResultsName('hour_24') + time_minutes
-
-time = hour + time_minutes + am_or_pm
+time = time_number("hour*") + time_separator + Optional(time_number("minute*")) + am_or_pm
 
 daterange = day.setResultsName('startday', listAllMatches=True) + Optional(range_separator + day.setResultsName('endday', listAllMatches=True))
 
