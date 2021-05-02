@@ -1,8 +1,42 @@
 
 import unittest
-from time import *
+from .time import *
 
 class TestTime(unittest.TestCase):
+
+	def test_from_string_unknown(self):
+		test_str = "9:00"
+		test_9 = Time(9,0)
+		test_9_str = Time.from_string(test_str)
+		print(test_9_str.minutes)
+		self.assertEqual(
+			test_9_str.hours,
+			test_9.hours
+		)
+		self.assertEqual(
+			test_9_str.minutes,
+			test_9.minutes
+		)
+		self.assertEqual(
+			test_9_str.time_type,
+			test_9.time_type
+		)
+
+
+	def test_from_string_am(self):
+		times_9am = [
+			"9:00am",
+			"9am",
+			# "0900",
+			# "900"
+		]
+		test_9am = Time(9,0, time_type=TimeType.AM)
+		for time_str in times_9am:
+			self.assertEqual(
+				Time.from_string(time_str),
+				test_9am
+			)
+
 
 	def test_stringify_time(self):
 		self.assertEqual(
