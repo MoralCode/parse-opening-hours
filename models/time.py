@@ -33,6 +33,10 @@ class Time:
 		self.minutes = minutes
 		self.time_type = time_type or TimeType.UNKNOWN
 
+		# automatically detect the time as military time if the hours are set to a value > 12
+		if self.is_unknown() and self.hours > 12:
+			self.set_type(TimeType.MILITARY)
+
 	def get_type(self):
 		return self.time_type
 	
