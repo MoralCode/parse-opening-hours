@@ -11,7 +11,8 @@
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 from patterns import *
-from helpers import detect_if_pm, str_to_day, day_to_str, expand_day_range
+from helpers import detect_if_pm, str_to_day, day_to_str, expand_day_range, value_from_parsed
+from models.time import Time
 
 
 class JsonOpeningHours():
@@ -44,22 +45,15 @@ def create_entry(day, opening, closing, notes=None):
 
 def parse_times(result):
 	# assumes that all three (hours, minutes, am_pm) are the same length
-	hours=result.get("hour")
-	minutes=result.get("minute") or [0,0] # if no minutes provided, assume 0 minutes
-	am_pm=result.get("am_pm")
-	is_24_hr=(am_pm is None)
+	start = value_from_parsed(result, "starttime")
+	end = value_from_parsed(result, "endtime")
+	start = Time.from_string("".join(start))
+	end = Time.from_string("".join(end))
 
-	hours = [int(t, 10) for t in hours]
-
-	if not is_24_hr:
-		is_pm = [detect_if_pm(s) for s in am_pm]
-
-		hours = [militarize_hours(hours[t], is_pm[t]) for t in range(len(hours))]
-
-	minutes = [int(t, 10) for t in minutes]
-		
-	return [(hours[t], minutes[t]) for t in range(len(hours))]
-
+	return (
+		start.get_as_military_time().to_string(),
+		end.get_as_military_time().to_string()
+		)
 
 
 def militarize_hours(hours, is_pm):
@@ -79,17 +73,15 @@ def convert_to_dict(result):
 	start_day = str_to_day(result["startday"][0])
 	end_day = result.get("endday")
 	end_day = str_to_day(end_day[0]) if end_day is not None else end_day
-	times = parse_times(result)
-	start_time = times[0]
-	end_time = times[1]
+	start_time, end_time = parse_times(result)
 	days = expand_day_range(start_day, end_day)
 
 	for day in days:
 		opening_hours_json.append(
 			create_entry(
 				day_to_str(day),
-				stringify_time(start_time),
-				stringify_time(end_time)
+				start_time,
+				end_time
 			)
 		)
 
