@@ -65,7 +65,7 @@ def int_from_parsed(parsed, key, default=0):
 	if parsed is None:
 		return default
 
-	num = result.get("hour")
+	num = parsed.get("hour")
 	if num is None:
 		return default
 	
