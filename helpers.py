@@ -61,15 +61,19 @@ def expand_day_range(start_day, end_day):
 		days.append(Weekday(index))
 	return days
 
-def int_from_parsed(parsed, key, default=0):
+def value_from_parsed(parsed, key, default=None):
 	if parsed is None:
 		return default
 
-	num = parsed.get("hour")
-	if num is None:
+	val = parsed.get("hour")
+	if val is None:
 		return default
 	
 	try:
-		return int(num[0], 10)
+		return val[0]
 	except KeyError:
 		return default
+
+def int_from_parsed(parsed, key, default=0):
+	val = value_from_parsed(parsed, key, default=default)
+	return int(val, 10)
