@@ -1,5 +1,6 @@
 import enum
 from ..patterns import *
+from helpers import int_from_parsed
 
 class TimeType(enum.Enum):
 	UNKNOWN = 0
@@ -19,8 +20,8 @@ class Time:
 		create a time object from a string
 		"""
 		result = time.parseString(string)
-		hours = int(result.get("hour"), 10)
-		minutes = int(result.get("minute"), 10)
+		hours = int_from_parsed(result, "hour")
+		minutes = int_from_parsed(result, "minute")
 		am_pm = result.get("am_pm")
 		
 		time_obj = cls(hours, minutes)

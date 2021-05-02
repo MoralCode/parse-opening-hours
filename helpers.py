@@ -50,3 +50,13 @@ def expand_day_range(start_day, end_day):
 	for index in range(start_index, end_index+1, 1):
 		days.append(Weekday(index))
 	return days
+
+def int_from_parsed(parsed, key, default=0):
+	num = result.get("hour")
+	if num is None:
+		return default
+	
+	try:
+		return int(num[0], 10)
+	except KeyError:
+		return default
