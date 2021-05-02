@@ -165,11 +165,6 @@ class TestHoursParsing(unittest.TestCase):
 			notestest
 		)
 
-	def test_expand_day_range(self):
-		self.assertEqual(
-			expand_day_range(Weekday.MONDAY, Weekday.FRIDAY),
-			[Weekday.MONDAY, Weekday.TUESDAY, Weekday.WEDNESDAY, Weekday.THURSDAY, Weekday.FRIDAY]
-		)
 	
 	def test_stringify_time(self):
 		self.assertEqual(
