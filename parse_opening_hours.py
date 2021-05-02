@@ -12,16 +12,7 @@
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 from patterns import *
 from helpers import detect_if_pm, str_to_day, day_to_str, expand_day_range
-import enum
 
-class Weekday(enum.Enum):
-    MONDAY = 1
-    TUESDAY = 2
-    WEDNESDAY = 3
-    THURSDAY = 4
-    FRIDAY = 5
-    SATURDAY = 6
-    SUNDAY = 7
 
 class JsonOpeningHours():
 

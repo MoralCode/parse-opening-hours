@@ -1,5 +1,15 @@
-from parse_opening_hours import Weekday
+import enum
 
+class Weekday(enum.Enum):
+    MONDAY = 1
+    TUESDAY = 2
+    WEDNESDAY = 3
+    THURSDAY = 4
+    FRIDAY = 5
+    SATURDAY = 6
+    SUNDAY = 7
+
+	
 def detect_if_pm(string):
 	return "p" in string.lower()
 
