@@ -45,6 +45,17 @@ class Time:
 
 	def get_minutes(self):
 		return self.minutes
+	
+	def set_type(self, time_type):
+		self.time_type = time_type
+
+	def set_type_from_string(self, time_type_str):
+		if "p" in time_type_str.lower():
+			self.set_type(TimeType.PM)
+		elif "a" in time_type_str.lower():
+			self.set_type(TimeType.AM)
+		else:
+			self.set_type(TimeType.UNKNOWN)
 
 	def is_24_hr(self):
 		return self.time_type == TimeType.MILITARY
