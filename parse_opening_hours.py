@@ -12,7 +12,7 @@
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 from patterns import *
 from helpers import detect_if_pm, str_to_day, day_to_str, expand_day_range, value_from_parsed, str_from_parsed
-from models.time import Time
+from models.time import Time, TimeType
 
 
 class JsonOpeningHours():
@@ -49,6 +49,10 @@ def parse_times(result, assume_type=None):
 	end = value_from_parsed(result, "endtime")
 	start = Time.from_string("".join(start), assume_type=assume_type)
 	end = Time.from_string("".join(end), assume_type=assume_type)
+
+	if start.is_am() and end.is_am() and start.get_hours() > end.get_hours():
+		end.set_type(TimeType.PM)
+
 
 	return (
 		start.get_as_military_time().to_string(),
