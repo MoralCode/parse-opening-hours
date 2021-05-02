@@ -51,7 +51,9 @@ class Time:
 		self.time_type = time_type
 
 	def set_type_from_string(self, time_type_str):
-		if "p" in time_type_str.lower():
+		if time_type_str is None:
+			self.set_type(TimeType.UNKNOWN)
+		elif "p" in time_type_str.lower():
 			self.set_type(TimeType.PM)
 		elif "a" in time_type_str.lower():
 			self.set_type(TimeType.AM)
