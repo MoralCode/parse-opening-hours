@@ -12,14 +12,30 @@ opening_hours = [
 	//..
 ]
 ```
+## Installation
+`pip install jsonify-opening-hours`
 
 ## Usage
 
 The simplest example is just printing the JSON for an opening hours string:
 ```python
+from parse_opening_hours import JsonOpeningHours
+
 print(JsonOpeningHours.parse("Mon- Fri 9:00am - 5:30pm"))
 ```
 
+This should give you the below output:
+```
+[
+	{'day': 'monday', 'opens': '9:00', 'closes': '17:30'},
+	{'day': 'tuesday', 'opens': '9:00', 'closes': '17:30'},
+	{'day': 'wednesday', 'opens': '9:00', 'closes': '17:30'},
+	{'day': 'thursday', 'opens': '9:00', 'closes': '17:30'},
+	{'day': 'friday', 'opens': '9:00', 'closes': '17:30'}
+]
+```
+
+This has been tested using Python 3.8.5
 
 ## Tests
 
