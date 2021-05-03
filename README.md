@@ -7,7 +7,7 @@ opening_hours = [
 	{
 		"day": "monday",
 		"opens": "9:00",
-		"closes": "5:00"
+		"closes": "17:00"
 	},
 	//..
 ]
