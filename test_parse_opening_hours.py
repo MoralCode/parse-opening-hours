@@ -96,6 +96,7 @@ class TestHoursParsing(unittest.TestCase):
 			"Monday 9:00-5:00",
 			"Monday 9:00am - 5:00pm",
 			"Monday 9:00am-5:00pm",
+			"Monday 9:00AM-5:00PM",
 			"Monday 9:00 am - 5:00 pm",
 			"Monday 9:00 am-5:00 pm",
 			"Monday 9:00a.m. - 5:00 p.m.",
@@ -106,8 +107,15 @@ class TestHoursParsing(unittest.TestCase):
 			"Monday 9:00am-5:00",
 			"Monday 9am - 5pm",
 			"Monday 9am-5pm",
+			"Monday 9AM-5PM",
 			"Monday 9am to 5pm",
-			"Monday 9am through 5pm"
+			"Monday 9 am - 5 pm",
+			"Monday 9 am-5 pm",
+			"Monday 9a.m. - 5 p.m.",
+			"Monday 9 a.m.-5 p.m.",
+			"Monday 9 a.m. to 5 p.m.",
+			"Monday 9am through 5pm",
+			"Monday 9am thru 5pm"
 		]
 		expected_result = [ self.mon_9_to_5 ]
 		self.run_tests(input_strings,expected_result, assume_type=TimeType.AM)
