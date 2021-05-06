@@ -14,7 +14,7 @@ time_separator = Optional(":")
 
 # this is all the unique characters in the string
 # "monday tuesday wednesday thursday friday"
-day_of_week = "mondaytueswhrfi"
+day_of_week = "mondaytueswhrfi'"
 day_of_week = day_of_week + day_of_week.upper()
 
 day = Word(day_of_week)
