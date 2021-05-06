@@ -21,8 +21,8 @@ class JsonOpeningHours():
 	def parse(self, hours_string, assume_type=None):
 
 		opening_hours_format = Or([
-			OneOrMore(daterange + timerange + notes),
-			OneOrMore(timerange + daterange + notes)
+			OneOrMore(dates + timerange + notes),
+			OneOrMore(timerange + dates + notes)
 		])	
 		parsed = opening_hours_format.parseString(hours_string)
 		opening_hours_json = convert_to_dict(parsed, assume_type=assume_type)
