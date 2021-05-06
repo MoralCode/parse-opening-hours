@@ -41,4 +41,4 @@ jobs:
           # This assumes pytest is installed via the install-package step above
           command: pipenv run pytest
       - codecov/upload:
-          file: {{ coverage_report_filepath }}
+          file: coverage.xml
