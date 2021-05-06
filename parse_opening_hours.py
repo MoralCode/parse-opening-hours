@@ -45,10 +45,10 @@ def create_entry(day, opening, closing, notes=None):
 
 def parse_times(result, assume_type=None):
 	# assumes that all three (hours, minutes, am_pm) are the same length
-	start = value_from_parsed(result, "starttime")
-	end = value_from_parsed(result, "endtime")
-	start = Time.from_string("".join(start), assume_type=assume_type)
-	end = Time.from_string("".join(end), assume_type=assume_type)
+	start = concat_from_parsed(result, "starttime")
+	end = concat_from_parsed(result, "endtime")
+	start = Time.from_string(start, assume_type=assume_type)
+	end = Time.from_string(end, assume_type=assume_type)
 
 	if start.is_am() and end.is_am() and start.get_hours() > end.get_hours():
 		end.set_type(TimeType.PM)
