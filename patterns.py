@@ -1,8 +1,17 @@
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 
-space = Word(" ")
+def caselessWord(some_str):
+	return Word(some_str + some_str.upper()
 
-word_range_separators = Optional(space) + oneOf("to thru through until") + Optional(space)
+space = Word(" ")
+words_for_range = Or([
+	caselessWord("to"),
+	caselessWord("thru"),
+	caselessWord("through"),
+	caselessWord("until"),
+	caselessWord("'til")
+])
+word_range_separators = Optional(space) + words_for_range + Optional(space)
 range_separator = Or([Word(" –—‐-"), word_range_separators])
 
 word_list_separators = Optional(space) + oneOf("and") + Optional(space)
