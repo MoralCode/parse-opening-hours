@@ -6,6 +6,7 @@ orbs:
   # so you dont have to copy and paste it everywhere.
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
   python: circleci/python@1.2
+  codecov: codecov/codecov@1.0.2
 
 workflows:
   sample:  # This is the name of the workflow, feel free to change it to better match your workflow.
@@ -39,3 +40,5 @@ jobs:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
           command: pipenv run pytest
+      - codecov/upload:
+          file: {{ coverage_report_filepath }}
