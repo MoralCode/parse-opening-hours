@@ -105,7 +105,7 @@ class TestHoursParsing(unittest.TestCase):
 		self.run_tests(input_strings,expected_result, assume_type=TimeType.AM)
 	
 	
-	def test_multi_day(self):
+	def test_day_range(self):
 		# TODO: implement assumption of pm if end time <= start time
 		input_strings = [
 			"Monday - Wednesday 9:00 - 5:00",
