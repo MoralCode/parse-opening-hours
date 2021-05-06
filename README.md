@@ -42,6 +42,8 @@ This should give you the below output:
 
 This has been tested using Python 3.8.5
 
-## Tests
+## Tests and Coverage
 
-run `pipenv run pytest`
+run pytet and generate coverage database `pipenv run pytest --cov=./`
+
+show coverage report: `pipenv run coverage report`
