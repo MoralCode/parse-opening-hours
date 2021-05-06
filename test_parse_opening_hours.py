@@ -92,6 +92,10 @@ class TestHoursParsing(unittest.TestCase):
 			"Monday 9:00-5:00",
 			"Monday 9:00am - 5:00pm",
 			"Monday 9:00am-5:00pm",
+			"Monday 9:00 am - 5:00 pm",
+			"Monday 9:00 am-5:00 pm",
+			"Monday 9:00a.m. - 5:00 p.m.",
+			"Monday 9:00 a.m.-5:00 p.m.",
 			"Monday 9:00 - 5:00pm",
 			"Monday 9:00-5:00pm",
 			"Monday 9:00am - 5:00",
@@ -163,6 +167,17 @@ class TestHoursParsing(unittest.TestCase):
 	# 		"9:00am - 5:00pm 5 days a week",
 	# 		"9:00am - 5:00pm 5 days",
 	# 		"9:00am - 5:00pm Business Days"
+	# 	]
+	# 	expected_result = self.workweek_9_to_5
+	# 	self.run_tests(input_strings,expected_result)
+
+	# def test_weekend(self):
+	# 	# TODO: implement assumption of pm if end time <= start time
+	# 	input_strings = [
+	# 		"Weekend 9:00am - 5:00pm",
+	# 		"Weekends 9:00am - 5:00pm",
+	# 		"9:00am - 5:00pm Weekend",
+	# 		"9:00am - 5:00pm Weekends",
 	# 	]
 	# 	expected_result = self.workweek_9_to_5
 	# 	self.run_tests(input_strings,expected_result)
