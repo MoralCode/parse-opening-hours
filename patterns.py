@@ -17,6 +17,8 @@ range_separator = Or([Word(" –—‐-"), word_range_separators])
 word_list_separators = Optional(space) + oneOf("and") + Optional(space)
 list_separator = Or([Word(" ,+/"), word_list_separators])
 
+day_time_separators = Optional(Word(": "))
+
 #TODO: support multiple sections like M 8am-2pm, W 9am-2pm
 section_separator = Optional(",")
 time_separator = Optional(":")
