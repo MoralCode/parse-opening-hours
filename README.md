@@ -1,4 +1,9 @@
 # Python Opening Hours parser
+
+[![CircleCI](https://circleci.com/gh/MoralCode/jsonify-opening-hours.svg?style=shield)](https://circleci.com/gh/MoralCode/jsonify-opening-hours)
+[![codecov](https://codecov.io/gh/MoralCode/jsonify-opening-hours/branch/main/graph/badge.svg?token=7JUFXSX43N)](https://codecov.io/gh/MoralCode/jsonify-opening-hours)
+[![Downloads](https://pepy.tech/badge/jsonify-opening-hours/month)](https://pepy.tech/project/jsonify-opening-hours)
+
 This library parses opening hours from various human-readable strings such as "Mon- Fri 9:00am - 5:30pm" into a more standard JSON format that can be processed more easily.
 
 ## The format
