@@ -74,6 +74,10 @@ def value_from_parsed(parsed, key, default=None):
 	except KeyError:
 		return default
 
+def concat_from_parsed(parsed, key, default=None):
+	val = value_from_parsed(parsed, key, default=[])
+	return "".join(val)
+
 def int_from_parsed(parsed, key, default=0):
 	val = value_from_parsed(parsed, key, default=default)
 	if val is None:
