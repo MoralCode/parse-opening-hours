@@ -1,6 +1,13 @@
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 
-range_separator = Or([Word(" –—‐-"), oneOf("to thru through until")])
+space = Word(" ")
+
+word_range_separators = Optional(space) + oneOf("to thru through until") + Optional(space)
+range_separator = Or([Word(" –—‐-"), word_range_separators])
+
+word_list_separators = Optional(space) + oneOf("and") + Optional(space)
+list_separator = Or([Word(" ,+/"), word_list_separators])
+
 #TODO: support multiple sections like M 8am-2pm, W 9am-2pm
 section_separator = Optional(",")
 time_separator = Optional(":")
