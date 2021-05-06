@@ -24,7 +24,7 @@ def str_to_day(day_string):
 		return Weekday.TUESDAY
 	elif day in ["w", "wed", "wednesday"]:
 		return Weekday.WEDNESDAY
-	elif day in ["th", "thu", "thurs", "thusday"]:
+	elif day in ["th", "thu", "thurs", "thursday"]:
 		return Weekday.THURSDAY
 	elif day in ["f", "fri", "friday"]:
 		return Weekday.FRIDAY
