@@ -18,6 +18,11 @@ def str_to_day(day_string):
 	if day_string is None:
 		return None
 	day = day_string.lower()
+	# ignore anything after the "day" part, if present
+	if "day" in day:
+		day = day.split("day")[0]
+		day += "day"
+
 	if day in ["m", "mon", "monday"]:
 		return Weekday.MONDAY
 	elif day in ["t", "tue", "tues", "tuesday"]:
