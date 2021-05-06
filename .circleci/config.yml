@@ -40,5 +40,8 @@ jobs:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
           command: pipenv run pytest
+      - run:
+          name: Generate coverage report
+          command: pipenv run coverage xml -i 
       - codecov/upload:
           file: coverage.xml
