@@ -121,6 +121,19 @@ class TestHoursParsing(unittest.TestCase):
 		expected_result = [ self.mon_9_to_5, self.tue_9_to_5, self.wed_9_to_5 ]
 		self.run_tests(input_strings, expected_result, assume_type=TimeType.AM)
 
+
+	def test_day_list(self):
+		# TODO: implement assumption of pm if end time <= start time
+		input_strings = [
+			"Monday Wednesday 9:00 - 5:00",
+			"Monday and Wednesday 9:00 - 5:00",
+			"Monday, Wednesday 9:00 - 5:00",
+			"Monday/Wednesday 9:00 - 5:00",
+			"Monday+Wednesday 9:00 - 5:00",
+		]
+		expected_result = [ self.mon_9_to_5, self.wed_9_to_5 ]
+		self.run_tests(input_strings, expected_result, assume_type=TimeType.AM)
+
 	# def test_allweek(self):
 	# 	# TODO: implement assumption of pm if end time <= start time
 	# 	input_strings = [
