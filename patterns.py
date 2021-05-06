@@ -11,7 +11,14 @@ list_separator = Or([Word(" ,+/"), word_list_separators])
 #TODO: support multiple sections like M 8am-2pm, W 9am-2pm
 section_separator = Optional(",")
 time_separator = Optional(":")
-day = Word(alphas)
+
+# this is all the unique characters in the string
+# "monday tuesday wednesday thursday friday"
+day_of_week = "mondaytueswhrfi"
+day_of_week = day_of_week + day_of_week.upper()
+
+day = Word(day_of_week)
+
 time_number = Word(nums, max=2)
 am_or_pm = Optional(Word("AaPpMm.").setResultsName('am_pm', listAllMatches=True))
 
