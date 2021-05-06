@@ -1,6 +1,6 @@
 
 import unittest
-from .time import *
+from models.time import *
 
 class TestTime(unittest.TestCase):
 

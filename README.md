@@ -39,4 +39,4 @@ This has been tested using Python 3.8.5
 
 ## Tests
 
-run `python3 -m unittest`
+run `pipenv run pytest`
