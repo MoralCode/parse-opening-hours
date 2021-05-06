@@ -11,7 +11,7 @@
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 from patterns import *
-from helpers import detect_if_pm, str_to_day, day_to_str, expand_day_range, value_from_parsed, str_from_parsed
+from helpers import detect_if_pm, str_to_day, day_to_str, expand_day_range, value_from_parsed, str_from_parsed, key_exists
 from models.time import Time, TimeType
 
 
@@ -59,15 +59,37 @@ def parse_times(result, assume_type=None):
 		end.get_as_military_time().to_string()
 		)
 
+# TODO: testme
+def is_day_range(result):
+	return key_exists(result, "startday")
+
+# TODO: testme
+def parse_days(result):
+	days = []
+
+	if is_day_range(result):
+		print("range")
+		# this is a date range
+		start_day = str_to_day(str_from_parsed(result, "startday"))
+		end_day = str_from_parsed(result, "endday", default=None)
+		end_day = str_to_day(end_day[0]) if end_day is not None else end_day
+		days = expand_day_range(start_day, end_day)
+	else:
+		print("list")
+		# print(result["day"])
+		days = [ str_to_day(day) for day in result["day"] ]
+		
+	
+	return days
+
 def convert_to_dict(result, assume_type=None):
 
 	opening_hours_json = []
 
-	start_day = str_to_day(str_from_parsed(result, "startday"))
-	end_day = str_from_parsed(result, "endday", default=None)
-	end_day = str_to_day(end_day[0]) if end_day is not None else end_day
+	days = parse_days(result)
+	
 	start_time, end_time = parse_times(result, assume_type=assume_type)
-	days = expand_day_range(start_day, end_day)
+	
 
 	for day in days:
 		opening_hours_json.append(
