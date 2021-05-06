@@ -87,3 +87,9 @@ def str_from_parsed(parsed, key, default=""):
 	if val is None:
 		return default
 	return str(val)
+
+# TODO: testme
+def key_exists(dictionary, key):
+	value = dictionary.get(key)
+
+	return value is not None
