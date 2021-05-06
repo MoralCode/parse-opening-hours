@@ -68,18 +68,14 @@ def parse_days(result):
 	days = []
 
 	if is_day_range(result):
-		print("range")
-		# this is a date range
+		# this is a date range that includes the intervening days
 		start_day = str_to_day(str_from_parsed(result, "startday"))
 		end_day = str_from_parsed(result, "endday", default=None)
 		end_day = str_to_day(end_day[0]) if end_day is not None else end_day
 		days = expand_day_range(start_day, end_day)
 	else:
-		print("list")
-		# print(result["day"])
 		days = [ str_to_day(day) for day in result["day"] ]
 		
-	
 	return days
 
 def convert_to_dict(result, assume_type=None):
