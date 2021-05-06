@@ -39,7 +39,7 @@ jobs:
       - run:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
-          command: pipenv run pytest
+          command: pipenv run pytest --cov=./
       - run:
           name: Generate coverage report
           command: pipenv run coverage xml -i 
