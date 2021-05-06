@@ -78,6 +78,9 @@ class TestHoursParsing(unittest.TestCase):
 	def test_single_day_abbreveations(self):
 		# TODO: implement assumption of pm if end time <= start time
 		input_strings = [
+			"Mondays' 9:00am - 5:00pm",
+			"Monday's 9:00am - 5:00pm",
+			"Mondays 9:00am - 5:00pm",
 			"Monday 9:00am - 5:00pm",
 			"Mon 9:00am - 5:00pm",
 			"M 9:00am - 5:00pm"
