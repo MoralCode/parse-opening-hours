@@ -11,7 +11,7 @@
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 from patterns import *
-from helpers import detect_if_pm, str_to_day, str_to_days, day_to_str, expand_day_range, value_from_parsed, str_from_parsed, key_exists, concat_from_parsed
+from helpers import detect_if_pm, str_to_day, str_to_days, day_to_str, expand_day_range, value_from_parsed, str_from_parsed, key_exists, concat_from_parsed, raw_from_parsed
 from models.time import Time, TimeType
 
 
@@ -80,7 +80,7 @@ def parse_days(result):
 		end_day = str_to_day(end_day[0]) if end_day is not None else end_day
 		days = expand_day_range(start_day, end_day)
 	elif is_day_list(result):
-		days = [ str_to_day(day) for day in value_from_parsed(result, "day") ]
+		days = [ str_to_day(day) for day in raw_from_parsed(result, "day") ]
 	elif is_day_shortcut(result):
 		days = str_to_days(concat_from_parsed(result, "day_shortcuts"))
 	return days
