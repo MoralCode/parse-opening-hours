@@ -1,7 +1,7 @@
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 
 def caselessWord(some_str):
-	return Word(some_str + some_str.upper())
+	return Word(some_str.lower() + some_str.upper())
 
 space = Word(" ")
 words_for_range = Or([
