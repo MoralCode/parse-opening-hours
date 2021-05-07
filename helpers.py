@@ -14,6 +14,28 @@ def detect_if_pm(string):
 	return "p" in string.lower()
 
 
+def str_to_days(day_string):
+	print(day_string)
+
+	if day_string is None:
+		return None
+	day = day_string.lower()
+
+	if "weekday" in day:
+		return expand_day_range(Weekday.MONDAY, Weekday.FRIDAY)
+	elif "business" in day:
+		return expand_day_range(Weekday.MONDAY, Weekday.FRIDAY)
+	elif "work" in day:
+		return expand_day_range(Weekday.MONDAY, Weekday.FRIDAY)
+	elif "5" in day:
+		return expand_day_range(Weekday.MONDAY, Weekday.FRIDAY)
+	elif "7" in day:
+		return expand_day_range(Weekday.MONDAY, Weekday.SUNDAY)
+	elif "weekend" in day:
+		return expand_day_range(Weekday.SATURDAY, Weekday.SUNDAY)
+
+
+
 def str_to_day(day_string):
 	if day_string is None:
 		return None
