@@ -47,3 +47,11 @@ This has been tested using Python 3.8.5
 run pytet and generate coverage database `pipenv run pytest --cov=./`
 
 show coverage report: `pipenv run coverage report`
+
+## Build and Release
+
+This is pretty much here so I can copy-paste the commands to make a new release.
+
+build: `python setup.py sdist bdist_wheel`
+check: `twine check dist/*`
+upload: `twine upload dist/*`
