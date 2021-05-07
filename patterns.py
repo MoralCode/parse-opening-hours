@@ -1,7 +1,10 @@
-from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
+from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char, Combine
 
 def caselessWord(some_str):
 	return Word(some_str.lower() + some_str.upper())
+
+def caselessChar(some_str):
+	return Char(some_str.lower() + some_str.upper())
 
 space = Word(" ")
 words_for_range = Or([
@@ -24,11 +27,10 @@ section_separator = Optional(",")
 time_separator = Optional(":")
 
 # this is all the unique characters in the string
-# "monday tuesday wednesday thursday friday"
-day_of_week = "mondaytueswhrfi'"
-day_of_week = day_of_week + day_of_week.upper()
-
-day = Word(day_of_week)
+# "monday tuesday wednesday thursday friday saturday sunday"
+day_of_week_start = caselessChar("mtwhfs")
+day_of_week_rest = Optional(caselessWord("ondayuesrit'"))
+day = Combine(day_of_week_start + day_of_week_rest)
 
 day_shortcuts = Or([
 	Or([
