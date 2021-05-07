@@ -88,18 +88,23 @@ def expand_day_range(start_day, end_day):
 		days.append(Weekday(index))
 	return days
 
-def value_from_parsed(parsed, key, default=None):
+def raw_from_parsed(parsed, key, default=None):
 	if parsed is None:
 		return default
 
 	val = parsed.get(key)
 	if val is None:
 		return default
-	
 	try:
-		return val[0]
+		return val
 	except KeyError:
 		return default
+
+def value_from_parsed(parsed, key, default=None):
+	val = raw_from_parsed(parsed, key, default=None)
+	if val is None:
+		return default
+	return val[0]
 
 def concat_from_parsed(parsed, key, default=None):
 	val = value_from_parsed(parsed, key, default=[])
