@@ -8,7 +8,6 @@ class TestTime(unittest.TestCase):
 		test_str = "9:00"
 		test_9 = Time(9,0)
 		test_9_str = Time.from_string(test_str)
-		print(test_9_str.minutes)
 		self.assertEqual(
 			test_9_str.hours,
 			test_9.hours

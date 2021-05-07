@@ -1,5 +1,7 @@
 import enum
+import logging
 
+logger = logging.getLogger(__name__)
 class Weekday(enum.Enum):
     MONDAY = 1
     TUESDAY = 2
@@ -15,7 +17,7 @@ def detect_if_pm(string):
 
 
 def str_to_days(day_string):
-	print(day_string)
+	logger.debug(day_string)
 
 	if day_string is None:
 		return None
