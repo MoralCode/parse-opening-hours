@@ -47,7 +47,7 @@ class TestHoursParsing(unittest.TestCase):
 
 	workweek_9_to_5 = [mon_9_to_5, tue_9_to_5, wed_9_to_5,thurs_9_to_5, fri_9_to_5]
 	weekend_9_to_5 = [sat_9_to_5, sun_9_to_5]
-	allweek_9_to_5 = workweek_9_to_5.extend(weekend_9_to_5)
+	allweek_9_to_5 = workweek_9_to_5.copy().extend(weekend_9_to_5)
 
 	def test_time_assumption_fail(self):
 		str_time = "Monday 9:00 - 5:00"
