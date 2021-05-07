@@ -23,5 +23,26 @@ class TestHelpers(unittest.TestCase):
 		for instr in input_strings:
 			self.assertEqual(str_to_day(instr), expected_result)
 
+	def test_detect_is_pm(self):
+		input_strings = [
+			"pm",
+			"Pm",
+			"pM",
+			"p.m.",
+			"PM",
+		]
+		for instr in input_strings:
+			self.assertTrue(detect_if_pm(instr))
+		
+		input_strings = [
+			"am",
+			"Am",
+			"aM",
+			"a.m.",
+			"AM",
+		]
+		for instr in input_strings:
+			self.assertFalse(detect_if_pm(instr))
+
 if __name__ == '__main__':
 	unittest.main()
