@@ -83,6 +83,9 @@ def parse_days(result):
 		days = [ str_to_day(day) for day in raw_from_parsed(result, "day") ]
 	elif is_day_shortcut(result):
 		days = str_to_days(concat_from_parsed(result, "day_shortcuts"))
+	else:
+		# nothing specified, assumeit means every day
+		return expand_day_range(Weekday.MONDAY, Weekday.SUNDAY)
 	return days
 
 def convert_to_dict(result, assume_type=None):
