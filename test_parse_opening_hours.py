@@ -22,25 +22,25 @@ class TestHoursParsing(unittest.TestCase):
 	}
 
 	thurs_9_to_5 = {
-		"day": "wednesday",
+		"day": "thursday",
 		"opens": "9:00",
 		"closes": "17:00"
 	}
 
 	fri_9_to_5 = {
-		"day": "wednesday",
+		"day": "friday",
 		"opens": "9:00",
 		"closes": "17:00"
 	}
 
 	sat_9_to_5 = {
-		"day": "wednesday",
+		"day": "saturday",
 		"opens": "9:00",
 		"closes": "17:00"
 	}
 
 	sun_9_to_5 = {
-		"day": "wednesday",
+		"day": "sunday",
 		"opens": "9:00",
 		"closes": "17:00"
 	}
