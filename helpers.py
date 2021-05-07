@@ -33,8 +33,14 @@ def str_to_days(day_string):
 		return expand_day_range(Weekday.MONDAY, Weekday.FRIDAY)
 	elif "7" in day:
 		return allweek
+	elif "all" in day and "week" in day:
+		return allweek
 	elif "weekend" in day:
 		return expand_day_range(Weekday.SATURDAY, Weekday.SUNDAY)
+	elif "every" in day:
+		return allweek
+	elif "daily" in day:
+		return allweek
 
 
 
