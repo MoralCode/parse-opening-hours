@@ -11,7 +11,7 @@
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 from patterns import *
-from helpers import detect_if_pm, str_to_day, str_to_days, day_to_str, expand_day_range, value_from_parsed, str_from_parsed, key_exists, concat_from_parsed, raw_from_parsed
+from helpers import detect_if_pm, str_to_day, str_to_days, day_to_str, expand_day_range, value_from_parsed, str_from_parsed, key_exists, concat_from_parsed, raw_from_parsed, Weekday
 from models.time import Time, TimeType
 
 
