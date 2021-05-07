@@ -60,7 +60,7 @@ dateList = OneOrMore(day.setResultsName('day', listAllMatches=True) + Optional(l
 
 daterange = day.setResultsName('startday', listAllMatches=True) + range_separator + day.setResultsName('endday', listAllMatches=True)
 
-dates = Or([daterange, dateList, dateShortcuts])
+dates = Optional(Or([daterange, dateList, dateShortcuts]))
 
 timerange = time.setResultsName('starttime', listAllMatches=True) + Optional(range_separator + time.setResultsName('endtime', listAllMatches=True))
 
