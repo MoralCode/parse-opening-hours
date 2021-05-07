@@ -30,16 +30,35 @@ day_of_week = day_of_week + day_of_week.upper()
 
 day = Word(day_of_week)
 
+day_shortcuts = Or([
+	Or([
+		caselessWord("Work"),
+		caselessWord("All")
+	]) + caselessWord("Week"),
+	Char("57") + caselessWord("days") + Optional(caselessWord("a week")),
+	caselessWord("Every Day"),
+	caselessWord("daily"),
+	caselessWord("Week") + Or([
+		caselessWord("day"),
+		caselessWord("end")
+	]) + Optional(caselessWord("'s")),
+	caselessWord("Business Days"),
+])
+
+days = Or([day, day_shortcuts])
+
 time_number = Word(nums, max=2)
 am_or_pm = Optional(Word("AaPpMm.").setResultsName('am_pm', listAllMatches=True))
 
 time = time_number("hour*") + time_separator + Optional(time_number("minute*")) + am_or_pm
 
+dateShortcuts = OneOrMore(days.setResultsName('day_shortcuts', listAllMatches=True) + Optional(list_separator))
+
 dateList = OneOrMore(day.setResultsName('day', listAllMatches=True) + Optional(list_separator))
 
 daterange = day.setResultsName('startday', listAllMatches=True) + range_separator + day.setResultsName('endday', listAllMatches=True)
 
-dates = Or([daterange, dateList])
+dates = Or([daterange, dateList, dateShortcuts])
 
 timerange = time.setResultsName('starttime', listAllMatches=True) + Optional(range_separator + time.setResultsName('endtime', listAllMatches=True))
 
