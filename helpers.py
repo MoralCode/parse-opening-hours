@@ -63,12 +63,13 @@ def str_to_day(day_string):
 		if weekday.value.startswith(day):
 			day_enum = weekday
 
-	# length checks guard against matching a single "s", since this is ambiguous
-	if day_enum == Weekday.SATURDAY and len(day) == 1:
-		return None
-	else:
-		return day_enum
-
+	# length checks to deal with ambiguous cases
+	if len(day) == 1:
+		if day_enum in [Weekday.SATURDAY, Weekday.SUNDAY]:
+			return None
+		elif day_enum == Weekday.THURSDAY:
+			return Weekday.TUESDAY
+	return day_enum
 
 def day_to_str(day):
 	return day.value
