@@ -50,9 +50,9 @@ day_shortcuts = Combine(Or([
 days = Or([day, day_shortcuts])
 
 time_number = Word(nums, max=2)
-am_or_pm = Optional(Word("AaPpMm.").setResultsName('am_pm', listAllMatches=True))
+am_or_pm = Optional(Word("AaPpMm.").setResultsName('am_pm'))
 
-time = time_number("hour*") + time_separator + Optional(time_number("minute*")) + am_or_pm
+time = Combine(time_number("hour") + time_separator + Optional(time_number("minute")) + am_or_pm,adjacent=False)
 
 dateShortcuts = OneOrMore(days.setResultsName('day_shortcuts', listAllMatches=True) + Optional(list_separator))
 
