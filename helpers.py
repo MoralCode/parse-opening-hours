@@ -24,15 +24,16 @@ def str_to_days(day_string):
 	day = day_string.lower()
 
 	allweek = expand_day_range(Weekday.MONDAY, Weekday.SUNDAY)
+	workweek = expand_day_range(Weekday.MONDAY, Weekday.FRIDAY)
 
 	if "weekday" in day:
-		return expand_day_range(Weekday.MONDAY, Weekday.FRIDAY)
+		return workweek
 	elif "business" in day:
-		return expand_day_range(Weekday.MONDAY, Weekday.FRIDAY)
+		return workweek
 	elif "work" in day:
-		return expand_day_range(Weekday.MONDAY, Weekday.FRIDAY)
+		return workweek
 	elif "5" in day:
-		return expand_day_range(Weekday.MONDAY, Weekday.FRIDAY)
+		return workweek
 	elif "7" in day:
 		return allweek
 	elif "all" in day and "week" in day:
