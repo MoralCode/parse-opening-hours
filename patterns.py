@@ -32,7 +32,7 @@ day_of_week_start = caselessChar("mtwhfs")
 day_of_week_rest = Optional(caselessWord("ondayuesrit'"))
 day = Combine(day_of_week_start + day_of_week_rest)
 
-day_shortcuts = Or([
+day_shortcuts = Combine(Or([
 	Or([
 		caselessWord("Work"),
 		caselessWord("All")
@@ -45,7 +45,7 @@ day_shortcuts = Or([
 		caselessWord("end")
 	]) + Optional(caselessWord("'s")),
 	caselessWord("Business Days"),
-])
+]), adjacent=False)
 
 days = Or([day, day_shortcuts])
 
