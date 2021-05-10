@@ -3,13 +3,13 @@ import logging
 
 logger = logging.getLogger(__name__)
 class Weekday(enum.Enum):
-    MONDAY = 1
-    TUESDAY = 2
-    WEDNESDAY = 3
-    THURSDAY = 4
-    FRIDAY = 5
-    SATURDAY = 6
-    SUNDAY = 7
+    MONDAY = "monday"
+    TUESDAY = "tuesday"
+    WEDNESDAY = "wednesday"
+    THURSDAY = "thursday"
+    FRIDAY = "friday"
+    SATURDAY = "saturday"
+    SUNDAY = "sunday"
 
 	
 def detect_if_pm(string):
@@ -55,47 +55,40 @@ def str_to_day(day_string):
 		day = day.split("day")[0]
 		day += "day"
 
-	if day in ["m", "mon", "monday"]:
-		return Weekday.MONDAY
-	elif day in ["t", "tue", "tues", "tuesday"]:
-		return Weekday.TUESDAY
-	elif day in ["w", "wed", "wednesday"]:
-		return Weekday.WEDNESDAY
-	elif day in ["th", "thu", "thurs", "thursday"]:
-		return Weekday.THURSDAY
-	elif day in ["f", "fri", "friday"]:
-		return Weekday.FRIDAY
-	elif day in ["sa", "sat", "saturday"]:
-		return Weekday.SATURDAY
-	elif day in ["su", "sun", "sunday"]:
-		return Weekday.SUNDAY
+	day_enum = None
+
+	# TODO: change to if "tuesday".startswith(day)
+	for weekday in list(Weekday):
+		if weekday.value.startswith(day):
+			day_enum = weekday
+
+	# length checks guard against matching a single "s", since this is ambiguous
+	if day_enum == Weekday.SATURDAY and len(day) == 1:
+		return None
+	else:
+		return day_enum
+
 
 def day_to_str(day):
-	if day == Weekday.MONDAY:
-		return "monday"
-	elif day == Weekday.TUESDAY:
-		return "tuesday"
-	elif day == Weekday.WEDNESDAY:
-		return "wednesday"
-	elif day == Weekday.THURSDAY:
-		return "thursday"
-	elif day == Weekday.FRIDAY:
-		return "friday"
-	elif day == Weekday.SATURDAY:
-		return "saturday"
-	elif day == Weekday.SUNDAY:
-		return "sunday"
+	return day.value
 
 
 def expand_day_range(start_day, end_day):
 	if end_day is None:
 		return [start_day]
 	days = []
-	start_index = start_day.value
-	end_index = end_day.value
+	count_day=False #flag to help determine which days should be included
+	all_days = enumerate(Weekday)
+	for _,day in all_days:
+		if day == start_day:
+			count_day = True
 
-	for index in range(start_index, end_index+1, 1):
-		days.append(Weekday(index))
+		if count_day:
+			days.append(day)
+
+		if day == end_day:
+			count_day = False
+		
 	return days
 
 def raw_from_parsed(parsed, key, default=None):
