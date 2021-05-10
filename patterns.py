@@ -1,4 +1,4 @@
-from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char, Combine
+from pyparsing import *
 
 def caselessWord(some_str):
 	return Word(some_str.lower() + some_str.upper())
