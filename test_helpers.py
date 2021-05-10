@@ -22,6 +22,9 @@ class TestHelpers(unittest.TestCase):
 		expected_result = Weekday.MONDAY
 		for instr in input_strings:
 			self.assertEqual(str_to_day(instr), expected_result)
+		
+		# Assert that "s" is explicitly not matched due to ambiguity
+		self.assertEqual(str_to_day("s"), None)
 
 	def test_detect_is_pm(self):
 		input_strings = [
