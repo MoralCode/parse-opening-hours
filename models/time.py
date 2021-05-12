@@ -24,6 +24,7 @@ class Time:
 		"""
 		create a time object from a string
 		"""
+		logger.debug("creating time object from string: " + string)
 		result = time.parseString(string)
 		hours = int_from_parsed(result, "hour")
 		minutes = int_from_parsed(result, "minute")

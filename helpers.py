@@ -101,6 +101,8 @@ def raw_from_parsed(parsed, key, default=None):
 		return default
 
 	val = parsed.get(key)
+	logger.debug("raw key: " + key)
+	logger.debug(val)
 	if val is None:
 		return default
 	try:
@@ -110,16 +112,22 @@ def raw_from_parsed(parsed, key, default=None):
 
 def value_from_parsed(parsed, key, default=None):
 	val = raw_from_parsed(parsed, key, default=None)
+	logger.debug("value key: " + key)
+	logger.debug(val)
 	if val is None:
 		return default
 	return val[0]
 
 def concat_from_parsed(parsed, key, default=None):
 	val = value_from_parsed(parsed, key, default=[])
+	logger.debug("concat key: " + key)
+	logger.debug(val)
 	return "".join(val)
 
 def int_from_parsed(parsed, key, default=0):
 	val = value_from_parsed(parsed, key, default=default)
+	logger.debug("int key: " + key)
+	logger.debug(str(val))
 	if val is None:
 		return default
 	if isinstance(val, int):
@@ -128,6 +136,8 @@ def int_from_parsed(parsed, key, default=0):
 
 def str_from_parsed(parsed, key, default=""):
 	val = value_from_parsed(parsed, key, default=default)
+	logger.debug("str key: " + key)
+	logger.debug(val)
 	if val is None:
 		return default
 	return str(val)
