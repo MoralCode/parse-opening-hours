@@ -1,7 +1,10 @@
 import enum
-import logging
+import logging, os
 
 logger = logging.getLogger(__name__)
+if os.getenv("OH_DEBUG") == "Y":
+	logger.setLevel(logging.DEBUG)
+	
 class Weekday(enum.Enum):
     MONDAY = "monday"
     TUESDAY = "tuesday"
