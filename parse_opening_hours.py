@@ -11,7 +11,7 @@
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 from patterns import *
-from helpers import detect_if_pm, str_to_day, str_to_days, day_to_str, expand_day_range, value_from_parsed, str_from_parsed, key_exists, concat_from_parsed, raw_from_parsed, Weekday
+from helpers import detect_if_pm, str_to_day, str_to_days, day_to_str, expand_day_range, value_from_parsed, str_from_parsed, concat_from_parsed, raw_from_parsed, Weekday
 from models.time import Time, TimeType
 import logging
 logging.basicConfig()
@@ -64,13 +64,13 @@ def parse_times(result, assume_type=None):
 
 # TODO: testme
 def is_day_range(result):
-	return key_exists(result, "startday")
+	return "startday" in result
 
 def is_day_list(result):
-	return key_exists(result, "day")
+	return "day" in result
 
 def is_day_shortcut(result):
-	return key_exists(result, "day_shortcuts")
+	return "day_shortcuts" in result
 
 # TODO: testme
 def parse_days(result):
