@@ -5,11 +5,11 @@ name = "pypi"
 
 [packages]
 pyparsing = "*"
+
+[dev-packages]
 pytest = "*"
 pytest-cov = "*"
 coverage = "*"
-
-[dev-packages]
 
 [requires]
 python_version = "3.8"
