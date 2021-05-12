@@ -5,7 +5,7 @@ logger = logging.getLogger(__name__)
 if os.getenv("OH_DEBUG") == "Y":
 	logger.setLevel(logging.DEBUG)
 	
-class Weekday(enum.Enum):
+class Days(enum.Enum):
     MONDAY = "monday"
     TUESDAY = "tuesday"
     WEDNESDAY = "wednesday"
@@ -26,8 +26,8 @@ def str_to_days(day_string):
 		return None
 	day = day_string.lower()
 
-	allweek = expand_day_range(Weekday.MONDAY, Weekday.SUNDAY)
-	workweek = expand_day_range(Weekday.MONDAY, Weekday.FRIDAY)
+	allweek = expand_day_range(Days.MONDAY, Days.SUNDAY)
+	workweek = expand_day_range(Days.MONDAY, Days.FRIDAY)
 
 	if "weekday" in day:
 		return workweek
@@ -42,7 +42,7 @@ def str_to_days(day_string):
 	elif "all" in day and "week" in day:
 		return allweek
 	elif "weekend" in day:
-		return expand_day_range(Weekday.SATURDAY, Weekday.SUNDAY)
+		return expand_day_range(Days.SATURDAY, Days.SUNDAY)
 	elif "every" in day:
 		return allweek
 	elif "daily" in day:
@@ -62,16 +62,16 @@ def str_to_day(day_string):
 	day_enum = None
 
 	# TODO: change to if "tuesday".startswith(day)
-	for weekday in list(Weekday):
+	for weekday in list(Days):
 		if weekday.value.startswith(day):
 			day_enum = weekday
 
 	# length checks to deal with ambiguous cases
 	if len(day) == 1:
-		if day_enum in [Weekday.SATURDAY, Weekday.SUNDAY]:
+		if day_enum in [Days.SATURDAY, Days.SUNDAY]:
 			return None
-		elif day_enum == Weekday.THURSDAY:
-			return Weekday.TUESDAY
+		elif day_enum == Days.THURSDAY:
+			return Days.TUESDAY
 	return day_enum
 
 def day_to_str(day):
@@ -83,7 +83,7 @@ def expand_day_range(start_day, end_day):
 		return [start_day]
 	days = []
 	count_day=False #flag to help determine which days should be included
-	all_days = enumerate(Weekday)
+	all_days = enumerate(Day)
 	for _,day in all_days:
 		if day == start_day:
 			count_day = True
