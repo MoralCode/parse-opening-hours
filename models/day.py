@@ -62,10 +62,14 @@ class Day():
 		return self.day.value
 	
 	def __eq__(self, other):
-		if not isinstance(other, Day):
+		if isinstance(other, Day):
+			return self.day == other.day
+		elif isinstance(other, DaysEnum):
+			return self.day == other
+		else:
 			# don't attempt to compare against unrelated types
 			raise NotImplementedError()
-		return self.day == other.day
+		
 
 
 
