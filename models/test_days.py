@@ -6,10 +6,17 @@ from models.day import DaysEnum
 
 class TestDays(unittest.TestCase):
 
+	workweek = [Day(DaysEnum.MONDAY), Day(DaysEnum.TUESDAY), Day(DaysEnum.WEDNESDAY), Day(DaysEnum.THURSDAY), Day(DaysEnum.FRIDAY)]
+
+	weekend = [Day(DaysEnum.SATURDAY), Day(DaysEnum.SUNDAY)]
+
+	fullweek = workweek.copy()
+	fullweek.extend(weekend)
+
 	def test_expand_day_range(self):
 		self.assertEqual(
 			list(Days(DaysEnum.MONDAY, DaysEnum.FRIDAY)),
-			[Day(DaysEnum.MONDAY), Day(DaysEnum.TUESDAY), Day(DaysEnum.WEDNESDAY), Day(DaysEnum.THURSDAY), Day(DaysEnum.FRIDAY)]
+			self.workweek
 		)
 
 	# def test_from_string_unknown(self):
