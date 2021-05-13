@@ -24,6 +24,18 @@ class TestDay(unittest.TestCase):
 		self.assertEqual(str_to_day("t"), Day.TUESDAY)
 		#handles none values
 		self.assertEqual(str_to_day(None), None)
+
+
+	def test_equals(self):
+		self.assertEqual(Day("monday"), Day("monday"))
+		self.assertNotEqual(Day("monday"), Day("tuesday"))
+		with self.assertRaises(NotImplementedError):
+			Day("monday").__eq__("monday")
+	
+
+	def test_init(self):
+		self.assertEqual(Day("monday"), Day(DaysEnum("monday")))
+
 	# def test_from_string_unknown(self):
 	# 	test_str = "9:00"
 	# 	test_9 = Time(9,0)
