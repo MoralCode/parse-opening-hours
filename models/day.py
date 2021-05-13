@@ -42,11 +42,11 @@ class Day():
 
 		# length checks to deal with ambiguous cases
 		if len(day) == 1:
-			if day_enum in [Day.SATURDAY, Day.SUNDAY]:
+			if day_enum in [DaysEnum.SATURDAY, DaysEnum.SUNDAY]:
 				raise ValueError("not enough information provided to resolve ambiguous day")
-			elif day_enum == Day.THURSDAY:
+			elif day_enum == DaysEnum.THURSDAY:
 				# most people will understand a day value of "T" to mean tuesday rather than thursday.
-				day_enum = Day.TUESDAY
+				day_enum = DaysEnum.TUESDAY
 		return cls(day_enum)
 		
 	def __init__(self, day):
