@@ -9,27 +9,6 @@ class TestHelpers(unittest.TestCase):
 			[Day.MONDAY, Day.TUESDAY, Day.WEDNESDAY, Day.THURSDAY, Day.FRIDAY]
 		)
 	
-	def test_str_to_day(self):
-		input_strings = [
-			"Monday",
-			"Mondays",
-			"Monday's",
-			"Mondays'",
-			"Mon",
-			"mon",
-			"M"
-		]
-		expected_result = Day.MONDAY
-		for instr in input_strings:
-			self.assertEqual(str_to_day(instr), expected_result)
-		
-		# Assert that "s" is explicitly not matched due to ambiguity
-		self.assertEqual(str_to_day("s"), None)
-		# Assert that "t" is explicitly matched to tuesday
-		self.assertEqual(str_to_day("t"), Day.TUESDAY)
-		#handles none values
-		self.assertEqual(str_to_day(None), None)
-
 	def test_detect_is_pm(self):
 		input_strings = [
 			"pm",

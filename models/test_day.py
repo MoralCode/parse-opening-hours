@@ -4,6 +4,26 @@ from models.day import *
 
 class TestDay(unittest.TestCase):
 
+	def test_from_string(self):
+		input_strings = [
+			"Monday",
+			"Mondays",
+			"Monday's",
+			"Mondays'",
+			"Mon",
+			"mon",
+			"M"
+		]
+		expected_result = Day("monday")
+		for instr in input_strings:
+			self.assertEqual(str_to_day(instr), expected_result)
+		
+		# Assert that "s" is explicitly not matched due to ambiguity
+		self.assertEqual(str_to_day("s"), None)
+		# Assert that "t" is explicitly matched to tuesday
+		self.assertEqual(str_to_day("t"), Day.TUESDAY)
+		#handles none values
+		self.assertEqual(str_to_day(None), None)
 	# def test_from_string_unknown(self):
 	# 	test_str = "9:00"
 	# 	test_9 = Time(9,0)
