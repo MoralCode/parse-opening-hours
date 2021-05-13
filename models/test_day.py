@@ -30,9 +30,11 @@ class TestDay(unittest.TestCase):
 
 	def test_equals(self):
 		self.assertEqual(Day("monday"), Day("monday"))
+		self.assertEqual(Day("monday"), DaysEnum.MONDAY)
 		self.assertNotEqual(Day("monday"), Day("tuesday"))
+		self.assertNotEqual(Day("monday"), DaysEnum.TUESDAY)
 		with self.assertRaises(NotImplementedError):
-			Day("monday").__eq__("monday")
+			Day("monday") == "some other value"
 	
 
 	def test_init(self):
