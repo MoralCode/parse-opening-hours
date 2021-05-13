@@ -24,9 +24,9 @@ class Day():
 		"""
 		create a time object from a string
 		"""
-		logger.debug("creating day object from string: " + string)
 		if day_string is None:
 			raise TypeError("Cannot create Day Object from value None")
+		logger.debug("creating day object from string: " + day_string)
 			
 		day = day_string.lower()
 		# ignore anything after the "day" part, if present
