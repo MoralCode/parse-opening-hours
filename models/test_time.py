@@ -39,7 +39,7 @@ class TestTime(unittest.TestCase):
 
 	def test_stringify_time(self):
 		self.assertEqual(
-			Time(11,17,TimeType.MILITARY).to_string(),
+			str(Time(11,17,TimeType.MILITARY)),
 			"11:17"
 		)
 	

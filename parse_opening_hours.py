@@ -62,8 +62,8 @@ def parse_times(result, assume_type=None):
 
 
 	return (
-		start.get_as_military_time().to_string(),
-		end.get_as_military_time().to_string()
+		str(start.get_as_military_time()),
+		str(end.get_as_military_time())
 		)
 
 # TODO: testme

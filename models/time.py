@@ -102,7 +102,7 @@ class Time:
 		return Time(hours, self.minutes, time_type=TimeType.MILITARY)
 			
 	
-	def to_string(self, format_str='{:d}:{:02d}'):
+	def __str__(self, format_str='{:d}:{:02d}'):
 		return format_str.format(self.hours, self.minutes)
 	
 	def __eq__(self, other):
