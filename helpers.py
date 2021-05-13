@@ -1,5 +1,6 @@
 import enum
 import logging, os
+from models.day import DaysEnum
 
 logger = logging.getLogger(__name__)
 if os.getenv("OH_DEBUG") == "Y":
@@ -19,7 +20,7 @@ def expand_day_range(start_day, end_day):
 		return [start_day]
 	days = []
 	count_day=False #flag to help determine which days should be included
-	all_days = enumerate(Day)
+	all_days = enumerate(DaysEnum)
 	for _,day in all_days:
 		if day == start_day:
 			count_day = True
