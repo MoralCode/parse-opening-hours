@@ -42,6 +42,9 @@ class Days():
 			return allweek
 		elif "weekend" in day:
 			return cls(DaysEnum.SATURDAY, DaysEnum.SUNDAY)
+		elif day == "":
+			# if no day is specified, assume the intention is all week
+			return allweek
 
 		logger.debug("unable to process days string: " + days_string)
 			
