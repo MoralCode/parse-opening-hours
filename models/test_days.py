@@ -19,6 +19,41 @@ class TestDays(unittest.TestCase):
 			self.workweek
 		)
 
+	
+	def test_allweek_shortcuts(self):
+		# TODO: implement assumption of pm if end time <= start time
+		input_strings = [
+			"All Week",
+			"7 days a week",
+			"7 days",
+			"Every Day",
+			"",# no date present, just a time -> assume all week
+			"daily",
+		]
+		expected_result = self.fullweek
+		self.run_tests(input_strings, expected_result)
+
+	def test_workweek(self):
+		input_strings = [
+			"Weekdays",
+			"5 days a week",
+			"5 days",
+			"Business Days",
+		]
+		expected_result = self.workweek
+		self.run_tests(input_strings,expected_result)
+
+	def test_weekend(self):
+		# TODO: implement assumption of pm if end time <= start time
+		input_strings = [
+			"Weekend",
+			"Weekends",
+		]
+		expected_result = self.weekend
+		self.run_tests(input_strings,expected_result)
+
+
+
 	# def test_from_string_unknown(self):
 	# 	test_str = "9:00"
 	# 	test_9 = Time(9,0)
@@ -70,5 +105,10 @@ class TestDays(unittest.TestCase):
 	# 		23
 	# 	)
 
-# if __name__ == '__main__':
-# 	unittest.main()
+	def run_tests(self, input_strings, expected_result, **kwargs):
+		for input_str in input_strings:
+			print("Testing String: '", input_str)
+			self.assertEqual(list(Days.from_shortcut_string(input_str, **kwargs)), expected_result)
+
+if __name__ == '__main__':
+	unittest.main()
