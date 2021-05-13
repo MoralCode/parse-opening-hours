@@ -50,7 +50,10 @@ day_shortcuts = Combine(Or([
 days = Or([day, day_shortcuts])
 
 time_number = Word(nums, max=2)
-am_or_pm = Optional(Word("AaPpMm.").setResultsName('am_pm'))
+
+possibly_dots = Optional(Char("."))
+
+am_or_pm = Optional(Group(Or([CaselessLiteral("A"), CaselessLiteral("P")]) + possibly_dots + CaselessLiteral("M")  + possibly_dots).setResultsName('am_pm'))
 
 time = Combine(time_number("hour") + time_separator + Optional(time_number("minute")) + am_or_pm,adjacent=False)
 
