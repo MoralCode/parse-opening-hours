@@ -17,33 +17,46 @@ class DaysEnum(enum.Enum):
     SUNDAY = "sunday"
 	
 
-class Day(DaysEnum):
-
+class Day():
+	day = None
+	
 	@classmethod
-	def from_string(cls, string, assume_type=None):
+	def from_string(cls, day_string, assume_type=None):
 		"""
 		create a time object from a string
 		"""
-		logger.debug("creating time object from string: " + string)
-		result = time.parseString(string)
-		hours = int_from_parsed(result, "hour")
-		minutes = int_from_parsed(result, "minute")
-		am_pm = str_from_parsed(result, "am_pm")
-		
-		time_obj = cls(hours, minutes)
-		time_obj.set_type_from_string(am_pm)
-
-		if time_obj.is_unknown() and assume_type is not None:
-			time_obj.set_type(assume_type)
-
-		return time_obj
-
-	def __init__(self):
-		pass
+		logger.debug("creating day object from string: " + string)
+		if day_string is None:
+			raise TypeError("Cannot create Day Object from value None")
 			
+		day = day_string.lower()
+		# ignore anything after the "day" part, if present
+		if "day" in day:
+			day = day.split("day")[0]
+			day += "day"
+
+		day_enum = None
+
+		for weekday in list(DaysEnum):
+			if weekday.value.startswith(day):
+				day_enum = weekday
+
+		# length checks to deal with ambiguous cases
+		if len(day) == 1:
+			if day_enum in [Day.SATURDAY, Day.SUNDAY]:
+				raise ValueError("not enough information provided to resolve ambiguous day")
+			elif day_enum == Day.THURSDAY:
+				# most people will understand a day value of "T" to mean tuesday rather than thursday.
+				day_enum = Day.TUESDAY
+		return cls(day_enum)
+		
+	def __init__(self, day):
+		if day is None:
+			raise TypeError("Cannot create Day Object from value None")
+		self.day = day
 	
-	def to_string(self, format_str='{:d}:{:02d}'):
-		return format_str.format(self.hours, self.minutes)
+	def __str__(self):
+		return self.day.value
 	
 	def __eq__(self, other):
 		if not isinstance(other, Time):
@@ -82,33 +95,4 @@ def str_to_days(day_string):
 		return allweek
 	elif "daily" in day:
 		return allweek
-
-
-
-def str_to_day(day_string):
-	if day_string is None:
-		return None
-	day = day_string.lower()
-	# ignore anything after the "day" part, if present
-	if "day" in day:
-		day = day.split("day")[0]
-		day += "day"
-
-	day_enum = None
-
-	# TODO: change to if "tuesday".startswith(day)
-	for weekday in list(Day):
-		if weekday.value.startswith(day):
-			day_enum = weekday
-
-	# length checks to deal with ambiguous cases
-	if len(day) == 1:
-		if day_enum in [Day.SATURDAY, Day.SUNDAY]:
-			return None
-		elif day_enum == Day.THURSDAY:
-			return Day.TUESDAY
-	return day_enum
-
-# @PendingDeprecationWarning
-def day_to_str(day):
-	return day.value
+	
