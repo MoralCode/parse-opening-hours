@@ -52,7 +52,11 @@ class Day():
 	def __init__(self, day):
 		if day is None:
 			raise TypeError("Cannot create Day Object from value None")
-		self.day = day
+
+		if isinstance(day, str):
+			self.day = DaysEnum(day)
+		else:
+			self.day = day
 	
 	def __str__(self):
 		return self.day.value
