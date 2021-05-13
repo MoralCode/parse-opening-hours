@@ -1,8 +1,8 @@
 
 import unittest
-from models.days import *
+from models.day import *
 
-class TestDays(unittest.TestCase):
+class TestDay(unittest.TestCase):
 
 	# def test_from_string_unknown(self):
 	# 	test_str = "9:00"
