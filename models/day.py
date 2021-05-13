@@ -59,9 +59,10 @@ class Day():
 		return self.day.value
 	
 	def __eq__(self, other):
-		if not isinstance(other, Time):
+		if not isinstance(other, Day):
 			# don't attempt to compare against unrelated types
 			raise NotImplementedError()
-		pass
+		return self.day == other.day
+
 
 
