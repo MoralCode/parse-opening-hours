@@ -95,7 +95,7 @@ def parse_days(result):
 		days = [ Day.from_string(day) for day in raw_from_parsed(result, "day") ]
 	elif is_day_shortcut(result):
 		logger.info("shortcut date detected")
-		days = Days.from_string(concat_from_parsed(result, "day_shortcuts"))
+		days = Days.from_shortcut_string(concat_from_parsed(result, "day_shortcuts"))
 	else:
 		logger.info("unspecified date detected")
 		# nothing specified, assumeit means every day

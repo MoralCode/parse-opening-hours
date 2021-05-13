@@ -10,7 +10,7 @@ class Days():
 	end_day = None
 	
 	@classmethod
-	def from_string(cls, days_string, assume_type=None):
+	def from_shortcut_string(cls, days_string, assume_type=None):
 		"""
 		create a time object from a string
 		"""
