@@ -9,29 +9,9 @@ if os.getenv("OH_DEBUG") == "Y":
 
 
 	
-def detect_if_pm(string):
-	return "p" in string.lower()
 
 
 
-
-def expand_day_range(start_day, end_day):
-	if end_day is None:
-		return [start_day]
-	days = []
-	count_day=False #flag to help determine which days should be included
-	all_days = enumerate(DaysEnum)
-	for _,day in all_days:
-		if day == start_day:
-			count_day = True
-
-		if count_day:
-			days.append(day)
-
-		if day == end_day:
-			count_day = False
-		
-	return days
 
 def raw_from_parsed(parsed, key, default=None):
 	if parsed is None:
