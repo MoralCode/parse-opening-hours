@@ -21,6 +21,13 @@ class TestTime(unittest.TestCase):
 			test_9.time_type
 		)
 
+	def test_from_string_None(self):
+		with self.assertRaises(TypeError):
+			Time.from_string(None)
+		
+		with self.assertRaises(ValueError):
+			Time.from_string("")
+
 
 	def test_from_string_am(self):
 		times_9am = [
@@ -36,10 +43,9 @@ class TestTime(unittest.TestCase):
 				test_9am
 			)
 
-
 	def test_stringify_time(self):
 		self.assertEqual(
-			Time(11,17,TimeType.MILITARY).to_string(),
+			str(Time(11,17,TimeType.MILITARY)),
 			"11:17"
 		)
 	

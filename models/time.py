@@ -25,6 +25,11 @@ class Time:
 		create a time object from a string
 		"""
 		logger.debug("creating time object from string: " + string)
+		if string is None:
+			raise TypeError("Cannot create Time from None")
+		elif string == "":
+			raise ValueError("Cannot create Time from empty string")
+		
 		result = time.parseString(string)
 		hours = int_from_parsed(result, "hour")
 		minutes = int_from_parsed(result, "minute")
@@ -102,7 +107,7 @@ class Time:
 		return Time(hours, self.minutes, time_type=TimeType.MILITARY)
 			
 	
-	def to_string(self, format_str='{:d}:{:02d}'):
+	def __str__(self, format_str='{:d}:{:02d}'):
 		return format_str.format(self.hours, self.minutes)
 	
 	def __eq__(self, other):
