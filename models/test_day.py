@@ -16,14 +16,16 @@ class TestDay(unittest.TestCase):
 		]
 		expected_result = Day("monday")
 		for instr in input_strings:
-			self.assertEqual(str_to_day(instr), expected_result)
+			self.assertEqual(Day.from_string(instr), expected_result)
 		
 		# Assert that "s" is explicitly not matched due to ambiguity
-		self.assertEqual(str_to_day("s"), None)
+		with self.assertRaises(ValueError):
+			Day.from_string("s")
 		# Assert that "t" is explicitly matched to tuesday
-		self.assertEqual(str_to_day("t"), Day.TUESDAY)
+		self.assertEqual(Day.from_string("t"), Day(DaysEnum.TUESDAY))
 		#handles none values
-		self.assertEqual(str_to_day(None), None)
+		with self.assertRaises(TypeError):
+			Day.from_string(None)
 
 
 	def test_equals(self):

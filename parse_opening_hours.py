@@ -11,8 +11,9 @@
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 from patterns import *
-from helpers import detect_if_pm, str_to_days, expand_day_range, value_from_parsed, str_from_parsed, concat_from_parsed, raw_from_parsed
+from helpers import value_from_parsed, str_from_parsed, concat_from_parsed, raw_from_parsed
 from models.day import Day, DaysEnum
+from models.days import Days
 from models.time import Time, TimeType
 import os
 import logging
@@ -84,21 +85,21 @@ def parse_days(result):
 	if is_day_range(result):
 		logger.info("range date detected")
 		# this is a date range that includes the intervening days
-		start_day = str_to_day(str_from_parsed(result, "startday"))
+		start_day = Day.from_string(str_from_parsed(result, "startday"))
 		end_day = str_from_parsed(result, "endday", default=None)
-		end_day = str_to_day(end_day[0]) if end_day is not None else end_day
-		days = expand_day_range(start_day, end_day)
+		end_day = Day.from_string(end_day[0]) if end_day is not None else end_day
+		days = Days(start_day, end_day)
 	elif is_day_list(result):
 		logger.info("list date detected")
 
-		days = [ str_to_day(day) for day in raw_from_parsed(result, "day") ]
+		days = [ Day.from_string(day) for day in raw_from_parsed(result, "day") ]
 	elif is_day_shortcut(result):
 		logger.info("shortcut date detected")
-		days = str_to_days(concat_from_parsed(result, "day_shortcuts"))
+		days = Days.from_string(concat_from_parsed(result, "day_shortcuts"))
 	else:
 		logger.info("unspecified date detected")
 		# nothing specified, assumeit means every day
-		return expand_day_range(DaysEnum.MONDAY, DaysEnum.SUNDAY)
+		return Days(DaysEnum.MONDAY, DaysEnum.SUNDAY)
 	return days
 
 def convert_to_dict(result, assume_type=None):
@@ -117,7 +118,7 @@ def convert_to_dict(result, assume_type=None):
 	for day in days:
 		opening_hours_json.append(
 			create_entry(
-				day_to_str(day),
+				str(day),
 				start_time,
 				end_time
 			)
