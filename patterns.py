@@ -87,7 +87,7 @@ day_shortcuts = Combine(Or([
 	CaselessLiteral("Business Day") + Optional(plural),
 ]), adjacent=False)
 
-days = Or([day, day_shortcuts])
+days = OneOrMore(day)
 
 time_number = Word(nums, max=2)
 
@@ -97,7 +97,7 @@ am_or_pm = Optional(Group(Or([CaselessLiteral("A"), CaselessLiteral("P")]) + pos
 
 time = Combine(time_number("hour") + time_separator + Optional(time_number("minute")) + am_or_pm,adjacent=False)
 
-dateShortcuts = OneOrMore(days.setResultsName('day_shortcuts', listAllMatches=True) + Optional(list_separator))
+dateShortcuts = day_shortcuts.setResultsName('day_shortcuts', listAllMatches=True) + Optional(list_separator)
 
 dateList = OneOrMore(day.setResultsName('day', listAllMatches=True) + Optional(list_separator))
 
