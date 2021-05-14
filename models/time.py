@@ -8,10 +8,10 @@ if os.getenv("OH_DEBUG") == "Y":
 	logger.setLevel(logging.DEBUG)
 
 class TimeType(enum.Enum):
-	UNKNOWN = 0
-	AM = 1
-	PM = 2
-	MILITARY = 3
+	UNKNOWN = None
+	AM = "am"
+	PM = "pm"
+	MILITARY = "mil"
 	
 
 class Time:
@@ -109,6 +109,9 @@ class Time:
 	
 	def __str__(self, format_str='{:d}:{:02d}'):
 		return format_str.format(self.hours, self.minutes)
+
+	def __repr__(self):
+		return 'H{:d} M{:02d} T{}'.format(self.hours, self.minutes, self.time_type.value)
 	
 	def __eq__(self, other):
 		if not isinstance(other, Time):
