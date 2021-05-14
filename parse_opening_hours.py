@@ -15,6 +15,7 @@ from helpers import value_from_parsed, str_from_parsed, concat_from_parsed, raw_
 from models.day import Day, DaysEnum
 from models.days import Days
 from models.time import Time, TimeType
+import unicodedata
 import os
 import logging
 logging.basicConfig()
@@ -28,6 +29,8 @@ class JsonOpeningHours():
 
 	@classmethod
 	def parse(self, hours_string, assume_type=None):
+
+		hours_string = unicodedata.normalize('NFC', hours_string)
 
 		opening_hours_format = Or([
 			OneOrMore(dates + day_time_separators + timerange),
