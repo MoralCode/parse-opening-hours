@@ -47,6 +47,8 @@ class Day():
 			elif day_enum == DaysEnum.THURSDAY:
 				# most people will understand a day value of "T" to mean tuesday rather than thursday.
 				day_enum = DaysEnum.TUESDAY
+			elif day == "h":
+				day_enum = DaysEnum.THURSDAY
 		return cls(day_enum)
 		
 	def __init__(self, day):
