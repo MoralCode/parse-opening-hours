@@ -25,6 +25,8 @@ day_time_separators = Optional(Or([
 	CaselessLiteral("from", )
 ]))
 
+plural = caselessWord("s'", max=2)
+
 #TODO: support multiple sections like M 8am-2pm, W 9am-2pm
 section_separator = Optional(",")
 time_separator = Optional(":")
