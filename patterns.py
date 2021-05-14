@@ -31,18 +31,46 @@ plural = caselessWord("s'", max=2)
 section_separator = Optional(",")
 time_separator = Optional(":")
 
+day = Combine(Or([
+	MatchFirst([
+		CaselessLiteral("Monday") + Optional(plural),
+		CaselessLiteral("Mon"),
+		CaselessLiteral("M")
+	]),
+	MatchFirst([
+		CaselessLiteral("Tuesday") + Optional(plural),
+		CaselessLiteral("Tues"),
+		CaselessLiteral("Tue"),
+		CaselessLiteral("T")
+	]),
+	MatchFirst([
+		CaselessLiteral("Wednesday") + Optional(plural),
+		CaselessLiteral("Wed"),
+		CaselessLiteral("W")
+	]),
+	MatchFirst([
+		CaselessLiteral("Thursday") + Optional(plural),
+		CaselessLiteral("Thurs"),
+		CaselessLiteral("Th"),
+		CaselessLiteral("H")
+	]),
+	MatchFirst([
+		CaselessLiteral("Friday") + Optional(plural),
+		CaselessLiteral("Fri"),
+		CaselessLiteral("F")
+	]),
+	MatchFirst([
+		CaselessLiteral("Saturday") + Optional(plural),
+		CaselessLiteral("Sat"),
+		CaselessLiteral("Sa")
+	]),
+	MatchFirst([
+		CaselessLiteral("Sunday") + Optional(plural),
+		CaselessLiteral("Sun"),
+		CaselessLiteral("Su")
+	]),
+]))
 
-day_suffix = Optional(CaselessLiteral("day")) + Optional(plural)
-
-day = Or([
-	Combine(CaselessLiteral("m") + Optional(caselessWord("on", max=2)) + day_suffix),
-	Combine(CaselessLiteral("T") + Optional(caselessWord("ues", max=3)) + day_suffix),
-	Combine(CaselessLiteral("W") + Optional(caselessWord("edns", max=5)) + day_suffix),
-	Combine(CaselessLiteral("T") + Optional(caselessWord("hurs", max=4)) + day_suffix),
-	Combine(CaselessLiteral("F") + Optional(caselessWord("ri", max=2)) + day_suffix),
-	Combine(CaselessLiteral("S") + Optional(caselessWord("aturn", max=4)) + day_suffix),
-	CaselessLiteral("H")
-])
 
 day_shortcuts = Combine(Or([
 	Or([
