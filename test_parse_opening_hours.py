@@ -152,6 +152,18 @@ class TestHoursParsing(unittest.TestCase):
 			with self.subTest(day_of_week, day=day_of_week):
 				expected_result = [ results[day_of_week] ]
 				self.run_tests(input_strings[day_of_week],expected_result, assume_type=TimeType.AM)
+	
+	
+	def test_day_time_separators(self):
+		# TODO: implement assumption of pm if end time <= start time
+		input_strings = [
+			"Monday 9:00 - 5:00",
+			"Monday from 9:00 - 5:00",
+			"Monday: 9:00 - 5:00",
+			
+		]
+		expected_result = [ self.mon_9_to_5 ]
+		self.run_tests(input_strings,expected_result, assume_type=TimeType.AM)
 
 	def test_time_formatting(self):
 		# TODO: implement assumption of pm if end time <= start time
