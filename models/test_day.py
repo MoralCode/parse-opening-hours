@@ -17,7 +17,10 @@ class TestDay(unittest.TestCase):
 		expected_result = Day("monday")
 		for instr in input_strings:
 			self.assertEqual(Day.from_string(instr), expected_result)
+
+
 		
+	def test_from_string_edge_cases(self):
 		# Assert that "s" is explicitly not matched due to ambiguity
 		with self.assertRaises(ValueError):
 			Day.from_string("s")
