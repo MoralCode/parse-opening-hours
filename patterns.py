@@ -39,17 +39,17 @@ day = Combine(day_of_week_start + day_of_week_rest)
 
 day_shortcuts = Combine(Or([
 	Or([
-		caselessWord("Work"),
-		caselessWord("All")
-	]) + caselessWord("Week"),
-	Char("57") + caselessWord("days") + Optional(caselessWord("a week")),
-	caselessWord("Every Day"),
-	caselessWord("daily"),
-	caselessWord("Week") + Or([
-		caselessWord("day"),
-		caselessWord("end")
-	]) + Optional(caselessWord("'s")),
-	caselessWord("Business Days"),
+		CaselessLiteral("Work"),
+		CaselessLiteral("All")
+	]) + Optional(space) + CaselessLiteral("Week"),
+	Char("57") + Optional(space) + CaselessLiteral("days") + Optional(space) + Optional(CaselessLiteral("a week")),
+	CaselessLiteral("Every Day"),
+	CaselessLiteral("daily"),
+	CaselessLiteral("Week") + Optional(space) + Or([
+		CaselessLiteral("day"),
+		CaselessLiteral("end")
+	]) + Optional(plural),
+	CaselessLiteral("Business Day") + Optional(plural),
 ]), adjacent=False)
 
 days = Or([day, day_shortcuts])
