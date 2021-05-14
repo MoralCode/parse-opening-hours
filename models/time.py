@@ -65,14 +65,12 @@ class Time:
 		self.time_type = time_type
 
 	def set_type_from_string(self, time_type_str):
-		if time_type_str is None:
-			self.set_type(TimeType.UNKNOWN)
+		if time_type_str is None and self.is_unknown():
+			return # already unknown
 		elif "p" in time_type_str.lower():
 			self.set_type(TimeType.PM)
 		elif "a" in time_type_str.lower():
 			self.set_type(TimeType.AM)
-		else:
-			self.set_type(TimeType.UNKNOWN)
 
 	def is_24_hr(self):
 		return self.time_type == TimeType.MILITARY
