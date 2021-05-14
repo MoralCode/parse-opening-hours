@@ -57,7 +57,7 @@ day = Combine(Or([
 	MatchFirst([
 		CaselessLiteral("Friday") + Optional(plural),
 		CaselessLiteral("Fri"),
-		CaselessLiteral("F")
+		CaselessLiteral("F") + ~CaselessLiteral("rom"),
 	]),
 	MatchFirst([
 		CaselessLiteral("Saturday") + Optional(plural),
