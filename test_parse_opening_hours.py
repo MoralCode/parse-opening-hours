@@ -79,16 +79,80 @@ class TestHoursParsing(unittest.TestCase):
 
 	def test_single_day_abbreveations(self):
 		# TODO: implement assumption of pm if end time <= start time
-		input_strings = [
-			"Mondays' 9:00am - 5:00pm",
-			"Monday's 9:00am - 5:00pm",
-			"Mondays 9:00am - 5:00pm",
-			"Monday 9:00am - 5:00pm",
-			"Mon 9:00am - 5:00pm",
-			"M 9:00am - 5:00pm"
-		]
-		expected_result = [ self.mon_9_to_5 ]
-		self.run_tests(input_strings,expected_result, assume_type=TimeType.AM)
+		input_strings = {
+			"monday": [
+				"Mondays' 9:00am - 5:00pm",
+				"Monday's 9:00am - 5:00pm",
+				"Mondays 9:00am - 5:00pm",
+				"Monday 9:00am - 5:00pm",
+				"Mon 9:00am - 5:00pm",
+				"M 9:00am - 5:00pm"
+			],
+			"tuesday": [
+				"Tuesdays' 9:00am - 5:00pm",
+				"Tuesday's 9:00am - 5:00pm",
+				"Tuesdays 9:00am - 5:00pm",
+				"Tuesday 9:00am - 5:00pm",
+				"Tues 9:00am - 5:00pm",
+				"Tue 9:00am - 5:00pm",
+				"Tu 9:00am - 5:00pm",
+				"T 9:00am - 5:00pm"
+			],
+			"wednesday": [
+				"Wednesdays 9:00am - 5:00pm",
+				"Wednesdays' 9:00am - 5:00pm",
+				"Wednesday's 9:00am - 5:00pm",
+				"Wednesday 9:00am - 5:00pm",
+				"Wed 9:00am - 5:00pm",
+				"W 9:00am - 5:00pm"
+			],
+			"thursday": [
+				"Thursdays' 9:00am - 5:00pm",
+				"Thursday's 9:00am - 5:00pm",
+				"Thursdays 9:00am - 5:00pm",
+				"Thursday 9:00am - 5:00pm",
+				"Thurs 9:00am - 5:00pm",
+				"Th 9:00am - 5:00pm",
+				"H 9:00am - 5:00pm"
+			],
+			"friday": [
+				"Fridays' 9:00am - 5:00pm",
+				"Friday's 9:00am - 5:00pm",
+				"Fridays 9:00am - 5:00pm",
+				"Friday 9:00am - 5:00pm",
+				"Fri 9:00am - 5:00pm",
+				"F 9:00am - 5:00pm"
+			],
+			"saturday": [
+				"Saturdays' 9:00am - 5:00pm",
+				"Saturday's 9:00am - 5:00pm",
+				"Saturdays 9:00am - 5:00pm",
+				"Saturday 9:00am - 5:00pm",
+				"Sat 9:00am - 5:00pm",
+				"Sa 9:00am - 5:00pm"
+			],
+			"sunday": [
+				"Sundays' 9:00am - 5:00pm",
+				"Sunday's 9:00am - 5:00pm",
+				"Sundays 9:00am - 5:00pm",
+				"Sunday 9:00am - 5:00pm",
+				"Sun 9:00am - 5:00pm",
+				"Su 9:00am - 5:00pm"
+			]
+		}
+		results = {
+			"monday": self.mon_9_to_5,
+			"tuesday": self.tue_9_to_5,
+			"wednesday": self.wed_9_to_5,
+			"thursday": self.thurs_9_to_5,
+			"friday": self.fri_9_to_5,
+			"saturday": self.sat_9_to_5,
+			"sunday": self.sun_9_to_5
+		}
+		for day_of_week in list(input_strings.keys()):
+			with self.subTest(day_of_week, day=day_of_week):
+				expected_result = [ results[day_of_week] ]
+				self.run_tests(input_strings[day_of_week],expected_result, assume_type=TimeType.AM)
 
 	def test_time_formatting(self):
 		# TODO: implement assumption of pm if end time <= start time
