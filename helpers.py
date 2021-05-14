@@ -41,16 +41,6 @@ def concat_from_parsed(parsed, key, default=None):
 	logger.debug(val)
 	return "".join(val)
 
-def int_from_parsed(parsed, key, default=0):
-	val = value_from_parsed(parsed, key, default=default)
-	logger.debug("int key: " + key)
-	logger.debug(str(val))
-	if val is None:
-		return default
-	if isinstance(val, int):
-		return val
-	return int(val, 10)
-
 def str_from_parsed(parsed, key, default=""):
 	val = value_from_parsed(parsed, key, default=default)
 	logger.debug("str key: " + key)

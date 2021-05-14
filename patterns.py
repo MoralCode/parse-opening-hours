@@ -89,7 +89,7 @@ day_shortcuts = Combine(Or([
 
 days = OneOrMore(day)
 
-time_number = Word(nums, max=2)
+time_number = Word(nums, max=2).setParseAction(pyparsing_common.convertToInteger)
 
 possibly_dots = Optional(Char("."))
 
