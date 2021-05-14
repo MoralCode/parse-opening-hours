@@ -22,7 +22,7 @@ list_separator = Or([Word(" ,+/"), word_list_separators])
 
 day_time_separators = Optional(Or([
 	Word(": "),
-	CaselessLiteral("from", )
+	CaselessLiteral("from")
 ]))
 
 plural = caselessWord("s'", max=2)
@@ -31,11 +31,18 @@ plural = caselessWord("s'", max=2)
 section_separator = Optional(",")
 time_separator = Optional(":")
 
-# this is all the unique characters in the string
-# "monday tuesday wednesday thursday friday saturday sunday"
-day_of_week_start = caselessChar("mtwhfs")
-day_of_week_rest = Optional(caselessWord("ondayuesrit'"))
-day = Combine(day_of_week_start + day_of_week_rest)
+
+day_suffix = Optional(CaselessLiteral("day")) + Optional(plural)
+
+day = Or([
+	Combine(CaselessLiteral("m") + Optional(caselessWord("on", max=2)) + day_suffix),
+	Combine(CaselessLiteral("T") + Optional(caselessWord("ues", max=3)) + day_suffix),
+	Combine(CaselessLiteral("W") + Optional(caselessWord("edns", max=5)) + day_suffix),
+	Combine(CaselessLiteral("T") + Optional(caselessWord("hurs", max=4)) + day_suffix),
+	Combine(CaselessLiteral("F") + Optional(caselessWord("ri", max=2)) + day_suffix),
+	Combine(CaselessLiteral("S") + Optional(caselessWord("aturn", max=4)) + day_suffix),
+	CaselessLiteral("H")
+])
 
 day_shortcuts = Combine(Or([
 	Or([
