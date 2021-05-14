@@ -200,6 +200,10 @@ class TestHoursParsing(unittest.TestCase):
 		]
 		expected_result = [ self.mon_9_to_5 ]
 		self.run_tests(input_strings,expected_result, assume_type=TimeType.AM)
+
+
+	def test_time_cutoff_regression(self):
+		self.assertEqual(JsonOpeningHours.parse("Monday 8am \u2013 11am"), [{'day': 'monday', 'opens': '8:00', 'closes': '11:00'}])
 	
 	
 	def test_day_range(self):
