@@ -1,7 +1,7 @@
 from pyparsing import *
 
-def caselessWord(some_str):
-	return Word(some_str.lower() + some_str.upper())
+def caselessWord(some_str, **kwargs):
+	return Word(some_str.lower() + some_str.upper(), **kwargs)
 
 def caselessChar(some_str):
 	return Char(some_str.lower() + some_str.upper())
