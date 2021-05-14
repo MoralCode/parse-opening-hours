@@ -10,6 +10,7 @@ pyparsing = "*"
 pytest = "*"
 pytest-cov = "*"
 coverage = "*"
+pytest-subtests = "*"
 
 [requires]
 python_version = "3.8"
