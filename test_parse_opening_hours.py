@@ -195,6 +195,7 @@ class TestHoursParsing(unittest.TestCase):
 			"Monday 9am - 5pm",
 			"Monday 9am – 5pm",
 			"Monday 9am — 5pm",
+			"Monday 9am \u2013 5pm",
 			
 		]
 		expected_result = [ self.mon_9_to_5 ]
