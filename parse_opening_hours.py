@@ -57,18 +57,28 @@ def create_entry(day, opening, closing, notes=None):
 
 def parse_times(result, assume_type=None):
 	# assumes that all three (hours, minutes, am_pm) are the same length
-	start = concat_from_parsed(result, "starttime")
-	end = concat_from_parsed(result, "endtime")
-	start = Time.from_string(start, assume_type=assume_type)
-	end = Time.from_string(end, assume_type=assume_type)
+	res_dct = result.asDict()
+	start = res_dct.get("starttime")[0]
+	end = res_dct.get("endtime")[0]
 
-	if start.is_am() and end.is_am() and start.get_hours() > end.get_hours():
-		end.set_type(TimeType.PM)
+	starttime = Time(start.get("hour"), start.get("minute"))
+	starttime.set_type_from_string(start.get("am_pm"))
+	endtime = Time(end.get("hour"), end.get("minute"))
+	endtime.set_type_from_string(end.get("am_pm"))
+	
+	if starttime.is_unknown() and assume_type is not None:
+		starttime.set_type(assume_type)
 
+	if endtime.is_unknown() and assume_type is not None:
+		endtime.set_type(assume_type)
+
+
+	if starttime.is_am() and endtime.is_am() and starttime.get_hours() > endtime.get_hours():
+		endtime.set_type(TimeType.PM)
 
 	return (
-		str(start.get_as_military_time()),
-		str(end.get_as_military_time())
+		str(starttime.get_as_military_time()),
+		str(endtime.get_as_military_time())
 		)
 
 # TODO: testme
