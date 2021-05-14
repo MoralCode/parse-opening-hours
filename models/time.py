@@ -1,6 +1,5 @@
 import enum
 from patterns import *
-from helpers import raw_from_parsed
 import logging, os
 
 logger = logging.getLogger(__name__)
@@ -31,8 +30,8 @@ class Time:
 			raise ValueError("Cannot create Time from empty string")
 		
 		result = time.parseString(string)
-		hours = raw_from_parsed(result, "hour")
-		minutes = raw_from_parsed(result, "minute")
+		hours = result.get("hour")
+		minutes = result.get("minute")
 		am_pm = result.get("am_pm")
 		
 		time_obj = cls(hours, minutes)

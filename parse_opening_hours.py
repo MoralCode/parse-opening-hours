@@ -11,7 +11,6 @@
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 from patterns import *
-from helpers import value_from_parsed, raw_from_parsed
 from models.day import Day, DaysEnum
 from models.days import Days
 from models.time import Time, TimeType
@@ -105,7 +104,7 @@ def parse_days(result):
 	elif is_day_list(result):
 		logger.info("list date detected")
 
-		days = [ Day.from_string(day) for day in raw_from_parsed(result, "day") ]
+		days = [ Day.from_string(day) for day in result.get("day") ]
 	elif is_day_shortcut(result):
 		logger.info("shortcut date detected")
 		days = Days.from_shortcut_string(result.get( "day_shortcuts")[0])

@@ -6,31 +6,3 @@ logger = logging.getLogger(__name__)
 if os.getenv("OH_DEBUG") == "Y":
 	logger.setLevel(logging.DEBUG)
 	
-
-
-	
-
-
-
-
-def raw_from_parsed(parsed, key, default=None):
-	if parsed is None:
-		return default
-
-	val = parsed.get(key)
-	logger.debug("raw key: " + key)
-	logger.debug(val)
-	if val is None:
-		return default
-	try:
-		return val
-	except KeyError:
-		return default
-
-def value_from_parsed(parsed, key, default=None):
-	val = raw_from_parsed(parsed, key, default=None)
-	logger.debug("value key: " + key)
-	logger.debug(val)
-	if val is None:
-		return default
-	return val[0]
