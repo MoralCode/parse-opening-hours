@@ -40,11 +40,3 @@ def concat_from_parsed(parsed, key, default=None):
 	logger.debug("concat key: " + key)
 	logger.debug(val)
 	return "".join(val)
-
-def str_from_parsed(parsed, key, default=""):
-	val = value_from_parsed(parsed, key, default=default)
-	logger.debug("str key: " + key)
-	logger.debug(val)
-	if val is None:
-		return default
-	return str(val)

@@ -11,7 +11,7 @@
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 from patterns import *
-from helpers import value_from_parsed, str_from_parsed, concat_from_parsed, raw_from_parsed
+from helpers import value_from_parsed, concat_from_parsed, raw_from_parsed
 from models.day import Day, DaysEnum
 from models.days import Days
 from models.time import Time, TimeType
@@ -88,8 +88,8 @@ def parse_days(result):
 	if is_day_range(result):
 		logger.info("range date detected")
 		# this is a date range that includes the intervening days
-		start_day = Day.from_string(str_from_parsed(result, "startday"))
-		end_day = str_from_parsed(result, "endday", default=None)
+		start_day = Day.from_string(result.get("startday")[0])
+		end_day = result.get("endday")[0]
 		end_day = Day.from_string(end_day[0]) if end_day is not None else end_day
 		days = Days(start_day, end_day)
 	elif is_day_list(result):

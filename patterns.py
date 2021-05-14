@@ -91,9 +91,9 @@ days = OneOrMore(day)
 
 time_number = Word(nums, max=2).setParseAction(pyparsing_common.convertToInteger)
 
-possibly_dots = Optional(Char("."))
+possibly_dots = Optional(Char(".")).suppress()
 
-am_or_pm = Optional(Group(Or([CaselessLiteral("A"), CaselessLiteral("P")]) + possibly_dots + CaselessLiteral("M")  + possibly_dots).setResultsName('am_pm'))
+am_or_pm = Optional(Combine(Or([CaselessLiteral("A"), CaselessLiteral("P")]) + possibly_dots + CaselessLiteral("M")  + possibly_dots).setResultsName('am_pm'))
 
 time = Combine(time_number("hour") + time_separator + Optional(time_number("minute")) + am_or_pm,adjacent=False)
 

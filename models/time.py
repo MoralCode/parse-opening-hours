@@ -1,6 +1,6 @@
 import enum
 from patterns import *
-from helpers import raw_from_parsed, str_from_parsed
+from helpers import raw_from_parsed
 import logging, os
 
 logger = logging.getLogger(__name__)
@@ -33,7 +33,7 @@ class Time:
 		result = time.parseString(string)
 		hours = raw_from_parsed(result, "hour")
 		minutes = raw_from_parsed(result, "minute")
-		am_pm = str_from_parsed(result, "am_pm")
+		am_pm = result.get("am_pm")
 		
 		time_obj = cls(hours, minutes)
 		time_obj.set_type_from_string(am_pm)
