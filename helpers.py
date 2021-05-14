@@ -34,9 +34,3 @@ def value_from_parsed(parsed, key, default=None):
 	if val is None:
 		return default
 	return val[0]
-
-def concat_from_parsed(parsed, key, default=None):
-	val = value_from_parsed(parsed, key, default=[])
-	logger.debug("concat key: " + key)
-	logger.debug(val)
-	return "".join(val)
