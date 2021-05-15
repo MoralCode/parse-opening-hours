@@ -5,20 +5,74 @@ from models.day import *
 class TestDay(unittest.TestCase):
 
 	def test_from_string(self):
-		input_strings = [
-			"Monday",
-			"Mondays",
-			"Monday's",
-			"Mondays'",
-			"Mon",
-			"mon",
-			"M"
-		]
-		expected_result = Day("monday")
-		for instr in input_strings:
-			self.assertEqual(Day.from_string(instr), expected_result)
 
-
+		input_strings = {
+			"monday": [
+				"Monday",
+				"Mondays",
+				"Monday's",
+				"Mondays'",
+				"Mon",
+				"mon",
+				"M"
+			],
+			"tuesday":  [
+				"Tuesdays'",
+				"Tuesday's",
+				"Tuesdays",
+				"Tuesday",
+				"Tues",
+				"Tue",
+				"Tu",
+				"T"
+			],
+			"wednesday": [
+				"Wednesdays",
+				"Wednesdays'",
+				"Wednesday's",
+				"Wednesday",
+				"Wed",
+				"W"
+			],
+			"thursday": [
+				"Thursdays'",
+				"Thursday's",
+				"Thursdays",
+				"Thursday",
+				"Thurs",
+				"Th",
+				"H"
+			],
+			"friday": [
+				"Fridays'",
+				"Friday's",
+				"Fridays",
+				"Friday",
+				"Fri",
+				"F"
+			],
+			"saturday":[
+				"Saturdays'",
+				"Saturday's",
+				"Saturdays",
+				"Saturday",
+				"Sat",
+				"Sa"
+			],
+			"sunday": [
+				"Sundays'",
+				"Sunday's",
+				"Sundays",
+				"Sunday",
+				"Sun",
+				"Su"
+			]
+		}
+		for day_of_week in list(input_strings.keys()):
+			with self.subTest(day_of_week, day=day_of_week):
+				expected_result = Day(day_of_week)
+				for instr in input_strings[day_of_week]:
+					self.assertEqual(Day.from_string(instr), expected_result)
 		
 	def test_from_string_edge_cases(self):
 		# Assert that "s" is explicitly not matched due to ambiguity
