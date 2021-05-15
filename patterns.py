@@ -26,6 +26,8 @@ day_time_separators = Optional(Or([
 ]))
 
 plural = caselessWord("s'", max=2)
+possibly_dots = Optional(Char(".")).suppress()
+
 
 #TODO: support multiple sections like M 8am-2pm, W 9am-2pm
 section_separator = Optional(",")
@@ -34,40 +36,40 @@ time_separator = Optional(":")
 day = Combine(Or([
 	MatchFirst([
 		CaselessLiteral("Monday") + Optional(plural),
-		CaselessLiteral("Mon"),
-		CaselessLiteral("M")
+		CaselessLiteral("Mon") + possibly_dots,
+		CaselessLiteral("M") + possibly_dots
 	]),
 	MatchFirst([
 		CaselessLiteral("Tuesday") + Optional(plural),
-		CaselessLiteral("Tues"),
-		CaselessLiteral("Tue"),
-		CaselessLiteral("T")
+		CaselessLiteral("Tues") + possibly_dots,
+		CaselessLiteral("Tue") + possibly_dots,
+		CaselessLiteral("T") + possibly_dots
 	]),
 	MatchFirst([
 		CaselessLiteral("Wednesday") + Optional(plural),
-		CaselessLiteral("Wed"),
-		CaselessLiteral("W")
+		CaselessLiteral("Wed") + possibly_dots,
+		CaselessLiteral("W") + possibly_dots
 	]),
 	MatchFirst([
 		CaselessLiteral("Thursday") + Optional(plural),
-		CaselessLiteral("Thurs"),
-		CaselessLiteral("Th"),
-		CaselessLiteral("H")
+		CaselessLiteral("Thurs") + possibly_dots,
+		CaselessLiteral("Th") + possibly_dots,
+		CaselessLiteral("H") + possibly_dots
 	]),
 	MatchFirst([
 		CaselessLiteral("Friday") + Optional(plural),
-		CaselessLiteral("Fri"),
-		CaselessLiteral("F") + ~CaselessLiteral("rom"),
+		CaselessLiteral("Fri") + possibly_dots,
+		CaselessLiteral("F") + possibly_dots + ~CaselessLiteral("rom"),
 	]),
 	MatchFirst([
 		CaselessLiteral("Saturday") + Optional(plural),
-		CaselessLiteral("Sat"),
-		CaselessLiteral("Sa")
+		CaselessLiteral("Sat") + possibly_dots,
+		CaselessLiteral("Sa") + possibly_dots
 	]),
 	MatchFirst([
 		CaselessLiteral("Sunday") + Optional(plural),
-		CaselessLiteral("Sun"),
-		CaselessLiteral("Su")
+		CaselessLiteral("Sun") + possibly_dots,
+		CaselessLiteral("Su") + possibly_dots
 	]),
 ]))
 
@@ -91,7 +93,6 @@ days = OneOrMore(day)
 
 time_number = Word(nums, max=2).setParseAction(pyparsing_common.convertToInteger)
 
-possibly_dots = Optional(Char(".")).suppress()
 
 am_or_pm = Optional(Combine(Or([CaselessLiteral("A"), CaselessLiteral("P")]) + possibly_dots + CaselessLiteral("M")  + possibly_dots).setResultsName('am_pm'))
 
