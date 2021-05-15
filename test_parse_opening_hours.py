@@ -86,7 +86,9 @@ class TestHoursParsing(unittest.TestCase):
 				"Mondays 9:00am - 5:00pm",
 				"Monday 9:00am - 5:00pm",
 				"Mon 9:00am - 5:00pm",
-				"M 9:00am - 5:00pm"
+				"M 9:00am - 5:00pm",
+				"Mon. 9:00am - 5:00pm",
+				"M. 9:00am - 5:00pm"
 			],
 			"tuesday": [
 				"Tuesdays' 9:00am - 5:00pm",
