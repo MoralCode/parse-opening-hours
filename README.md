@@ -53,5 +53,7 @@ show coverage report: `pipenv run coverage report`
 This is pretty much here so I can copy-paste the commands to make a new release.
 
 build: `python setup.py sdist bdist_wheel`
+
 check: `twine check dist/*`
+
 upload: `twine upload dist/*`
