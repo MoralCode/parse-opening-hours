@@ -84,10 +84,6 @@ def parse_times(result, assume_type=None):
 def convert_to_dict(result, assume_type=None):
 
 	opening_hours_json = []
-	logger.debug(result.dump())
-	logger.debug(vars(result))
-	logger.debug(result["starttime"])
-	logger.debug(result.get("starttime").get("hours"))
 
 	days = Days.from_parse_results(result)
 	
