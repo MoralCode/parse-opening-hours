@@ -80,31 +80,21 @@ def parse_times(result, assume_type=None):
 		)
 
 # TODO: testme
-def is_day_range(result):
-	return "startday" in result
-
-def is_day_list(result):
-	return "day" in result
-
-def is_day_shortcut(result):
-	return "day_shortcuts" in result
-
-# TODO: testme
 def parse_days(result):
 	days = []
 
-	if is_day_range(result):
+	if "startday" in result:
 		logger.info("range date detected")
 		# this is a date range that includes the intervening days
 		start_day = Day.from_string(result.get("startday")[0])
 		end_day = result.get("endday")[0]
 		end_day = Day.from_string(end_day[0]) if end_day is not None else end_day
 		days = Days(start_day, end_day)
-	elif is_day_list(result):
+	elif "day" in result:
 		logger.info("list date detected")
 
 		days = [ Day.from_string(day) for day in result.get("day") ]
-	elif is_day_shortcut(result):
+	elif "day_shortcuts" in result:
 		logger.info("shortcut date detected")
 		days = Days.from_shortcut_string(result.get( "day_shortcuts")[0])
 	else:
