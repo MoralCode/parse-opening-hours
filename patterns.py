@@ -21,7 +21,7 @@ word_list_separators = Optional(space) + oneOf("and") + Optional(space)
 list_separator = Or([Word(" ,+/"), word_list_separators])
 
 day_time_separators = Optional(Or([
-	Word(": "),
+	Literal(":"),
 	CaselessLiteral("from")
 ]))
 
