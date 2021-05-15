@@ -347,7 +347,7 @@ class TestHoursParsing(unittest.TestCase):
 
 	def run_tests(self, input_strings, expected_result, **kwargs):
 		for input_str in input_strings:
-			print("Testing String: ", input_str)
+			logger.debug("Testing String: " + input_str)
 			self.assertEqual(JsonOpeningHours.parse(input_str, **kwargs), expected_result)
 
 if __name__ == '__main__':
