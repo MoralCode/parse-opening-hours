@@ -24,9 +24,11 @@ if os.getenv("OH_DEBUG") == "Y":
 	logging.basicConfig(level=logging.DEBUG)
 
 class OpeningHours():
+	"""This is the main, class responsible for parsing and returning representations of opening hours strings. It's main responsibility is to store a representation of a string representing business opening hours using objects that represent more specific pieces of the opening hours string."""
 
 	@classmethod
 	def parse(cls, hours_string, assume_type=None):
+		"""This parse function allows an OpeningHours instance to be created from most arbitrary strings representing opening hours using pyparsing."""
 
 		hours_string = unicodedata.normalize('NFC', hours_string)
 
@@ -39,7 +41,7 @@ class OpeningHours():
 		self.assume_type = assume_type
 
 	def json(self, assume_type=None):
-		
+		"""Converts the parsed results from pyparsing into the json output """
 		opening_hours_json = []
 
 		# TODO: move parse days and parse times out of the json() function
@@ -60,6 +62,7 @@ class OpeningHours():
 		return opening_hours_json
 
 def parse_times(result, assume_type=None):
+	""" Takes values from the pyparsing results and converts them to the appropriate internal objects """
 	# assumes that all three (hours, minutes, am_pm) are the same length
 	res_dct = result.asDict()
 
@@ -85,6 +88,7 @@ def parse_times(result, assume_type=None):
 		)
 
 def create_entry(day, opening, closing, notes=None):
+	"""Creates a new JSON object representing a single time slot for a single day"""
 	entry = {
 		"day": day,
 		"opens": opening,

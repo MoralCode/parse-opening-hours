@@ -12,6 +12,8 @@ class TimeType(enum.Enum):
 	
 
 class Time:
+	"""This class represents a single time and provides methods """
+
 	hours = None
 	minutes = None
 	time_type = TimeType.UNKNOWN
