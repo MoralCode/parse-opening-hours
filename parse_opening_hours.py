@@ -31,10 +31,6 @@ class OpeningHours():
 
 		hours_string = unicodedata.normalize('NFC', hours_string)
 
-		opening_hours_format = Or([
-			OneOrMore(dates + day_time_separators + timerange),
-			OneOrMore(timerange + dates + notes)
-		])	
 
 		return cls(opening_hours_format.parseString(hours_string), assume_type=assume_type)
 

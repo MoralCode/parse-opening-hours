@@ -114,4 +114,9 @@ time = Group(Or([clocktime, time_shortcut]))
 
 timerange = time.setResultsName('starttime', listAllMatches=True) + Optional(range_separator + time.setResultsName('endtime', listAllMatches=True))
 
+opening_hours_format = Or([
+	Optional(notes) + OneOrMore(dates + day_time_separators + timerange),
+	OneOrMore(timerange + dates + notes)
+])	
+
 notes = section_separator + Optional(OneOrMore(Word(alphas))).setResultsName('notes', listAllMatches=True)
