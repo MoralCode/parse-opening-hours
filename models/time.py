@@ -65,7 +65,7 @@ class Time:
 	@classmethod
 	def from_parse_results(cls, result_dict):
 		time = None
-		if "hour" in result_dict and "minute" in result_dict:
+		if "hour" in result_dict:
 			time = cls(result_dict.get("hour"), result_dict.get("minute"))
 
 			if "am_pm" in result_dict:
@@ -76,6 +76,7 @@ class Time:
 			time = cls.from_shortcut(shortcut)
 		else:
 			raise ValueError("No recognized keys found in provided parse results dict")
+		return time 
 
 	def __init__(self, hours, minutes, time_type=TimeType.UNKNOWN):
 		self.hours = hours
