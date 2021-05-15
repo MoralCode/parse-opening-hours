@@ -235,6 +235,48 @@ class TestHoursParsing(unittest.TestCase):
 		expected_result = [ self.mon_9_to_5, self.wed_9_to_5 ]
 		self.run_tests(input_strings, expected_result, assume_type=TimeType.AM)
 
+	def test_time_abbreviations(self):
+
+		input_strings = {
+			"noon": [
+				"Monday noon - 1:00pm",
+				"Monday Noon - 1:00pm",
+				"Monday NOON - 1:00pm"
+			],
+			"midnight": [
+				"Monday 11am - midnight",
+				"Monday 11am - Midnight",
+				"Monday 11am - MIDNIGHT"
+			],
+			"both": [
+				"Monday noon - midnight",
+				"Monday Noon - Midnight",
+				"Monday NOON - MIDNIGHT"
+			],
+		}
+		results = {
+			"noon": {
+				"day": "monday",
+				"opens": "12:00",
+				"closes": "13:00"
+			},
+			"midnight": {
+				"day": "monday",
+				"opens": "11:00",
+				"closes": "0:00"
+			},
+			"both": {
+				"day": "monday",
+				"opens": "12:00",
+				"closes": "0:00"
+			}
+		}
+		for day_of_week in list(input_strings.keys()):
+			with self.subTest(day_of_week, day=day_of_week):
+				expected_result = [ results[day_of_week] ]
+				self.run_tests(input_strings[day_of_week],expected_result, assume_type=TimeType.AM)
+
+	
 	def test_allweek(self):
 		# TODO: implement assumption of pm if end time <= start time
 		input_strings = [
