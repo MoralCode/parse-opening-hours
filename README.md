@@ -24,9 +24,9 @@ opening_hours = [
 
 The simplest example is just printing the JSON for an opening hours string:
 ```python
-from parse_opening_hours import JsonOpeningHours
+from parse_opening_hours import OpeningHours
 
-print(JsonOpeningHours.parse("Mon- Fri 9:00am - 5:30pm"))
+print(OpeningHours.parse("Mon- Fri 9:00am - 5:30pm"))
 ```
 
 This should give you the below output:

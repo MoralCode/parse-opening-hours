@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 if os.getenv("OH_DEBUG") == "Y":
 	logger.setLevel(logging.DEBUG)
 
-class JsonOpeningHours():
+class OpeningHours():
 
 	@classmethod
 	def parse(self, hours_string, assume_type=None):
