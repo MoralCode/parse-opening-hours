@@ -54,7 +54,7 @@ class TestHoursParsing(unittest.TestCase):
 		str_time = "Monday 9:00 - 5:00"
 		expected_result = [ self.mon_9_to_5 ]
 		with self.assertRaises(TypeError):
-			OpeningHours.parse(str_time)
+			OpeningHours.parse(str_time).json()
 
 	def test_single_day_miltime(self):
 		# TODO: implement assumption of pm if end time <= start time
@@ -203,7 +203,7 @@ class TestHoursParsing(unittest.TestCase):
 
 
 	def test_time_cutoff_regression(self):
-		self.assertEqual(OpeningHours.parse("Monday 8am \u2013 11am"), [{'day': 'monday', 'opens': '8:00', 'closes': '11:00'}])
+		self.assertEqual(OpeningHours.parse("Monday 8am \u2013 11am").json(), [{'day': 'monday', 'opens': '8:00', 'closes': '11:00'}])
 	
 	
 	def test_day_range(self):
@@ -348,7 +348,7 @@ class TestHoursParsing(unittest.TestCase):
 	def run_tests(self, input_strings, expected_result, **kwargs):
 		for input_str in input_strings:
 			logger.debug("Testing String: " + input_str)
-			self.assertEqual(OpeningHours.parse(input_str, **kwargs), expected_result)
+			self.assertEqual(OpeningHours.parse(input_str, **kwargs).json(), expected_result)
 
 if __name__ == '__main__':
 	unittest.main()

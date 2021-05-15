@@ -26,7 +26,7 @@ The simplest example is just printing the JSON for an opening hours string:
 ```python
 from parse_opening_hours import OpeningHours
 
-print(OpeningHours.parse("Mon- Fri 9:00am - 5:30pm"))
+print(OpeningHours.parse("Mon- Fri 9:00am - 5:30pm").json())
 ```
 
 This should give you the below output:

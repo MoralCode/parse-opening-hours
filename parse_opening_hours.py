@@ -27,7 +27,7 @@ if os.getenv("OH_DEBUG") == "Y":
 class OpeningHours():
 
 	@classmethod
-	def parse(self, hours_string, assume_type=None):
+	def parse(cls, hours_string, assume_type=None):
 
 		hours_string = unicodedata.normalize('NFC', hours_string)
 
@@ -35,24 +35,34 @@ class OpeningHours():
 			OneOrMore(dates + day_time_separators + timerange),
 			OneOrMore(timerange + dates + notes)
 		])	
-		parsed = opening_hours_format.parseString(hours_string)
-		opening_hours_json = convert_to_dict(parsed, assume_type=assume_type)
 
+		return cls(opening_hours_format.parseString(hours_string), assume_type=assume_type)
+
+	
+	def __init__(self, openinghours, assume_type=None):
+		self.openinghours = openinghours
+		self.assume_type = assume_type
+
+	def json(self, assume_type=None):
+		
+		opening_hours_json = []
+
+		# TODO: move parse days and parse times out of the json() function
+		days = Days.from_parse_results(self.openinghours)
+		
+		start_time, end_time = parse_times(self.openinghours, assume_type=assume_type or self.assume_type)
+		
+
+		for day in days:
+			opening_hours_json.append(
+				create_entry(
+					str(day),
+					start_time,
+					end_time
+				)
+			)
 
 		return opening_hours_json
-
-
-
-def create_entry(day, opening, closing, notes=None):
-	entry = {
-		"day": day,
-		"opens": opening,
-		"closes": closing
-	}
-	if notes:
-		entry["notes"] = notes
-	return entry
-
 
 def parse_times(result, assume_type=None):
 	# assumes that all three (hours, minutes, am_pm) are the same length
@@ -79,25 +89,14 @@ def parse_times(result, assume_type=None):
 		str(endtime.get_as_military_time())
 		)
 
-# TODO: testme
+def create_entry(day, opening, closing, notes=None):
+	entry = {
+		"day": day,
+		"opens": opening,
+		"closes": closing
+	}
+	if notes:
+		entry["notes"] = notes
+	return entry
 
-def convert_to_dict(result, assume_type=None):
 
-	opening_hours_json = []
-
-	days = Days.from_parse_results(result)
-	
-	start_time, end_time = parse_times(result, assume_type=assume_type)
-	
-
-	for day in days:
-		opening_hours_json.append(
-			create_entry(
-				str(day),
-				start_time,
-				end_time
-			)
-		)
-	
-	
-	return opening_hours_json
