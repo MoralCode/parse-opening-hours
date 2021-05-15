@@ -11,6 +11,7 @@ pytest = "*"
 pytest-cov = "*"
 coverage = "*"
 pytest-subtests = "*"
+pdoc3 = "*"
 
 [requires]
 python_version = "3.8"
