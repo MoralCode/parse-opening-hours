@@ -98,6 +98,7 @@ am_or_pm = Optional(Combine(Or([CaselessLiteral("A"), CaselessLiteral("P")]) + p
 time_shortcut = Combine(Or([
 	CaselessLiteral("noon"),
 	CaselessLiteral("midnight"),
+	CaselessLiteral("CLOSED")
 ]), adjacent=False).setResultsName("time_shortcut")
 
 clocktime = Combine(time_number("hour") + time_separator + Optional(time_number("minute")) + am_or_pm,adjacent=False)
