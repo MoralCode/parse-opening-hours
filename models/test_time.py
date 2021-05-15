@@ -21,6 +21,24 @@ class TestTime(unittest.TestCase):
 			test_9.time_type
 		)
 
+	def test_from_shortcut(self):
+		test_str = "noon"
+		test_9_str = Time.from_shortcut(test_str)
+		self.assertEqual(
+			test_9_str.hours,
+			12
+		)
+		self.assertEqual(test_9_str.minutes, 0)
+
+		test_str = "midnight"
+		test_9_str = Time.from_shortcut(test_str)
+		self.assertEqual(
+			test_9_str.hours,
+			0
+		)
+		self.assertEqual(test_9_str.minutes, 0)
+		
+
 	def test_from_string_None(self):
 		with self.assertRaises(TypeError):
 			Time.from_string(None)
@@ -60,6 +78,27 @@ class TestTime(unittest.TestCase):
 			testTimePm.get_as_military_time().get_hours(),
 			23
 		)
+
+	# def test_detect_pm(self):
+	# 	input_strings = [
+	# 		"pm",
+	# 		"Pm",
+	# 		"pM",
+	# 		"p.m.",
+	# 		"PM",
+	# 	]
+	# 	for instr in input_strings:
+	# 		self.assertTrue(detect_if_pm(instr))
+		
+	# 	input_strings = [
+	# 		"am",
+	# 		"Am",
+	# 		"aM",
+	# 		"a.m.",
+	# 		"AM",
+	# 	]
+	# 	for instr in input_strings:
+	# 		self.assertFalse(detect_if_pm(instr))
 
 if __name__ == '__main__':
 	unittest.main()
