@@ -49,6 +49,7 @@ class TestDays(unittest.TestCase):
 			"5 days a week",
 			"5 days",
 			"Business Days",
+			"workdays"
 		]
 		expected_result = self.workweek
 		self.run_tests(input_strings,expected_result)
