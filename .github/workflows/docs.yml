@@ -38,8 +38,8 @@ jobs:
 
       - name: Generate docs
         run: |
-        pipenv run pdoc3 --html parse_opening_hours
-        mv html/parse_opening_hours.html html/index.html
+          pipenv run pdoc3 --html parse_opening_hours
+          mv html/parse_opening_hours.html html/index.html
       - name: Deploy to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v2
