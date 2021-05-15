@@ -3,8 +3,6 @@ from patterns import *
 import logging, os
 
 logger = logging.getLogger(__name__)
-if os.getenv("OH_DEBUG") == "Y":
-	logger.setLevel(logging.DEBUG)
 
 class DaysEnum(enum.Enum):
     MONDAY = "monday"

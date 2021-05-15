@@ -42,6 +42,9 @@ This should give you the below output:
 
 This has been tested using Python 3.8.5
 
+### Environment variables
+Setting the environment variable `OH_DEBUG` to a value of `Y` will set the root logging level to debug and will cause log entries to appear in stdout for debugging purposes
+
 ## Troubleshooting
 ### Assumptions
 When specifying a time without AM or PM indicators, you may get an error that reads `TypeError: Cannot convert a time of unknown type (AM, PM or 24H) without assuming its type.`. To resolve this, pass `assume_type=TimeType.AM` when calling the `parse()` function. This will use AM in place of an unknown AM or PM designation. In cases like the string "9-5", if the second value in the range (in this case the `5` is smaller than the first (i.e. the `9`) then it will be converted to PM automatically

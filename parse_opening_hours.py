@@ -17,12 +17,11 @@ from models.time import Time, TimeType
 import unicodedata
 import os
 import logging
-logging.basicConfig()
 
 logger = logging.getLogger(__name__)
 
 if os.getenv("OH_DEBUG") == "Y":
-	logger.setLevel(logging.DEBUG)
+	logging.basicConfig(level=logging.DEBUG)
 
 class OpeningHours():
 
