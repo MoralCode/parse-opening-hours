@@ -196,6 +196,7 @@ class TestHoursParsing(unittest.TestCase):
 			"Monday 9am – 5pm",
 			"Monday 9am — 5pm",
 			"Monday 9am \u2013 5pm",
+			"Monday 9 a.m. \u2013 5 p.m."
 			
 		]
 		expected_result = [ self.mon_9_to_5 ]
@@ -290,7 +291,9 @@ class TestHoursParsing(unittest.TestCase):
 			"9:00am - 5:00pm All Week",
 			"9:00am - 5:00pm 7 days a week",
 			"9:00am - 5:00pm 7 days",
-			"9:00am - 5:00pm Every Day"
+			"9:00am - 5:00pm Every Day",
+			"9 a.m. \u2013 5 p.m.",
+			"9 am \u2013 5 pm"
 		]
 		expected_result = self.allweek_9_to_5
 		self.run_tests(input_strings, expected_result)
