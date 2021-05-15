@@ -57,13 +57,12 @@ def create_entry(day, opening, closing, notes=None):
 def parse_times(result, assume_type=None):
 	# assumes that all three (hours, minutes, am_pm) are the same length
 	res_dct = result.asDict()
-	start = res_dct.get("starttime")[0]
-	end = res_dct.get("endtime")[0]
 
-	starttime = Time(start.get("hour"), start.get("minute"))
-	starttime.set_type_from_string(start.get("am_pm"))
-	endtime = Time(end.get("hour"), end.get("minute"))
-	endtime.set_type_from_string(end.get("am_pm"))
+	start = res_dct.get("starttime")[0]
+	starttime = Time.from_parse_results(start)
+	
+	end = res_dct.get("endtime")[0]
+	endtime = Time.from_parse_results(end)
 	
 	if starttime.is_unknown() and assume_type is not None:
 		starttime.set_type(assume_type)
