@@ -29,7 +29,7 @@ class Time:
 		elif string == "":
 			raise ValueError("Cannot create Time from empty string")
 		
-		result = time.parseString(string)
+		result = clocktime.parseString(string)
 		hours = result.get("hour")
 		minutes = result.get("minute")
 		am_pm = result.get("am_pm")
