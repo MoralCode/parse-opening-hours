@@ -22,7 +22,8 @@ list_separator = Or([Word(" ,+/"), word_list_separators])
 
 day_time_separators = Optional(Or([
 	Literal(":"),
-	CaselessLiteral("from")
+	CaselessLiteral("from"),
+	Literal(",")
 ]))
 
 plural = caselessWord("s'", max=2)
