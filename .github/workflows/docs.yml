@@ -33,8 +33,11 @@ jobs:
           key: ${{ runner.os }}
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
       - name: Install dependencies
-        run: pipenv install -d
+        run: |
+          pip install -U pip setuptools wheel pipenv
+          pipenv install -d
 
       - name: Generate docs
         run: |
