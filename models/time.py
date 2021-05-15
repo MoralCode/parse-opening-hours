@@ -41,6 +41,41 @@ class Time:
 			time_obj.set_type(assume_type)
 
 		return time_obj
+	
+	@classmethod
+	def from_shortcut(cls, string):
+		"""
+		create a time object from a string
+		"""
+		logger.debug("creating time object from shortcut: " + string)
+		if string is None:
+			raise TypeError("Cannot create Time from None")
+		elif string == "":
+			raise ValueError("Cannot create Time from empty string")
+			
+		string = string.lower()
+
+		if "midnight" in string:
+			return cls(0,0,time_type=TimeType.MILITARY) 
+		elif "noon" in string:
+			return cls(12,0,time_type=TimeType.MILITARY) 
+		
+		raise ValueError("Cannot match given shortcut string '" + string + "' to a known time shortcut pattern")
+
+	@classmethod
+	def from_parse_results(cls, result_dict):
+		time = None
+		if "hour" in result_dict and "minute" in result_dict:
+			time = cls(result_dict.get("hour"), result_dict.get("minute"))
+
+			if "am_pm" in result_dict:
+				time.set_type_from_string(result_dict.get("am_pm"))
+
+		elif "time_shortcut" in result_dict:
+			shortcut = result_dict.get("time_shortcut")
+			time = cls.from_shortcut(shortcut)
+		else:
+			raise ValueError("No recognized keys found in provided parse results dict")
 
 	def __init__(self, hours, minutes, time_type=TimeType.UNKNOWN):
 		self.hours = hours
