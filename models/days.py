@@ -46,9 +46,8 @@ class Days():
 			# if no day is specified, assume the intention is all week
 			return allweek
 
-		logger.debug("unable to process days string: " + days_string)
+		raise ValueError("string '" + days_string + "' does not match a known pattern")
 			
-		return None
 		
 	def __init__(self, start_day, end_day):
 		if start_day is None or end_day is None:
