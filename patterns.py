@@ -95,7 +95,7 @@ possibly_dots = Optional(Char(".")).suppress()
 
 am_or_pm = Optional(Combine(Or([CaselessLiteral("A"), CaselessLiteral("P")]) + possibly_dots + CaselessLiteral("M")  + possibly_dots).setResultsName('am_pm'))
 
-time = Combine(time_number("hour") + time_separator + Optional(time_number("minute")) + am_or_pm,adjacent=False)
+clocktime = Combine(time_number("hour") + time_separator + Optional(time_number("minute")) + am_or_pm,adjacent=False)
 
 dateShortcuts = day_shortcuts.setResultsName('day_shortcuts', listAllMatches=True) + Optional(list_separator)
 
@@ -104,6 +104,8 @@ dateList = OneOrMore(day.setResultsName('day', listAllMatches=True) + Optional(l
 daterange = day.setResultsName('startday', listAllMatches=True) + range_separator + day.setResultsName('endday', listAllMatches=True)
 
 dates = Optional(Or([daterange, dateList, dateShortcuts]))
+
+time = Group(Or([clocktime]))
 
 timerange = time.setResultsName('starttime', listAllMatches=True) + Optional(range_separator + time.setResultsName('endtime', listAllMatches=True))
 
