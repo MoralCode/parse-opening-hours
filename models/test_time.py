@@ -37,7 +37,39 @@ class TestTime(unittest.TestCase):
 			0
 		)
 		self.assertEqual(test_9_str.minutes, 0)
-		
+
+	def test_from_parse_regular(self):
+		test_dict = {
+			"hour": 5,
+			"minute": 0,
+			"am_pm": "PM"
+		}
+		test_time_dict = Time.from_parse_results(test_dict)
+		self.assertEqual(
+			test_time_dict.hours,
+			5
+		)
+		self.assertEqual(test_time_dict.minutes, 0)
+
+		self.assertTrue(test_time_dict.is_pm())
+	
+	def test_from_parse_shortcut(self):
+		test_dict = {
+			"time_shortcut": "noon"
+		}
+		test_time_dict = Time.from_parse_results(test_dict)
+		self.assertEqual(
+			test_time_dict.hours,
+			12
+		)
+		self.assertEqual(test_time_dict.minutes, 0)
+
+	def test_from_parse_unknown(self):
+		test_dict = {
+			"unknown": "dont care"
+		}
+		with self.assertRaises(ValueError):
+			Time.from_parse_results(test_dict)
 
 	def test_from_string_None(self):
 		with self.assertRaises(TypeError):
