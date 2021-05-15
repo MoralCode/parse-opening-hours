@@ -33,6 +33,16 @@ class TestDays(unittest.TestCase):
 		expected_result = self.fullweek
 		self.run_tests(input_strings, expected_result)
 
+	def test_create_from_none(self):
+		with self.assertRaises(TypeError):
+			Days.from_shortcut_string(None)
+		with self.assertRaises(TypeError):
+			Days(None, None)
+
+	def test_create_from_unknown(self):
+		with self.assertRaises(ValueError):
+			Days.from_shortcut_string("cheeseburger")
+
 	def test_workweek(self):
 		input_strings = [
 			"Weekdays",
@@ -52,58 +62,13 @@ class TestDays(unittest.TestCase):
 		expected_result = self.weekend
 		self.run_tests(input_strings,expected_result)
 
+	def test_equals(self):
+		workweek = Days(DaysEnum.MONDAY, DaysEnum.FRIDAY)
+		with self.assertRaises(NotImplementedError):
+			workweek == "something else"
+		
+		self.assertEqual(workweek, workweek)
 
-
-	# def test_from_string_unknown(self):
-	# 	test_str = "9:00"
-	# 	test_9 = Time(9,0)
-	# 	test_9_str = Time.from_string(test_str)
-	# 	self.assertEqual(
-	# 		test_9_str.hours,
-	# 		test_9.hours
-	# 	)
-	# 	self.assertEqual(
-	# 		test_9_str.minutes,
-	# 		test_9.minutes
-	# 	)
-	# 	self.assertEqual(
-	# 		test_9_str.time_type,
-	# 		test_9.time_type
-	# 	)
-
-
-	# def test_from_string_am(self):
-	# 	times_9am = [
-	# 		"9:00am",
-	# 		"9am",
-	# 		# "0900",
-	# 		# "900"
-	# 	]
-	# 	test_9am = Time(9,0, time_type=TimeType.AM)
-	# 	for time_str in times_9am:
-	# 		self.assertEqual(
-	# 			Time.from_string(time_str),
-	# 			test_9am
-	# 		)
-
-
-	# def test_stringify_time(self):
-	# 	self.assertEqual(
-	# 		str(Time(11,17,TimeType.MILITARY)),
-	# 		"11:17"
-	# 	)
-	
-	# def test_militarize_hours(self):
-	# 	testTimeMil = Time(11,17,TimeType.MILITARY)
-	# 	testTimePm = Time(11,17,TimeType.PM)
-	# 	self.assertEqual(
-	# 		testTimeMil.get_as_military_time().get_hours(),
-	# 		11
-	# 	)
-	# 	self.assertEqual(
-	# 		testTimePm.get_as_military_time().get_hours(),
-	# 		23
-	# 	)
 
 	def run_tests(self, input_strings, expected_result, **kwargs):
 		for input_str in input_strings:
