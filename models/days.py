@@ -48,6 +48,29 @@ class Days():
 
 		raise ValueError("string '" + days_string + "' does not match a known pattern")
 			
+	@classmethod
+	def from_parse_results(cls, result):
+		days = []
+
+		if "startday" in result:
+			logger.info("range date detected")
+			# this is a date range that includes the intervening days
+			start_day = Day.from_string(result.get("startday")[0])
+			end_day = result.get("endday")[0]
+			end_day = Day.from_string(end_day[0]) if end_day is not None else end_day
+			days = cls(start_day, end_day)
+		elif "day" in result:
+			logger.info("list date detected")
+			#TODO: have Days class support lists of individual days, as well as just ranges. as of now this is fine because both are iterable and give the same outputs when iterated over
+			days = [ Day.from_string(day) for day in result.get("day") ]
+		elif "day_shortcuts" in result:
+			logger.info("shortcut date detected")
+			days = cls.from_shortcut_string(result.get( "day_shortcuts")[0])
+		else:
+			logger.info("unspecified date detected")
+			# nothing specified, assumeit means every day
+			return cls(DaysEnum.MONDAY, DaysEnum.SUNDAY)
+		return days
 		
 	def __init__(self, start_day, end_day):
 		if start_day is None or end_day is None:
