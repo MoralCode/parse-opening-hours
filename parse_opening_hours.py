@@ -32,6 +32,7 @@ class OpeningHours():
 
 		hours_string = unicodedata.normalize('NFC', hours_string)
 
+		hours_string = hours_string.strip()
 
 		return cls(opening_hours_format.parseString(hours_string), assume_type=assume_type)
 
