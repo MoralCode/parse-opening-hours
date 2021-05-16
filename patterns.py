@@ -97,7 +97,7 @@ hour = Regex(r'[01]\d|2[0-3]|\d').setParseAction(pyparsing_common.convertToInteg
 minute = Regex(r'[0-5]\d').setParseAction(pyparsing_common.convertToInteger).setResultsName("minute")
 
 
-am_or_pm = Optional(Combine(Or([CaselessLiteral("A"), CaselessLiteral("P")]) + possibly_dots + CaselessLiteral("M")  + possibly_dots).setResultsName('am_pm'))
+am_or_pm = Optional(Combine(Or([CaselessLiteral("A"), CaselessLiteral("P")]) + possibly_dots + Optional(CaselessLiteral("M")  + possibly_dots)).setResultsName('am_pm'))
 
 time_shortcut = Combine(Or([
 	CaselessLiteral("noon"),
