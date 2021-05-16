@@ -14,6 +14,7 @@ from patterns import *
 from models.day import Day, DaysEnum
 from models.days import Days
 from models.time import Time, TimeType
+from models.times import Times
 import unicodedata
 import os
 import logging
@@ -48,45 +49,21 @@ class OpeningHours():
 		# TODO: move parse days and parse times out of the json() function
 		days = Days.from_parse_results(self.openinghours)
 		
-		start_time, end_time = parse_times(self.openinghours, assume_type=assume_type or self.assume_type)
+		times = Times.from_parse_results(self.openinghours, assume_type=assume_type or self.assume_type)
 		
 
 		for day in days:
 			opening_hours_json.append(
 				create_entry(
 					str(day),
-					start_time,
-					end_time
+					str(times.get_start_time().get_as_military_time()),
+					str(times.get_end_time().get_as_military_time())
 				)
 			)
 
 		return opening_hours_json
 
-def parse_times(result, assume_type=None):
-	""" Takes values from the pyparsing results and converts them to the appropriate internal objects """
-	# assumes that all three (hours, minutes, am_pm) are the same length
-	res_dct = result.asDict()
 
-	start = res_dct.get("starttime")[0]
-	starttime = Time.from_parse_results(start)
-	
-	end = res_dct.get("endtime")[0]
-	endtime = Time.from_parse_results(end)
-	
-	if starttime.is_unknown() and assume_type is not None:
-		starttime.set_type(assume_type)
-
-	if endtime.is_unknown() and assume_type is not None:
-		endtime.set_type(assume_type)
-
-
-	if starttime.is_am() and endtime.is_am() and starttime.get_hours() > endtime.get_hours():
-		endtime.set_type(TimeType.PM)
-
-	return (
-		str(starttime.get_as_military_time()),
-		str(endtime.get_as_military_time())
-		)
 
 def create_entry(day, opening, closing, notes=None):
 	"""Creates a new JSON object representing a single time slot for a single day"""
