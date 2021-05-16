@@ -326,7 +326,7 @@ class TestHoursParsing(unittest.TestCase):
 			"9-5 Weekdays"
 		]
 		expected_result = self.workweek_9_to_5
-		self.run_tests(input_strings,expected_result)
+		self.run_tests(input_strings,expected_result, assume_type=TimeType.AM)
 
 	def test_weekend(self):
 		# TODO: implement assumption of pm if end time <= start time
