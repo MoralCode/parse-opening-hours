@@ -10,7 +10,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="jsonify-opening-hours",
-    version="0.2.0",
+    version="0.3.0",
     description="Parses opening hours from various human-readable strings into a standard JSON format",
     long_description=README,
     long_description_content_type="text/markdown",
