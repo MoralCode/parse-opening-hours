@@ -56,6 +56,14 @@ class TestHoursParsing(unittest.TestCase):
 		with self.assertRaises(TypeError):
 			OpeningHours.parse(str_time).json()
 
+	def test_useless_prefixes(self):
+		# TODO: implement assumption of pm if end time <= start time
+		input_strings = [
+			"Open Monday 9am - 5pm"
+		]
+		expected_result = [ self.mon_9_to_5 ]
+		self.run_tests(input_strings,expected_result)
+
 	def test_single_day_miltime(self):
 		# TODO: implement assumption of pm if end time <= start time
 		input_strings = [

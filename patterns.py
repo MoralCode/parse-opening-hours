@@ -7,6 +7,11 @@ def caselessChar(some_str):
 	return Char(some_str.lower() + some_str.upper())
 
 space = Word(" ")
+
+useless_optional_prefixes = Optional(Or([
+	CaselessLiteral("Open")
+])).suppress()
+
 words_for_range = Or([
 	caselessWord("to"),
 	caselessWord("thru"),
@@ -120,8 +125,8 @@ time = Group(Or([clocktime, time_shortcut]))
 timerange = time.setResultsName('starttime', listAllMatches=True) + Optional(range_separator + time.setResultsName('endtime', listAllMatches=True))
 
 opening_hours_format = Or([
-	OneOrMore(dates + day_time_separators + timerange),
-	OneOrMore(timerange + dates)
+	useless_optional_prefixes + OneOrMore(dates + day_time_separators + timerange),
+	useless_optional_prefixes + OneOrMore(timerange + dates)
 ])	
 
 notes = section_separator + Optional(OneOrMore(Word(alphas))).setResultsName('notes', listAllMatches=True)
