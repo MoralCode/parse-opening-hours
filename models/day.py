@@ -15,6 +15,9 @@ class DaysEnum(enum.Enum):
 	
 
 class Day():
+	""" Represents a single day - kinda like an enum with extra steps.
+	This class essentially provides additional ways to instantiate a day enum
+	from strings. Thats pretty much it. """
 	day = None
 	
 	@classmethod

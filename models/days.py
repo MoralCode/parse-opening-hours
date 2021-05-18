@@ -4,6 +4,12 @@ import logging, os
 logger = logging.getLogger(__name__)
 
 class Days():
+	"""
+	This class represents a range of days (i.e monday to friday) and provides
+	some helpful methods to interperet these ranges from shortcuts (like
+	"weekdays"), iterate over the range of days to get a list of all the days
+	that are covered by this range
+	"""
 	start_day = None
 	end_day = None
 	

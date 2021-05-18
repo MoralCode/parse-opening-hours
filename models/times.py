@@ -4,6 +4,11 @@ import logging, os
 logger = logging.getLogger(__name__)
 
 class Times():
+	"""
+	Similar to Days, this class represents a range of times and provides methods
+	to help reate them from common shortcuts. No iterator here though since
+	there isnt really a need to iterate over every single time within a range.
+	"""
 	start_time = None
 	end_time = None
 	
@@ -71,6 +76,9 @@ class Times():
 	
 	def get_end_time(self):
 		return self.end_time
+
+	#TODO: possibly add a function to see if a single Time is within the range 
+	# specified by this Times object 
 	
 	def __str__(self):
 		return self.start_time + to + self.end_time

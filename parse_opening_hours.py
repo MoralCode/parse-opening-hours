@@ -25,7 +25,9 @@ if os.getenv("OH_DEBUG") == "Y":
 	logging.basicConfig(level=logging.DEBUG)
 
 class OpeningHours():
-	"""This is the main, class responsible for parsing and returning representations of opening hours strings. It's main responsibility is to store a representation of a string representing business opening hours using objects that represent more specific pieces of the opening hours string."""
+	"""This is the main, class responsible for parsing and returning representations of opening hours strings. It's main responsibility is to store a representation of a string representing business opening hours using objects that represent more specific pieces of the opening hours string.
+	
+	It is similar to Days in that its ultimate goal is/will be to store (possibly) multiple sets of opening hours """
 
 	@classmethod
 	def parse(cls, hours_string, assume_type=None):

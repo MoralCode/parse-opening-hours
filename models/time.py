@@ -12,7 +12,11 @@ class TimeType(enum.Enum):
 	
 
 class Time:
-	"""This class represents a single time and provides methods """
+	"""This class represents a single time and provides methods to help with
+	common time-related things such as converting to military time and dealing
+	with AM/PM, as well as creating times from common shortcuts like "midnight"
+	and "noon"
+	"""
 
 	hours = None
 	minutes = None
