@@ -77,6 +77,9 @@ class Time:
 
 		elif "time_shortcuts" in result_dict:
 			shortcut = result_dict.get("time_shortcuts")
+			# this mix of lists and not lists being received is liekly due to a mix of values from asdict() and not asdict() being called
+			if isinstance(shortcut, list):
+				shortcut = shortcut[0]
 			time = cls.from_shortcut(shortcut)
 		else:
 			raise ValueError("No recognized keys found in provided parse results dict")
