@@ -43,24 +43,58 @@ class Times():
 		""" Takes values from the pyparsing results and converts them to the appropriate internal objects """
 		# assumes that all three (hours, minutes, am_pm) are the same length
 		res_dct = result.asDict()
+		if "starttime" in res_dct and "endtime" in res_dct: 
+			logger.info("time range detected")
+			start = res_dct.get("starttime")[0]
+			starttime = Time.from_parse_results(start)
+			
+			end = res_dct.get("endtime")[0]
+			endtime = Time.from_parse_results(end)
+			
+			if starttime.is_unknown() and assume_type is not None:
+				starttime.set_type(assume_type)
 
-		start = res_dct.get("starttime")[0]
-		starttime = Time.from_parse_results(start)
-		
-		end = res_dct.get("endtime")[0]
-		endtime = Time.from_parse_results(end)
-		
-		if starttime.is_unknown() and assume_type is not None:
-			starttime.set_type(assume_type)
-
-		if endtime.is_unknown() and assume_type is not None:
-			endtime.set_type(assume_type)
+			if endtime.is_unknown() and assume_type is not None:
+				endtime.set_type(assume_type)
 
 
-		if starttime.is_am() and endtime.is_am() and starttime.get_hours() > endtime.get_hours():
-			endtime.set_type(TimeType.PM)
+			if starttime.is_am() and endtime.is_am() and starttime.get_hours() > endtime.get_hours():
+				endtime.set_type(TimeType.PM)
 
-		return cls(starttime, endtime)
+			return cls(starttime, endtime)
+		elif "time_shortcuts" in res_dct: 
+			logger.info("time shortcut detected")
+			return cls.from_shortcut_string(result.get("time_shortcuts")[0])
+		else:
+			logger.info("unspecified time pattern detected")
+			logger.debug(vars(result))
+			# nothing specified, assumeit means every day
+			return cls(Time(0, 0, TimeType.AM), Time(11, 59, TimeType.PM))
+
+	@classmethod
+	def from_shortcut_string(cls, times_shortcut, assume_type=None):
+		"""
+		create a times object from a shortcut string
+		"""
+		logger.debug("creating times object from shortcut: " + times_shortcut)
+		if times_shortcut is None:
+			raise TypeError("Cannot create Times Object from value None")
+			
+		day = times_shortcut.lower()
+
+		# set up some shortcut ranges
+		allday = cls(Time(0, 0, TimeType.AM), Time(11, 59, TimeType.PM))
+
+		if "all day" in day:
+			return allday
+		elif "24" in day:
+			return allday
+		elif day == "":
+			# if no day is specified, assume the intention is all day
+			return allday
+
+		raise ValueError("string '" + times_shortcut + "' does not match a known pattern")
+
 		
 	def __init__(self, start_time, end_time):
 		if start_time is None or end_time is None:
