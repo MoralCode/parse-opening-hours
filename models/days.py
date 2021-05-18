@@ -61,7 +61,6 @@ class Days():
 			# this is a date range that includes the intervening days
 			start_day = Day.from_string(result.get("startday")[0])
 			end_day = result.get("endday")[0]
-			end_day = Day.from_string(end_day[0]) if end_day is not None else end_day
 			days = cls(start_day, end_day)
 		elif "day" in result:
 			logger.info("list date detected")
