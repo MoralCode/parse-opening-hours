@@ -1,9 +1,29 @@
 
-# import unittest
+import unittest
+from models.time import Time, TimeType
+from models.times import Times
 
 
 
-# class TestTimes(unittest.TestCase):
+class TestTimes(unittest.TestCase):
+
+	def test_create_from_none(self):
+		with self.assertRaises(TypeError):
+			Times.from_shortcut_string(None)
+		with self.assertRaises(TypeError):
+			Times(None, None)
+
+	def test_create_from_unknown(self):
+		with self.assertRaises(ValueError):
+			Times.from_shortcut_string("cheeseburger")
+
+	def test_equals(self):
+		allday = Times(Time(0, 0, TimeType.AM), Time(11, 59, TimeType.PM))
+		with self.assertRaises(NotImplementedError):
+			allday == "something else"
+		
+		self.assertEqual(allday, allday)
+
 
 # 	workweek = [Day(DaysEnum.MONDAY), Day(DaysEnum.TUESDAY), Day(DaysEnum.WEDNESDAY), Day(DaysEnum.THURSDAY), Day(DaysEnum.FRIDAY)]
 
@@ -70,10 +90,10 @@
 # 		self.assertEqual(workweek, workweek)
 
 
-# 	def run_tests(self, input_strings, expected_result, **kwargs):
-# 		for input_str in input_strings:
-# 			print("Testing String: '", input_str)
-# 			self.assertEqual(list(Days.from_shortcut_string(input_str, **kwargs)), expected_result)
+	def run_tests(self, input_strings, expected_result, **kwargs):
+		for input_str in input_strings:
+			print("Testing String: '", input_str)
+			self.assertEqual(list(Times.from_shortcut_string(input_str, **kwargs)), expected_result)
 
-# if __name__ == '__main__':
-# 	unittest.main()
+if __name__ == '__main__':
+	unittest.main()
