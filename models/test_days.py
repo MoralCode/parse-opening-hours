@@ -29,6 +29,9 @@ class TestDays(unittest.TestCase):
 			"Every Day",
 			"",# no date present, just a time -> assume all week
 			"daily",
+			"24/7",
+			# "24 hours a day",
+			"24 hours a day, 7 days a week"
 		]
 		expected_result = self.fullweek
 		self.run_tests(input_strings, expected_result)

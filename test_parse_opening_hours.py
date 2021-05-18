@@ -256,6 +256,26 @@ class TestHoursParsing(unittest.TestCase):
 		expected_result = [ self.mon_9_to_5, self.wed_9_to_5 ]
 		self.run_tests(input_strings, expected_result, assume_type=TimeType.AM)
 
+	def test_shortcuts(self):
+		twenteyfourseven = OpeningHours.parse("Mon-sun 0am-11:59pm").json()
+		input_strings = [
+			"24 hours a day",
+			"24 hours",
+			"24hrs",
+			"24h",
+			"All Day",
+			"Open 24 hours",
+			"24/7",
+			"24 hours a day",
+			"24 hours a day, 7 days a week",
+			"24 Hours/Day",
+			# "24 Hours/Day, 7 Days/Week",
+			"24 Hours per Day",
+			# "24 Hours a Day, 7 Days a Week",
+			# "Seven Days a Week"
+		]
+		self.run_tests(input_strings, twenteyfourseven, assume_type=TimeType.AM)
+
 	def test_time_abbreviations(self):
 
 		input_strings = {
