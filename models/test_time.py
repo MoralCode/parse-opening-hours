@@ -55,7 +55,7 @@ class TestTime(unittest.TestCase):
 	
 	def test_from_parse_shortcut(self):
 		test_dict = {
-			"time_shortcut": "noon"
+			"time_shortcuts": "noon"
 		}
 		test_time_dict = Time.from_parse_results(test_dict)
 		self.assertEqual(

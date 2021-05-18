@@ -75,8 +75,8 @@ class Time:
 			if "am_pm" in result_dict:
 				time.set_type_from_string(result_dict.get("am_pm"))
 
-		elif "time_shortcut" in result_dict:
-			shortcut = result_dict.get("time_shortcut")
+		elif "time_shortcuts" in result_dict:
+			shortcut = result_dict.get("time_shortcuts")
 			time = cls.from_shortcut(shortcut)
 		else:
 			raise ValueError("No recognized keys found in provided parse results dict")
