@@ -104,11 +104,34 @@ minute = Regex(r'[0-5]\d').setParseAction(pyparsing_common.convertToInteger).set
 
 am_or_pm = Optional(Combine(Or([CaselessLiteral("A"), CaselessLiteral("P")]) + possibly_dots + Optional(CaselessLiteral("M")  + possibly_dots)).setResultsName('am_pm'))
 
-time_shortcut = Combine(Or([
+per = Or([
+	Literal("/"),
+	CaselessLiteral("a"),
+	CaselessLiteral("per")
+]).suppress()
+
+
+hours_shortcuts = Optional(
+	MatchFirst([
+		CaselessLiteral("hour") + Optional(plural),
+		CaselessLiteral("hr") + Optional(plural),
+		CaselessLiteral("h")
+	]) + Optional(per) + Optional(CaselessLiteral("day"))
+)
+
+time_range_shortcuts = Or([
+	Literal("24") + hours_shortcuts,
+	CaselessLiteral("All Day")
+])
+
+# TODO: use CaselessCloseMatch here once implemented to handle typos, particularly for the longer names
+single_time_shortcut = Combine(Or([
 	CaselessLiteral("noon"),
 	CaselessLiteral("midnight"),
 	CaselessLiteral("CLOSED")
-]), adjacent=False).setResultsName("time_shortcut")
+]), adjacent=False)
+
+time_shortcuts = Or([single_time_shortcut, time_range_shortcuts]).setResultsName("time_shortcuts")
 
 clocktime = Combine(hour + time_separator + Optional(minute) + am_or_pm, adjacent=False)
 
@@ -120,7 +143,7 @@ daterange = day.setResultsName('startday', listAllMatches=True) + range_separato
 
 dates = Optional(Or([daterange, dateList, dateShortcuts]))
 
-time = Group(Or([clocktime, time_shortcut]))
+time = Group(Or([clocktime, time_shortcuts]))
 
 timerange = time.setResultsName('starttime', listAllMatches=True) + Optional(range_separator + time.setResultsName('endtime', listAllMatches=True))
 
