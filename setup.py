@@ -16,7 +16,6 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/MoralCode/jsonify-opening-hours",
     author="Adrian Edwards",
-    author_email="adrian@adriancedwards.com",
     license="MIT",
     classifiers=[
         "License :: OSI Approved :: MIT License",
