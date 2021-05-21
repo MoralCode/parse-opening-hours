@@ -1,5 +1,5 @@
 import enum
-from patterns import *
+from opening_hours.patterns import *
 import logging, os
 
 logger = logging.getLogger(__name__)
@@ -31,6 +31,7 @@ class Day():
 			
 		day = day_string.lower()
 		# ignore anything after the "day" part, if present
+		logger.debug(day)
 		if "day" in day:
 			day = day.split("day")[0]
 			day += "day"

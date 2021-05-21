@@ -1,5 +1,9 @@
 import unittest
-from parse_opening_hours import *
+from opening_hours import *
+from opening_hours.models.time import TimeType
+import logging
+
+logger = logging.getLogger(__name__)
 
 class TestHoursParsing(unittest.TestCase):
 

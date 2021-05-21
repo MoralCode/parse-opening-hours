@@ -1,5 +1,5 @@
 import enum
-from patterns import *
+from opening_hours.patterns import *
 import logging, os
 
 logger = logging.getLogger(__name__)
@@ -63,6 +63,8 @@ class Time:
 			return cls(0,0,time_type=TimeType.MILITARY) 
 		elif "noon" in string:
 			return cls(12,0,time_type=TimeType.MILITARY) 
+		# elif "closed" in string:
+			# TODO: how to handle this???
 		
 		raise ValueError("Cannot match given shortcut string '" + string + "' to a known time shortcut pattern")
 

@@ -39,6 +39,7 @@ possibly_dots = Optional(Char(".")).suppress()
 section_separator = Optional(",")
 time_separator = Optional(":")
 
+# TODO: use CaselessCloseMatch here once implemented to handle typos, particularly for the longer names
 day = Combine(Or([
 	MatchFirst([
 		CaselessLiteral("Monday") + Optional(plural),
@@ -79,7 +80,7 @@ day = Combine(Or([
 	]),
 ]))
 
-
+# TODO: use CaselessCloseMatch here once implemented to handle typos, particularly for the longer names
 day_shortcuts = Combine(Or([
 	Or([
 		CaselessLiteral("Work"),
@@ -141,15 +142,18 @@ dateList = OneOrMore(day.setResultsName('day', listAllMatches=True) + Optional(l
 
 daterange = day.setResultsName('startday', listAllMatches=True) + range_separator + day.setResultsName('endday', listAllMatches=True)
 
-dates = Optional(Or([daterange, dateList, dateShortcuts]))
+dates = Or([daterange, dateList, dateShortcuts])
 
 time = Group(Or([clocktime, time_shortcuts]))
 
 timerange = time.setResultsName('starttime', listAllMatches=True) + Optional(range_separator + time.setResultsName('endtime', listAllMatches=True))
 
 opening_hours_format = Or([
-	useless_optional_prefixes + OneOrMore(dates + day_time_separators + timerange),
+	useless_optional_prefixes + OneOrMore(Optional(dates) + day_time_separators + timerange),
 	useless_optional_prefixes + OneOrMore(timerange + dates)
 ])	
 
-notes = section_separator + Optional(OneOrMore(Word(alphas))).setResultsName('notes', listAllMatches=True)
+note = Optional(Group(OneOrMore(caselessWord(alphas + " "), stopOn=opening_hours_format)).setResultsName('note', listAllMatches=True))
+
+notes_start = note #+ FollowedBy(Or([dates, timerange]))
+notes_end = FollowedBy(opening_hours_format) + note

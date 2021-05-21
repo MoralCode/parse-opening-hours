@@ -1,8 +1,11 @@
 
 import unittest
-from models.time import Time, TimeType
-from models.times import Times
+from opening_hours.models.time import Time, TimeType
+from opening_hours.models.times import Times
 
+
+# "24 hours a day",
+# "24 hours" "24hrs" "24h" "All Day" "Open 24 hours"
 
 
 class TestTimes(unittest.TestCase):
@@ -16,6 +19,39 @@ class TestTimes(unittest.TestCase):
 	def test_create_from_unknown(self):
 		with self.assertRaises(ValueError):
 			Times.from_shortcut_string("cheeseburger")
+
+	# def test_from_parse_regular(self):
+	# 	test_dict = {
+	# 		"hour": 5,
+	# 		"minute": 0,
+	# 		"am_pm": "PM"
+	# 	}
+	# 	test_time_dict = Times.from_parse_results(test_dict)
+	# 	self.assertEqual(
+	# 		test_time_dict.hours,
+	# 		5
+	# 	)
+	# 	self.assertEqual(test_time_dict.minutes, 0)
+
+	# 	self.assertTrue(test_time_dict.is_pm())
+	
+	# def test_from_parse_shortcut(self):
+	# 	test_dict = {
+	# 		"time_shortcuts": "24 hours"
+	# 	}
+	# 	test_time_dict = Times.from_parse_results(test_dict)
+	# 	self.assertEqual(
+	# 		test_time_dict.hours,
+	# 		12
+	# 	)
+	# 	self.assertEqual(test_time_dict.minutes, 0)
+
+	# def test_from_parse_unknown(self):
+	# 	test_dict = {
+	# 		"unknown": "dont care"
+	# 	}
+	# 	with self.assertRaises(ValueError):
+	# 		Times.from_parse_results(test_dict)
 
 	def test_equals(self):
 		allday = Times(Time(0, 0, TimeType.AM), Time(11, 59, TimeType.PM))

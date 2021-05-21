@@ -1,4 +1,4 @@
-from models.day import Day, DaysEnum
+from opening_hours.models.day import Day, DaysEnum
 import logging, os
 
 logger = logging.getLogger(__name__)
@@ -12,13 +12,13 @@ class Days():
 	"""
 	start_day = None
 	end_day = None
-	
+	#TODO: support days with exceptions (like "Monday to friday but not thurdsays")
 	@classmethod
 	def from_shortcut_string(cls, days_string, assume_type=None):
 		"""
 		create a time object from a string
 		"""
-		logger.debug("creating days object from string: " + days_string)
+		logger.debug("creating days object from shortcut: " + days_string)
 		if days_string is None:
 			raise TypeError("Cannot create Days Object from value None")
 			
@@ -61,6 +61,7 @@ class Days():
 			# this is a date range that includes the intervening days
 			start_day = Day.from_string(result.get("startday")[0])
 			end_day = result.get("endday")[0]
+			logger.debug(end_day)
 			end_day = Day.from_string(end_day) if end_day is not None else end_day
 			days = cls(start_day, end_day)
 		elif "day" in result:
@@ -71,7 +72,8 @@ class Days():
 			logger.info("shortcut date detected")
 			days = cls.from_shortcut_string(result.get( "day_shortcuts")[0])
 		else:
-			logger.info("unspecified date detected")
+			logger.info("unspecified date detected ")
+			# logger.debug(vars(result))
 			# nothing specified, assumeit means every day
 			return cls(DaysEnum.MONDAY, DaysEnum.SUNDAY)
 		return days

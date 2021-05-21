@@ -10,11 +10,11 @@
 #   ]
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
-from patterns import *
-from models.day import Day, DaysEnum
-from models.days import Days
-from models.time import Time, TimeType
-from models.times import Times
+from opening_hours.patterns import *
+from opening_hours.models.day import Day, DaysEnum
+from opening_hours.models.days import Days
+from opening_hours.models.time import Time, TimeType
+from opening_hours.models.times import Times
 import unicodedata
 import os
 import logging
@@ -34,6 +34,17 @@ class OpeningHours():
 		"""This parse function allows an OpeningHours instance to be created from most arbitrary strings representing opening hours using pyparsing."""
 
 		hours_string = unicodedata.normalize('NFC', hours_string)
+		# TODO: handle unicode confuseables
+		# TODO: handle special cases taht apply to beoth data and time, like "24/7"
+		
+		pattern = note+opening_hours_format
+		# Or([
+			
+			# opening_hours_format + notes_end
+		# ])
+		logger.debug(hours_string)
+		for p in pattern.scanString(hours_string):
+			logger.debug(p)
 
 		hours_string = hours_string.strip()
 
@@ -42,7 +53,7 @@ class OpeningHours():
 	
 	def __init__(self, openinghours, assume_type=None):
 		self.openinghours = openinghours
-		self.assume_type = assume_type
+		self.assume_type = assume_type #temporary
 
 	def json(self, assume_type=None):
 		"""Converts the parsed results from pyparsing into the json output """
@@ -65,6 +76,7 @@ class OpeningHours():
 
 		return opening_hours_json
 
+	# TODO: normalize function to return the opening hours string as a string in a consistent, predictable format
 
 
 def create_entry(day, opening, closing, notes=None):
@@ -79,3 +91,4 @@ def create_entry(day, opening, closing, notes=None):
 	return entry
 
 
+# print(OpeningHours.parse("by appointment Sunday \u2013 Wednesday from 9 a.m. to 5 p.m."))
