@@ -217,8 +217,8 @@ class TestHoursParsing(unittest.TestCase):
 			"Monday 9-5",
 			"Monday 900-1700",
 			"Monday 0900-1700",
-			"Monday 09:00AM-05:00PM"
-			
+			"Monday 09:00AM-05:00PM",
+			"Monday 900AM-500PM"
 		]
 		expected_result = [ self.mon_9_to_5 ]
 		self.run_tests(input_strings,expected_result, assume_type=TimeType.AM)
