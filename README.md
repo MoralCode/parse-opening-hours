@@ -1,8 +1,8 @@
 # Python Opening Hours parser
 
-[![CircleCI](https://circleci.com/gh/MoralCode/jsonify-opening-hours.svg?style=shield)](https://circleci.com/gh/MoralCode/jsonify-opening-hours)
-[![codecov](https://codecov.io/gh/MoralCode/jsonify-opening-hours/branch/main/graph/badge.svg?token=7JUFXSX43N)](https://codecov.io/gh/MoralCode/jsonify-opening-hours)
-[![Downloads](https://pepy.tech/badge/jsonify-opening-hours/month)](https://pepy.tech/project/jsonify-opening-hours)
+[![CircleCI](https://circleci.com/gh/MoralCode/parse-opening-hours.svg?style=shield)](https://circleci.com/gh/MoralCode/parse-opening-hours)
+[![codecov](https://codecov.io/gh/MoralCode/parse-opening-hours/branch/main/graph/badge.svg?token=7JUFXSX43N)](https://codecov.io/gh/MoralCode/parse-opening-hours)
+[![Downloads](https://pepy.tech/badge/parse-opening-hours/month)](https://pepy.tech/project/parse-opening-hours)
 
 This library parses opening hours from various human-readable strings such as "Mon- Fri 9:00am - 5:30pm" into a more standard JSON format that can be processed more easily.
 
@@ -42,7 +42,7 @@ This should give you the below output:
 
 This has been tested using Python 3.8.5
 ### Documentation
-In addition to this README, there is some documentation generated from inline documentation comments. This is available at htttps://moralcode.github.io/jsonify-opening-hours/ 
+In addition to this README, there is some documentation generated from inline documentation comments. This is available at htttps://moralcode.github.io/parse-opening-hours/ 
 ### Environment variables
 Setting the environment variable `OH_DEBUG` to a value of `Y` will set the root logging level to debug and will cause log entries to appear in stdout for debugging purposes
 
