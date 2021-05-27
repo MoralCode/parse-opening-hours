@@ -18,7 +18,7 @@ opening_hours = [
 ]
 ```
 ## Installation
-`pip install jsonify-opening-hours`
+`pip install parse-opening-hours`
 
 ## Usage
 

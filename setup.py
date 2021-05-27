@@ -9,12 +9,12 @@ README = (HERE / "README.md").read_text()
 
 # This call to setup() does all the work
 setup(
-    name="jsonify-opening-hours",
+    name="parse-opening-hours",
     version="0.4.0",
     description="Parses opening hours from various human-readable strings into a standard JSON format",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/MoralCode/jsonify-opening-hours",
+    url="https://github.com/MoralCode/parse-opening-hours",
     author="Adrian Edwards",
     license="MIT",
     classifiers=[
