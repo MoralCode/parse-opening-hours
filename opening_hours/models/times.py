@@ -1,4 +1,4 @@
-from models.time import Time, TimeType
+from opening_hours.models.time import Time, TimeType
 import logging, os
 
 logger = logging.getLogger(__name__)
@@ -113,6 +113,9 @@ class Times():
 
 	#TODO: possibly add a function to see if a single Time is within the range 
 	# specified by this Times object 
+
+
+	#TODO: getduration function
 	
 	def __str__(self):
 		return self.start_time + to + self.end_time

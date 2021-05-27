@@ -1,7 +1,7 @@
 
 import unittest
-from models.days import *
-from models.day import DaysEnum
+from opening_hours.models.days import *
+from opening_hours.models.day import DaysEnum
 
 
 class TestDays(unittest.TestCase):
@@ -45,6 +45,39 @@ class TestDays(unittest.TestCase):
 	def test_create_from_unknown(self):
 		with self.assertRaises(ValueError):
 			Days.from_shortcut_string("cheeseburger")
+	
+	# def test_from_parse_regular(self):
+	# 	test_dict = {
+	# 		"hour": 5,
+	# 		"minute": 0,
+	# 		"am_pm": "PM"
+	# 	}
+	# 	test_days_dict = Time.from_parse_results(test_dict)
+	# 	self.assertEqual(
+	# 		test_time_dict.hours,
+	# 		5
+	# 	)
+	# 	self.assertEqual(test_time_dict.minutes, 0)
+
+	# 	self.assertTrue(test_time_dict.is_pm())
+	
+	# def test_from_parse_shortcut(self):
+	# 	test_dict = {
+	# 		"time_shortcuts": "noon"
+	# 	}
+	# 	test_days_dict = Days.from_parse_results(test_dict)
+	# 	self.assertEqual(
+	# 		test_days_dict.hours,
+	# 		12
+	# 	)
+	# 	self.assertEqual(test_days_dict.minutes, 0)
+
+	# def test_from_parse_unknown(self):
+	# 	test_dict = {
+	# 		"unknown": "dont care"
+	# 	}
+	# 	with self.assertRaises(ValueError):
+	# 		Days.from_parse_results(test_dict)
 
 	def test_workweek(self):
 		input_strings = [
