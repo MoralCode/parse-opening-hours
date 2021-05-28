@@ -42,7 +42,7 @@ This should give you the below output:
 
 This has been tested using Python 3.8.5
 ### Documentation
-In addition to this README, there is some documentation generated from inline documentation comments. This is available at htttps://moralcode.github.io/parse-opening-hours/ 
+In addition to this README, there is some documentation generated from inline documentation comments. This is available at https://moralcode.github.io/parse-opening-hours/ 
 ### Environment variables
 Setting the environment variable `OH_DEBUG` to a value of `Y` will set the root logging level to debug and will cause log entries to appear in stdout for debugging purposes
 
