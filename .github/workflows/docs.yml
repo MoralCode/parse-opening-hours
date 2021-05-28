@@ -40,14 +40,12 @@ jobs:
           pipenv install -d
 
       - name: Generate docs
-        run: |
-          pipenv run pdoc3 --html opening_hours
-          mv html/opening_hours.html html/index.html
+        run: pipenv run pdoc3 --html opening_hours
       - name: Deploy to GitHub Pages
         if: success()
         uses: crazy-max/ghaction-github-pages@v2
         with:
           target_branch: gh-pages
-          build_dir: html
+          build_dir: html/opening_hours
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
