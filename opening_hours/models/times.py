@@ -1,5 +1,7 @@
 from opening_hours.models.time import Time, TimeType
+from patterns import timerange
 import logging, os
+from helpers import normalize_string
 
 logger = logging.getLogger(__name__)
 
@@ -13,31 +15,18 @@ class Times():
 	end_time = None
 	
 	@classmethod
-	def from_shortcut_string(cls, times_string, assume_type=None):
+	def parse(cls, times_string, assume_type=None):
 		"""
 		create a time object from a string
 		"""
-		logger.debug("creating times object from shortcut: " + times_string)
+		logger.debug("creating times object from string: " + times_string)
 		if times_string is None:
 			raise TypeError("Cannot create Times Object from value None")
 			
-		day = times_string.lower()
+		times_string = normalize_string(times_string)
 
-		# set up some shortcut ranges
-		allday = cls(Time(0, 0, TimeType.AM), Time(11, 59, TimeType.PM))
-		workhours = cls(Time(9, 0, TimeType.AM), Time(5, 0, TimeType.PM))
+		return cls.from_parse_results(timerange.parseString(hours_string), assume_type=assume_type)
 
-		if "24" in day:
-			return allday
-		elif "business" in day:
-			return workhours
-		elif "work" in day:
-			return workhours
-		elif "all day" in day:
-			return allday
-
-		raise ValueError("string '" + times_string + "' does not match a known pattern")
-			
 	@classmethod
 	def from_parse_results(cls, result, assume_type=None):
 		""" Takes values from the pyparsing results and converts them to the appropriate internal objects """
