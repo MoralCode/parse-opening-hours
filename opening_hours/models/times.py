@@ -84,13 +84,15 @@ class Times():
 
 		# set up some shortcut ranges
 		allday = cls(Time(0, 0, TimeType.AM), Time(11, 59, TimeType.PM))
+		workhours = cls(Time(9, 0, TimeType.AM), Time(5, 0, TimeType.PM))
 
-		if "all day" in day:
+		if "24" in day:
 			return allday
-		elif "24" in day:
-			return allday
-		elif day == "":
-			# if no day is specified, assume the intention is all day
+		elif "business" in day:
+			return workhours
+		elif "work" in day:
+			return workhours
+		elif "all day" in day:
 			return allday
 
 		raise ValueError("string '" + times_shortcut + "' does not match a known pattern")
