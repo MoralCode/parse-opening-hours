@@ -81,6 +81,7 @@ class Times():
 		# set up some shortcut ranges
 		allday = cls(Time(0, 0, TimeType.AM), Time(11, 59, TimeType.PM))
 		workhours = cls(Time(9, 0, TimeType.AM), Time(5, 0, TimeType.PM))
+		closed = cls(None, None)
 
 		if "24" in times:
 			return allday
@@ -90,8 +91,13 @@ class Times():
 			return workhours
 		elif "all day" in times:
 			return allday
+		elif "closed" in times:
+			return closed
+		elif "null" in times:
+			return closed
 
 		raise ValueError("string '" + times_shortcut + "' does not match a known pattern")
+
 
 		
 	def __init__(self, start_time, end_time):
