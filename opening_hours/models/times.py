@@ -133,7 +133,7 @@ class Times():
 		if self.is_closed():
 			return "closed"
 		else:
-			return self.start_time + " to " + self.end_time
+			return str(self.start_time) + " to " + str(self.end_time)
 
 	
 	def __eq__(self, other):
