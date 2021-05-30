@@ -32,20 +32,15 @@ class TestTimes(unittest.TestCase):
 		expected_value = Times(Time(7,0, TimeType.AM), Time(5,0, TimeType.PM)) 
 		input_strings = [
 			"700AM-500PM",
-			"24/7",
-			"Closed",
-			
 		]
 
 		self.run_tests(input_strings, expected_value)
 
-	def test_shortcuts_closed(self):
-		input_strings = [
-			"Closed",
-			"null"
-		]
-		for time in input_strings:
-			self.assertTrue(Times.from_shortcut_string(time).is_closed())
+	# def test_shortcuts(self):
+		# "24/7",
+		# "Closed",
+		# for time in input_strings:
+		# 	self.assertTrue(Times.from_shortcut_string(time).is_closed())
 
 
 	def test_is_closed(self):
