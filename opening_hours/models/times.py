@@ -1,7 +1,7 @@
 from opening_hours.models.time import Time, TimeType
-from patterns import timerange
+from opening_hours.patterns import timerange
 import logging, os
-from helpers import normalize_string
+from opening_hours.helpers import normalize_string
 
 logger = logging.getLogger(__name__)
 

@@ -15,8 +15,7 @@ from opening_hours.models.day import Day, DaysEnum
 from opening_hours.models.days import Days
 from opening_hours.models.time import Time, TimeType
 from opening_hours.models.times import Times
-from helpers import normalize_string
-import unicodedata
+from opening_hours.helpers import normalize_string
 import os
 import logging
 
