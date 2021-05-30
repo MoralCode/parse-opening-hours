@@ -76,19 +76,19 @@ class Times():
 		if times_shortcut is None:
 			raise TypeError("Cannot create Times Object from value None")
 			
-		day = times_shortcut.lower()
+		times = times_shortcut.lower()
 
 		# set up some shortcut ranges
 		allday = cls(Time(0, 0, TimeType.AM), Time(11, 59, TimeType.PM))
 		workhours = cls(Time(9, 0, TimeType.AM), Time(5, 0, TimeType.PM))
 
-		if "24" in day:
+		if "24" in times:
 			return allday
-		elif "business" in day:
+		elif "business" in times:
 			return workhours
-		elif "work" in day:
+		elif "work" in times:
 			return workhours
-		elif "all day" in day:
+		elif "all day" in times:
 			return allday
 
 		raise ValueError("string '" + times_shortcut + "' does not match a known pattern")
