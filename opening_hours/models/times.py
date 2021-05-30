@@ -72,7 +72,7 @@ class Times():
 		This is primarily for internal use and is helpful when combined with the parse() functions of this or other objects.
 
 		"""
-		logger.debug("creating times object from shortcut: " + times_shortcut)
+		logger.debug("creating times object from shortcut: " + (times_shortcut or "None"))
 		if times_shortcut is None:
 			raise TypeError("Cannot create Times Object from value None")
 			
@@ -96,8 +96,8 @@ class Times():
 		elif "null" in times:
 			return closed
 
-		raise ValueError("string '" + times_shortcut + "' does not match a known pattern")
 
+		raise ValueError("string '" + times_shortcut or "[NoneType]" + "' does not match a known pattern")
 
 		
 	def __init__(self, start_time, end_time):
