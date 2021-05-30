@@ -17,7 +17,8 @@ class Times():
 	@classmethod
 	def parse(cls, times_string, assume_type=None):
 		"""
-		create a time object from a string
+		parse a time object from a string using the pyparsing patterns for a time range
+		This function will normalize the input value first and will raise a TypeError if None is given.
 		"""
 		logger.debug("creating times object from string: " + times_string)
 		if times_string is None:
@@ -29,7 +30,10 @@ class Times():
 
 	@classmethod
 	def from_parse_results(cls, result, assume_type=None):
-		""" Takes values from the pyparsing results and converts them to the appropriate internal objects """
+		"""
+		Takes values from pyparsing results and converts them to an instance of this object. This makes heavy use of the output names defined for certain patterns to help pick out only the relevant data.
+		This is primarily for internal use and is helpful when combined with the parse() functions of this or other objects.
+		"""
 		# assumes that all three (hours, minutes, am_pm) are the same length
 		res_dct = result.asDict()
 		if "starttime" in res_dct and "endtime" in res_dct: 
@@ -63,7 +67,10 @@ class Times():
 	@classmethod
 	def from_shortcut_string(cls, times_shortcut, assume_type=None):
 		"""
-		create a times object from a shortcut string
+		create a times object from a shortcut string, such as are used to represent time ranges such as "24 hours", or "work hours".
+
+		This is primarily for internal use and is helpful when combined with the parse() functions of this or other objects.
+
 		"""
 		logger.debug("creating times object from shortcut: " + times_shortcut)
 		if times_shortcut is None:
@@ -88,6 +95,9 @@ class Times():
 
 		
 	def __init__(self, start_time, end_time):
+		"""
+		Creates a Times object from two Time objects
+		"""
 		if start_time is None or end_time is None:
 			raise TypeError("Cannot create Times Object from value None")
 	
