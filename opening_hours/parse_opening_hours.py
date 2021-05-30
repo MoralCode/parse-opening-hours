@@ -33,7 +33,7 @@ class OpeningHours():
 	def parse(cls, hours_string, assume_type=None):
 		"""This parse function allows an OpeningHours instance to be created from most arbitrary strings representing opening hours using pyparsing."""
 
-		hours_string = unicodedata.normalize('NFC', hours_string)
+		hours_string = normalize_string(hours_string)
 		# TODO: handle unicode confuseables
 		# TODO: handle special cases taht apply to beoth data and time, like "24/7"
 		
@@ -46,7 +46,6 @@ class OpeningHours():
 		for p in pattern.scanString(hours_string):
 			logger.debug(p)
 
-		hours_string = hours_string.strip()
 
 		return cls(opening_hours_format.parseString(hours_string), assume_type=assume_type)
 
@@ -90,5 +89,8 @@ def create_entry(day, opening, closing, notes=None):
 		entry["notes"] = notes
 	return entry
 
-
+def normalize_string(string):
+	string = unicodedata.normalize('NFC', string)
+	string = string.strip()
+	return string
 # print(OpeningHours.parse("by appointment Sunday \u2013 Wednesday from 9 a.m. to 5 p.m."))
