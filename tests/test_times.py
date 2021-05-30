@@ -10,16 +10,47 @@ from opening_hours.models.times import Times
 
 class TestTimes(unittest.TestCase):
 
+	def test_create_closed(self):
+		closed_list = [
+			Times(None, None),
+			Times(Time(12,0), Time(12,0))
+		]
+		for time in closed_list:
+			self.assertTrue(time.is_closed())
+		
 	def test_create_from_none(self):
 		with self.assertRaises(TypeError):
 			Times.from_shortcut_string(None)
 		with self.assertRaises(TypeError):
-			Times(None, None)
+			Times.parse(None)
 
 	def test_create_from_unknown(self):
 		with self.assertRaises(ValueError):
 			Times.from_shortcut_string("cheeseburger")
 
+	def test_parse_time_formats(self):
+		expected_value = Times(Time(7,0, TimeType.AM), Time(5,0, TimeType.PM)) 
+		input_strings = [
+			"700AM-500PM",
+		]
+
+		self.run_tests(input_strings, expected_value)
+
+	# def test_shortcuts(self):
+		# "24/7",
+		# "Closed",
+		# for time in input_strings:
+		# 	self.assertTrue(Times.from_shortcut_string(time).is_closed())
+
+
+	def test_is_closed(self):
+		input_strings = [
+			"Closed",
+			"null"
+		]
+		for time in input_strings:
+			self.assertTrue(Times.from_shortcut_string(time).is_closed())
+		
 	# def test_from_parse_regular(self):
 	# 	test_dict = {
 	# 		"hour": 5,
@@ -128,8 +159,8 @@ class TestTimes(unittest.TestCase):
 
 	def run_tests(self, input_strings, expected_result, **kwargs):
 		for input_str in input_strings:
-			print("Testing String: '", input_str)
-			self.assertEqual(list(Times.from_shortcut_string(input_str, **kwargs)), expected_result)
+			print("Testing String: '"+ input_str + "'")
+			self.assertEqual(Times.parse(input_str, **kwargs), expected_result)
 
 if __name__ == '__main__':
 	unittest.main()

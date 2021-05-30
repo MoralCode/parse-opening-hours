@@ -15,7 +15,7 @@ from opening_hours.models.day import Day, DaysEnum
 from opening_hours.models.days import Days
 from opening_hours.models.time import Time, TimeType
 from opening_hours.models.times import Times
-import unicodedata
+from opening_hours.helpers import normalize_string
 import os
 import logging
 
@@ -33,7 +33,7 @@ class OpeningHours():
 	def parse(cls, hours_string, assume_type=None):
 		"""This parse function allows an OpeningHours instance to be created from most arbitrary strings representing opening hours using pyparsing."""
 
-		hours_string = unicodedata.normalize('NFC', hours_string)
+		hours_string = normalize_string(hours_string)
 		# TODO: handle unicode confuseables
 		# TODO: handle special cases taht apply to beoth data and time, like "24/7"
 		
@@ -46,7 +46,6 @@ class OpeningHours():
 		for p in pattern.scanString(hours_string):
 			logger.debug(p)
 
-		hours_string = hours_string.strip()
 
 		return cls(opening_hours_format.parseString(hours_string), assume_type=assume_type)
 
@@ -89,6 +88,5 @@ def create_entry(day, opening, closing, notes=None):
 	if notes:
 		entry["notes"] = notes
 	return entry
-
 
 # print(OpeningHours.parse("by appointment Sunday \u2013 Wednesday from 9 a.m. to 5 p.m."))
