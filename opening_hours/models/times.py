@@ -26,7 +26,7 @@ class Times():
 			
 		times_string = normalize_string(times_string)
 
-		return cls.from_parse_results(timerange.parseString(hours_string), assume_type=assume_type)
+		return cls.from_parse_results(timerange.parseString(times_string), assume_type=assume_type)
 
 	@classmethod
 	def from_parse_results(cls, result, assume_type=None):
