@@ -109,7 +109,7 @@ class Times():
 	#TODO: getduration function
 	
 	def __str__(self):
-		return self.start_time + to + self.end_time
+		return self.start_time + " to " + self.end_time
 
 	
 	def __eq__(self, other):
