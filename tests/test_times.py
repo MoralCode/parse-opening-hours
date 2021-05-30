@@ -28,6 +28,17 @@ class TestTimes(unittest.TestCase):
 		with self.assertRaises(ValueError):
 			Times.from_shortcut_string("cheeseburger")
 
+	def test_parse_time_formats(self):
+		expected_value = Times(Time(7,0, TimeType.AM), Time(5,0, TimeType.PM)) 
+		input_strings = [
+			"700AM-500PM",
+			"24/7",
+			"Closed",
+			
+		]
+
+		self.run_tests(input_strings, expected_value)
+
 	def test_shortcuts_closed(self):
 		input_strings = [
 			"Closed",
@@ -153,8 +164,8 @@ class TestTimes(unittest.TestCase):
 
 	def run_tests(self, input_strings, expected_result, **kwargs):
 		for input_str in input_strings:
-			print("Testing String: '", input_str)
-			self.assertEqual(list(Times.from_shortcut_string(input_str, **kwargs)), expected_result)
+			print("Testing String: '"+ input_str + "'")
+			self.assertEqual(Times.parse(input_str, **kwargs), expected_result)
 
 if __name__ == '__main__':
 	unittest.main()
