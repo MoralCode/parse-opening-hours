@@ -36,6 +36,7 @@ class Times():
 		"""
 		# assumes that all three (hours, minutes, am_pm) are the same length
 		res_dct = result.asDict()
+		logger.debug(res_dct)
 		if "starttime" in res_dct and "endtime" in res_dct: 
 			logger.info("time range detected")
 			start = res_dct.get("starttime")[0]
