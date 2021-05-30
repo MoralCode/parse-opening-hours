@@ -15,6 +15,7 @@ from opening_hours.models.day import Day, DaysEnum
 from opening_hours.models.days import Days
 from opening_hours.models.time import Time, TimeType
 from opening_hours.models.times import Times
+from helpers import normalize_string
 import unicodedata
 import os
 import logging
@@ -89,8 +90,4 @@ def create_entry(day, opening, closing, notes=None):
 		entry["notes"] = notes
 	return entry
 
-def normalize_string(string):
-	string = unicodedata.normalize('NFC', string)
-	string = string.strip()
-	return string
 # print(OpeningHours.parse("by appointment Sunday \u2013 Wednesday from 9 a.m. to 5 p.m."))
