@@ -136,6 +136,16 @@ class Times():
 			return str(self.start_time) + " to " + str(self.end_time)
 
 	
+	def json(self):
+		if self.is_closed():
+			return {}
+		else:
+			return {
+				"opens": str(self.start_time.get_as_military_time()),
+				"closes": str(self.end_time.get_as_military_time())
+				}
+
+	
 	def __eq__(self, other):
 		if not isinstance(other, Times):
 			# don't attempt to compare against unrelated types
