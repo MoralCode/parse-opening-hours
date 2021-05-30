@@ -98,10 +98,10 @@ class Times():
 		"""
 		Creates a Times object from two Time objects
 		"""
-		if start_time is None or end_time is None:
-			raise TypeError("Cannot create Times Object from value None")
+		# if start_time is None or end_time is None:
+		# 	raise TypeError("Cannot create Times Object from value None")
 	
-		logger.debug("creating times from " + str(start_time) + " and " + str(end_time))
+		logger.debug("creating times from " + str(start_time or "None") + " and " + str(end_time or "None"))
 
 		self.start_time = start_time
 		self.end_time = end_time
@@ -111,6 +111,11 @@ class Times():
 	
 	def get_end_time(self):
 		return self.end_time
+	
+	def is_closed(self):
+		has_none = self.start_time is None or self.end_time is None
+		times_match = self.start_time == self.end_time
+		return has_none or times_match
 
 	#TODO: possibly add a function to see if a single Time is within the range 
 	# specified by this Times object 
@@ -119,7 +124,10 @@ class Times():
 	#TODO: getduration function
 	
 	def __str__(self):
-		return self.start_time + " to " + self.end_time
+		if self.is_closed():
+			return "closed"
+		else:
+			return self.start_time + " to " + self.end_time
 
 	
 	def __eq__(self, other):
