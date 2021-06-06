@@ -21,12 +21,46 @@ class TestTimes(unittest.TestCase):
 	def test_create_from_none(self):
 		with self.assertRaises(TypeError):
 			Times.from_shortcut_string(None)
+
 		with self.assertRaises(TypeError):
 			Times.parse(None)
 
 	def test_create_from_unknown(self):
 		with self.assertRaises(ValueError):
 			Times.from_shortcut_string("cheeseburger")
+
+	
+	def test_create_from_shortcut(self):
+		allday = Times(Time(0, 0, TimeType.AM), Time(11, 59, TimeType.PM))
+		workhours = Times(Time(9, 0, TimeType.AM), Time(5, 0, TimeType.PM))
+		closed = Times(None, None)
+
+
+		test_values = {
+
+			"allday": [
+				"24h",
+				"all day"
+			],
+			"workhours": [
+				"business hours",
+				"work hours",
+			],
+			"closed": [
+				"closed",
+				"null"
+			]
+		}
+		result_values = {
+			"allday": allday,
+			"workhours": workhours,
+			"closed": closed
+		}
+		for result_key in list(test_values.keys()):
+			result = result_values[result_key]
+			with self.subTest(result_key, result=result):
+				for instr in test_values[result_key]:
+					self.assertEqual(Times.from_shortcut_string(instr), result)
 
 	def test_parse_time_formats(self):
 		expected_value = Times(Time(7,0, TimeType.AM), Time(5,0, TimeType.PM)) 
@@ -50,111 +84,36 @@ class TestTimes(unittest.TestCase):
 		]
 		for time in input_strings:
 			self.assertTrue(Times.from_shortcut_string(time).is_closed())
-		
-	# def test_from_parse_regular(self):
-	# 	test_dict = {
-	# 		"hour": 5,
-	# 		"minute": 0,
-	# 		"am_pm": "PM"
-	# 	}
-	# 	test_time_dict = Times.from_parse_results(test_dict)
-	# 	self.assertEqual(
-	# 		test_time_dict.hours,
-	# 		5
-	# 	)
-	# 	self.assertEqual(test_time_dict.minutes, 0)
-
-	# 	self.assertTrue(test_time_dict.is_pm())
 	
-	# def test_from_parse_shortcut(self):
-	# 	test_dict = {
-	# 		"time_shortcuts": "24 hours"
-	# 	}
-	# 	test_time_dict = Times.from_parse_results(test_dict)
-	# 	self.assertEqual(
-	# 		test_time_dict.hours,
-	# 		12
-	# 	)
-	# 	self.assertEqual(test_time_dict.minutes, 0)
+	def test_str(self):
+		self.assertEqual(str(Times(None, None)), "closed")
+		self.assertEqual(str(Times(
+			Time(9,0,TimeType.AM),
+			Time(5,0,TimeType.PM))
+		), "9:00 to 17:00")
 
-	# def test_from_parse_unknown(self):
-	# 	test_dict = {
-	# 		"unknown": "dont care"
-	# 	}
-	# 	with self.assertRaises(ValueError):
-	# 		Times.from_parse_results(test_dict)
 
+	def test_json(self):
+		self.assertEqual(Times(None, None).json(), {})
+
+		
+		self.assertEqual(Times(
+			Time(9,0,TimeType.AM),
+			Time(5,0,TimeType.PM)
+		).json(), 
+		{
+		"opens": "9:00",
+		"closes": "17:00"
+		}
+		)
+
+		
 	def test_equals(self):
 		allday = Times(Time(0, 0, TimeType.AM), Time(11, 59, TimeType.PM))
 		with self.assertRaises(NotImplementedError):
 			allday == "something else"
 		
 		self.assertEqual(allday, allday)
-
-
-# 	workweek = [Day(DaysEnum.MONDAY), Day(DaysEnum.TUESDAY), Day(DaysEnum.WEDNESDAY), Day(DaysEnum.THURSDAY), Day(DaysEnum.FRIDAY)]
-
-# 	weekend = [Day(DaysEnum.SATURDAY), Day(DaysEnum.SUNDAY)]
-
-# 	fullweek = workweek.copy()
-# 	fullweek.extend(weekend)
-
-# 	def test_expand_day_range(self):
-# 		self.assertEqual(
-# 			list(Days(DaysEnum.MONDAY, DaysEnum.FRIDAY)),
-# 			self.workweek
-# 		)
-
-	
-# 	def test_allweek_shortcuts(self):
-# 		# TODO: implement assumption of pm if end time <= start time
-# 		input_strings = [
-# 			"All Week",
-# 			"7 days a week",
-# 			"7 days",
-# 			"Every Day",
-# 			"",# no date present, just a time -> assume all week
-# 			"daily",
-# 		]
-# 		expected_result = self.fullweek
-# 		self.run_tests(input_strings, expected_result)
-
-# 	def test_create_from_none(self):
-# 		with self.assertRaises(TypeError):
-# 			Days.from_shortcut_string(None)
-# 		with self.assertRaises(TypeError):
-# 			Days(None, None)
-
-# 	def test_create_from_unknown(self):
-# 		with self.assertRaises(ValueError):
-# 			Days.from_shortcut_string("cheeseburger")
-
-# 	def test_workweek(self):
-# 		input_strings = [
-# 			"Weekdays",
-# 			"5 days a week",
-# 			"5 days",
-# 			"Business Days",
-# 			"workdays"
-# 		]
-# 		expected_result = self.workweek
-# 		self.run_tests(input_strings,expected_result)
-
-# 	def test_weekend(self):
-# 		# TODO: implement assumption of pm if end time <= start time
-# 		input_strings = [
-# 			"Weekend",
-# 			"Weekends",
-# 		]
-# 		expected_result = self.weekend
-# 		self.run_tests(input_strings,expected_result)
-
-# 	def test_equals(self):
-# 		workweek = Days(DaysEnum.MONDAY, DaysEnum.FRIDAY)
-# 		with self.assertRaises(NotImplementedError):
-# 			workweek == "something else"
-		
-# 		self.assertEqual(workweek, workweek)
 
 
 	def run_tests(self, input_strings, expected_result, **kwargs):
