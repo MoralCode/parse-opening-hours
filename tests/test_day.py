@@ -84,6 +84,17 @@ class TestDay(unittest.TestCase):
 		with self.assertRaises(TypeError):
 			Day.from_string(None)
 
+	def test_from_string_apostrophes(self):
+
+		input_strings = [
+			"Monday's",
+			"Monday\u0060s",
+			"Monday\u00b4s",
+			"Monday\u2018s",
+			"Monday\u2019s",
+		]
+		for instr in input_strings:
+			self.assertEqual(Day.from_string(instr), Day("monday"))
 
 	def test_equals(self):
 		self.assertEqual(Day("monday"), Day("monday"))
