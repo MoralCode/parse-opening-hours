@@ -134,7 +134,7 @@ class Times():
 		if self.is_closed():
 			return "closed"
 		else:
-			return str(self.start_time) + " to " + str(self.end_time)
+			return str(self.start_time.get_as_military_time()) + " to " + str(self.end_time.get_as_military_time())
 
 	
 	def json(self):
