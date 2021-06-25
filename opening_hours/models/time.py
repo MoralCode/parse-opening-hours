@@ -144,7 +144,7 @@ class Time:
 			pass
 		
 		elif self.is_pm():
-			hours = hours + 12
+			hours = (hours + 12) if hours <= 11 else 12
 		
 		return Time(hours, self.minutes, time_type=TimeType.MILITARY)
 			
