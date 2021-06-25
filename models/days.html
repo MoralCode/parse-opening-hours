@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>opening_hours.models.days API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>opening_hours.models.days</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from opening_hours.models.day import Day, DaysEnum
+import logging, os
+
+logger = logging.getLogger(__name__)
+
+class Days():
+        &#34;&#34;&#34;
+        This class represents a range of days (i.e monday to friday) and provides
+        some helpful methods to interperet these ranges from shortcuts (like
+        &#34;weekdays&#34;), iterate over the range of days to get a list of all the days
+        that are covered by this range
+        &#34;&#34;&#34;
+        start_day = None
+        end_day = None
+        #TODO: support days with exceptions (like &#34;Monday to friday but not thurdsays&#34;)
+        @classmethod
+        def from_shortcut_string(cls, days_string, assume_type=None):
+                &#34;&#34;&#34;
+                create a time object from a string
+                &#34;&#34;&#34;
+                logger.debug(&#34;creating days object from shortcut: &#34; + days_string)
+                if days_string is None:
+                        raise TypeError(&#34;Cannot create Days Object from value None&#34;)
+                        
+                day = days_string.lower()
+
+                # set up some shortcut ranges
+                allweek = cls(DaysEnum.MONDAY, DaysEnum.SUNDAY)
+                workweek = cls(DaysEnum.MONDAY, DaysEnum.FRIDAY)
+
+                if &#34;weekday&#34; in day:
+                        return workweek
+                elif &#34;business&#34; in day:
+                        return workweek
+                elif &#34;work&#34; in day:
+                        return workweek
+                elif &#34;5&#34; in day:
+                        return workweek
+                elif &#34;7&#34; in day:
+                        return allweek
+                elif &#34;all&#34; in day and &#34;week&#34; in day:
+                        return allweek
+                elif &#34;every&#34; in day:
+                        return allweek
+                elif &#34;daily&#34; in day:
+                        return allweek
+                elif &#34;weekend&#34; in day:
+                        return cls(DaysEnum.SATURDAY, DaysEnum.SUNDAY)
+                elif day == &#34;&#34;:
+                        # if no day is specified, assume the intention is all week
+                        return allweek
+
+                raise ValueError(&#34;string &#39;&#34; + days_string + &#34;&#39; does not match a known pattern&#34;)
+                        
+        @classmethod
+        def from_parse_results(cls, result):
+                days = []
+
+                if &#34;startday&#34; in result:
+                        logger.info(&#34;range date detected&#34;)
+                        # this is a date range that includes the intervening days
+                        start_day = Day.from_string(result.get(&#34;startday&#34;)[0])
+                        end_day = result.get(&#34;endday&#34;)[0]
+                        logger.debug(end_day)
+                        end_day = Day.from_string(end_day) if end_day is not None else end_day
+                        days = cls(start_day, end_day)
+                elif &#34;day&#34; in result:
+                        logger.info(&#34;list date detected&#34;)
+                        #TODO: have Days class support lists of individual days, as well as just ranges. as of now this is fine because both are iterable and give the same outputs when iterated over
+                        days = [ Day.from_string(day) for day in result.get(&#34;day&#34;) ]
+                elif &#34;day_shortcuts&#34; in result:
+                        logger.info(&#34;shortcut date detected&#34;)
+                        days = cls.from_shortcut_string(result.get( &#34;day_shortcuts&#34;)[0])
+                else:
+                        logger.info(&#34;unspecified date detected &#34;)
+                        # logger.debug(vars(result))
+                        # nothing specified, assumeit means every day
+                        return cls(DaysEnum.MONDAY, DaysEnum.SUNDAY)
+                return days
+                
+        def __init__(self, start_day, end_day):
+                if start_day is None or end_day is None:
+                        raise TypeError(&#34;Cannot create Days Object from value None&#34;)
+        
+                logger.debug(&#34;creating days from &#34; + str(start_day) + &#34; and &#34; + str(end_day))
+
+
+                if isinstance(start_day, DaysEnum):
+                        self.start_day = Day(start_day)
+
+                if isinstance(end_day, DaysEnum):
+                        self.end_day = Day(end_day)
+
+                self.start_day = start_day
+                self.end_day = end_day
+        
+        def __str__(self):
+                return self.start_day.value + to + self.end_day.value
+
+        def __iter__(self):
+                # if end_day is None:
+                #       return [start_day]
+                week = list(DaysEnum)
+                start_index = week.index(self.start_day)
+                end_index = week.index(self.end_day)
+
+                if end_index &lt; start_index:
+                        # if the end day is sooner in the week than the start
+                        end_index += start_index
+
+                days = []
+                for x in range(start_index, end_index+1):
+                        #ensure the indices wrap around to the beginning of the week
+                        day_index = x % 7
+                        days.append(Day(week[day_index]))
+        
+                return iter(days)
+        
+        def __eq__(self, other):
+                if not isinstance(other, Days):
+                        # don&#39;t attempt to compare against unrelated types
+                        raise NotImplementedError()
+                return self.start_day == other.start_day and self.end_day == other.end_day </code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="opening_hours.models.days.Days"><code class="flex name class">
+<span>class <span class="ident">Days</span></span>
+<span>(</span><span>start_day, end_day)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This class represents a range of days (i.e monday to friday) and provides
+some helpful methods to interperet these ranges from shortcuts (like
+"weekdays"), iterate over the range of days to get a list of all the days
+that are covered by this range</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Days():
+        &#34;&#34;&#34;
+        This class represents a range of days (i.e monday to friday) and provides
+        some helpful methods to interperet these ranges from shortcuts (like
+        &#34;weekdays&#34;), iterate over the range of days to get a list of all the days
+        that are covered by this range
+        &#34;&#34;&#34;
+        start_day = None
+        end_day = None
+        #TODO: support days with exceptions (like &#34;Monday to friday but not thurdsays&#34;)
+        @classmethod
+        def from_shortcut_string(cls, days_string, assume_type=None):
+                &#34;&#34;&#34;
+                create a time object from a string
+                &#34;&#34;&#34;
+                logger.debug(&#34;creating days object from shortcut: &#34; + days_string)
+                if days_string is None:
+                        raise TypeError(&#34;Cannot create Days Object from value None&#34;)
+                        
+                day = days_string.lower()
+
+                # set up some shortcut ranges
+                allweek = cls(DaysEnum.MONDAY, DaysEnum.SUNDAY)
+                workweek = cls(DaysEnum.MONDAY, DaysEnum.FRIDAY)
+
+                if &#34;weekday&#34; in day:
+                        return workweek
+                elif &#34;business&#34; in day:
+                        return workweek
+                elif &#34;work&#34; in day:
+                        return workweek
+                elif &#34;5&#34; in day:
+                        return workweek
+                elif &#34;7&#34; in day:
+                        return allweek
+                elif &#34;all&#34; in day and &#34;week&#34; in day:
+                        return allweek
+                elif &#34;every&#34; in day:
+                        return allweek
+                elif &#34;daily&#34; in day:
+                        return allweek
+                elif &#34;weekend&#34; in day:
+                        return cls(DaysEnum.SATURDAY, DaysEnum.SUNDAY)
+                elif day == &#34;&#34;:
+                        # if no day is specified, assume the intention is all week
+                        return allweek
+
+                raise ValueError(&#34;string &#39;&#34; + days_string + &#34;&#39; does not match a known pattern&#34;)
+                        
+        @classmethod
+        def from_parse_results(cls, result):
+                days = []
+
+                if &#34;startday&#34; in result:
+                        logger.info(&#34;range date detected&#34;)
+                        # this is a date range that includes the intervening days
+                        start_day = Day.from_string(result.get(&#34;startday&#34;)[0])
+                        end_day = result.get(&#34;endday&#34;)[0]
+                        logger.debug(end_day)
+                        end_day = Day.from_string(end_day) if end_day is not None else end_day
+                        days = cls(start_day, end_day)
+                elif &#34;day&#34; in result:
+                        logger.info(&#34;list date detected&#34;)
+                        #TODO: have Days class support lists of individual days, as well as just ranges. as of now this is fine because both are iterable and give the same outputs when iterated over
+                        days = [ Day.from_string(day) for day in result.get(&#34;day&#34;) ]
+                elif &#34;day_shortcuts&#34; in result:
+                        logger.info(&#34;shortcut date detected&#34;)
+                        days = cls.from_shortcut_string(result.get( &#34;day_shortcuts&#34;)[0])
+                else:
+                        logger.info(&#34;unspecified date detected &#34;)
+                        # logger.debug(vars(result))
+                        # nothing specified, assumeit means every day
+                        return cls(DaysEnum.MONDAY, DaysEnum.SUNDAY)
+                return days
+                
+        def __init__(self, start_day, end_day):
+                if start_day is None or end_day is None:
+                        raise TypeError(&#34;Cannot create Days Object from value None&#34;)
+        
+                logger.debug(&#34;creating days from &#34; + str(start_day) + &#34; and &#34; + str(end_day))
+
+
+                if isinstance(start_day, DaysEnum):
+                        self.start_day = Day(start_day)
+
+                if isinstance(end_day, DaysEnum):
+                        self.end_day = Day(end_day)
+
+                self.start_day = start_day
+                self.end_day = end_day
+        
+        def __str__(self):
+                return self.start_day.value + to + self.end_day.value
+
+        def __iter__(self):
+                # if end_day is None:
+                #       return [start_day]
+                week = list(DaysEnum)
+                start_index = week.index(self.start_day)
+                end_index = week.index(self.end_day)
+
+                if end_index &lt; start_index:
+                        # if the end day is sooner in the week than the start
+                        end_index += start_index
+
+                days = []
+                for x in range(start_index, end_index+1):
+                        #ensure the indices wrap around to the beginning of the week
+                        day_index = x % 7
+                        days.append(Day(week[day_index]))
+        
+                return iter(days)
+        
+        def __eq__(self, other):
+                if not isinstance(other, Days):
+                        # don&#39;t attempt to compare against unrelated types
+                        raise NotImplementedError()
+                return self.start_day == other.start_day and self.end_day == other.end_day </code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="opening_hours.models.days.Days.end_day"><code class="name">var <span class="ident">end_day</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opening_hours.models.days.Days.start_day"><code class="name">var <span class="ident">start_day</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Static methods</h3>
+<dl>
+<dt id="opening_hours.models.days.Days.from_parse_results"><code class="name flex">
+<span>def <span class="ident">from_parse_results</span></span>(<span>result)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def from_parse_results(cls, result):
+        days = []
+
+        if &#34;startday&#34; in result:
+                logger.info(&#34;range date detected&#34;)
+                # this is a date range that includes the intervening days
+                start_day = Day.from_string(result.get(&#34;startday&#34;)[0])
+                end_day = result.get(&#34;endday&#34;)[0]
+                logger.debug(end_day)
+                end_day = Day.from_string(end_day) if end_day is not None else end_day
+                days = cls(start_day, end_day)
+        elif &#34;day&#34; in result:
+                logger.info(&#34;list date detected&#34;)
+                #TODO: have Days class support lists of individual days, as well as just ranges. as of now this is fine because both are iterable and give the same outputs when iterated over
+                days = [ Day.from_string(day) for day in result.get(&#34;day&#34;) ]
+        elif &#34;day_shortcuts&#34; in result:
+                logger.info(&#34;shortcut date detected&#34;)
+                days = cls.from_shortcut_string(result.get( &#34;day_shortcuts&#34;)[0])
+        else:
+                logger.info(&#34;unspecified date detected &#34;)
+                # logger.debug(vars(result))
+                # nothing specified, assumeit means every day
+                return cls(DaysEnum.MONDAY, DaysEnum.SUNDAY)
+        return days</code></pre>
+</details>
+</dd>
+<dt id="opening_hours.models.days.Days.from_shortcut_string"><code class="name flex">
+<span>def <span class="ident">from_shortcut_string</span></span>(<span>days_string, assume_type=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>create a time object from a string</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def from_shortcut_string(cls, days_string, assume_type=None):
+        &#34;&#34;&#34;
+        create a time object from a string
+        &#34;&#34;&#34;
+        logger.debug(&#34;creating days object from shortcut: &#34; + days_string)
+        if days_string is None:
+                raise TypeError(&#34;Cannot create Days Object from value None&#34;)
+                
+        day = days_string.lower()
+
+        # set up some shortcut ranges
+        allweek = cls(DaysEnum.MONDAY, DaysEnum.SUNDAY)
+        workweek = cls(DaysEnum.MONDAY, DaysEnum.FRIDAY)
+
+        if &#34;weekday&#34; in day:
+                return workweek
+        elif &#34;business&#34; in day:
+                return workweek
+        elif &#34;work&#34; in day:
+                return workweek
+        elif &#34;5&#34; in day:
+                return workweek
+        elif &#34;7&#34; in day:
+                return allweek
+        elif &#34;all&#34; in day and &#34;week&#34; in day:
+                return allweek
+        elif &#34;every&#34; in day:
+                return allweek
+        elif &#34;daily&#34; in day:
+                return allweek
+        elif &#34;weekend&#34; in day:
+                return cls(DaysEnum.SATURDAY, DaysEnum.SUNDAY)
+        elif day == &#34;&#34;:
+                # if no day is specified, assume the intention is all week
+                return allweek
+
+        raise ValueError(&#34;string &#39;&#34; + days_string + &#34;&#39; does not match a known pattern&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="opening_hours.models" href="index.html">opening_hours.models</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="opening_hours.models.days.Days" href="#opening_hours.models.days.Days">Days</a></code></h4>
+<ul class="">
+<li><code><a title="opening_hours.models.days.Days.end_day" href="#opening_hours.models.days.Days.end_day">end_day</a></code></li>
+<li><code><a title="opening_hours.models.days.Days.from_parse_results" href="#opening_hours.models.days.Days.from_parse_results">from_parse_results</a></code></li>
+<li><code><a title="opening_hours.models.days.Days.from_shortcut_string" href="#opening_hours.models.days.Days.from_shortcut_string">from_shortcut_string</a></code></li>
+<li><code><a title="opening_hours.models.days.Days.start_day" href="#opening_hours.models.days.Days.start_day">start_day</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

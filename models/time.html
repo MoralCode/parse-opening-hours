@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>opening_hours.models.time API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>opening_hours.models.time</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import enum
+from opening_hours.patterns import *
+import logging, os
+
+logger = logging.getLogger(__name__)
+
+class TimeType(enum.Enum):
+        UNKNOWN = None
+        AM = &#34;am&#34;
+        PM = &#34;pm&#34;
+        MILITARY = &#34;mil&#34;
+        
+
+class Time:
+        &#34;&#34;&#34;This class represents a single time and provides methods to help with
+        common time-related things such as converting to military time and dealing
+        with AM/PM, as well as creating times from common shortcuts like &#34;midnight&#34;
+        and &#34;noon&#34;
+        &#34;&#34;&#34;
+
+        hours = None
+        minutes = None
+        time_type = TimeType.UNKNOWN
+
+        @classmethod
+        def from_string(cls, string, assume_type=None):
+                &#34;&#34;&#34;
+                create a time object from a string
+                &#34;&#34;&#34;
+                logger.debug(&#34;creating time object from string: &#34; + string)
+                if string is None:
+                        raise TypeError(&#34;Cannot create Time from None&#34;)
+                elif string == &#34;&#34;:
+                        raise ValueError(&#34;Cannot create Time from empty string&#34;)
+                
+                result = clocktime.parseString(string)
+                hours = result.get(&#34;hour&#34;)
+                minutes = result.get(&#34;minute&#34;)
+                am_pm = result.get(&#34;am_pm&#34;)
+                
+                time_obj = cls(hours, minutes)
+                time_obj.set_type_from_string(am_pm)
+
+                if time_obj.is_unknown() and assume_type is not None:
+                        time_obj.set_type(assume_type)
+
+                return time_obj
+        
+        @classmethod
+        def from_shortcut(cls, string):
+                &#34;&#34;&#34;
+                create a time object from a string
+                &#34;&#34;&#34;
+                logger.debug(&#34;creating time object from shortcut: &#34; + string)
+                if string is None:
+                        raise TypeError(&#34;Cannot create Time from None&#34;)
+                elif string == &#34;&#34;:
+                        raise ValueError(&#34;Cannot create Time from empty string&#34;)
+                        
+                string = string.lower()
+
+                if &#34;midnight&#34; in string:
+                        return cls(0,0,time_type=TimeType.MILITARY) 
+                elif &#34;noon&#34; in string:
+                        return cls(12,0,time_type=TimeType.MILITARY) 
+                # elif &#34;closed&#34; in string:
+                        # TODO: how to handle this???
+                
+                raise ValueError(&#34;Cannot match given shortcut string &#39;&#34; + string + &#34;&#39; to a known time shortcut pattern&#34;)
+
+        @classmethod
+        def from_parse_results(cls, result_dict):
+                time = None
+                if &#34;hour&#34; in result_dict:
+                        time = cls(result_dict.get(&#34;hour&#34;), result_dict.get(&#34;minute&#34;))
+
+                        if &#34;am_pm&#34; in result_dict:
+                                time.set_type_from_string(result_dict.get(&#34;am_pm&#34;))
+
+                elif &#34;time_shortcuts&#34; in result_dict:
+                        shortcut = result_dict.get(&#34;time_shortcuts&#34;)
+                        # this mix of lists and not lists being received is liekly due to a mix of values from asdict() and not asdict() being called
+                        if isinstance(shortcut, list):
+                                shortcut = shortcut[0]
+                        time = cls.from_shortcut(shortcut)
+                else:
+                        raise ValueError(&#34;No recognized keys found in provided parse results dict&#34;)
+                return time 
+
+        def __init__(self, hours, minutes, time_type=TimeType.UNKNOWN):
+                self.hours = hours
+                self.minutes = minutes or 0
+                self.time_type = time_type or TimeType.UNKNOWN
+
+                # automatically detect the time as military time if the hours are set to a value &gt; 12
+                if self.is_unknown() and self.hours &gt; 12:
+                        self.set_type(TimeType.MILITARY)
+
+        def get_type(self):
+                return self.time_type
+        
+        def get_hours(self):
+                return self.hours
+
+        def get_minutes(self):
+                return self.minutes
+        
+        def set_type(self, time_type):
+                self.time_type = time_type
+
+        def set_type_from_string(self, time_type_str):
+                if time_type_str is None and self.is_unknown():
+                        return # already unknown
+                elif &#34;p&#34; in time_type_str.lower():
+                        self.set_type(TimeType.PM)
+                elif &#34;a&#34; in time_type_str.lower():
+                        self.set_type(TimeType.AM)
+
+        def is_24_hr(self):
+                return self.time_type == TimeType.MILITARY
+
+        def is_unknown(self):
+                return self.time_type == TimeType.UNKNOWN
+        
+        def is_12_hour(self):
+                return not self.is_24_hour() and not self.is_unknown()
+
+        def is_am(self):
+                return self.time_type == TimeType.AM
+
+        def is_pm(self):
+                return self.time_type == TimeType.PM
+
+        def get_as_military_time(self):
+                hours = self.hours
+
+                if self.is_unknown():
+                        raise TypeError(&#34;Cannot convert a time of unknown type (AM, PM or 24H) without assuming its type.&#34;)
+
+                elif self.is_24_hr():
+                        return self
+                
+                elif self.is_am():
+                        pass
+                
+                elif self.is_pm():
+                        hours = (hours + 12) if hours &lt;= 11 else 12
+                
+                return Time(hours, self.minutes, time_type=TimeType.MILITARY)
+                        
+        
+        def __str__(self, format_str=&#39;{:d}:{:02d}&#39;):
+                return format_str.format(self.hours, self.minutes)
+
+        def __repr__(self):
+                return &#39;H{:d} M{:02d} T{}&#39;.format(self.hours, self.minutes, self.time_type.value)
+        
+        def __eq__(self, other):
+                if not isinstance(other, Time):
+                        # don&#39;t attempt to compare against unrelated types
+                        raise NotImplementedError()
+                return self.hours == other.hours and self.minutes == other.minutes and self.time_type == other.time_type</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="opening_hours.models.time.Time"><code class="flex name class">
+<span>class <span class="ident">Time</span></span>
+<span>(</span><span>hours, minutes, time_type=TimeType.UNKNOWN)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This class represents a single time and provides methods to help with
+common time-related things such as converting to military time and dealing
+with AM/PM, as well as creating times from common shortcuts like "midnight"
+and "noon"</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Time:
+        &#34;&#34;&#34;This class represents a single time and provides methods to help with
+        common time-related things such as converting to military time and dealing
+        with AM/PM, as well as creating times from common shortcuts like &#34;midnight&#34;
+        and &#34;noon&#34;
+        &#34;&#34;&#34;
+
+        hours = None
+        minutes = None
+        time_type = TimeType.UNKNOWN
+
+        @classmethod
+        def from_string(cls, string, assume_type=None):
+                &#34;&#34;&#34;
+                create a time object from a string
+                &#34;&#34;&#34;
+                logger.debug(&#34;creating time object from string: &#34; + string)
+                if string is None:
+                        raise TypeError(&#34;Cannot create Time from None&#34;)
+                elif string == &#34;&#34;:
+                        raise ValueError(&#34;Cannot create Time from empty string&#34;)
+                
+                result = clocktime.parseString(string)
+                hours = result.get(&#34;hour&#34;)
+                minutes = result.get(&#34;minute&#34;)
+                am_pm = result.get(&#34;am_pm&#34;)
+                
+                time_obj = cls(hours, minutes)
+                time_obj.set_type_from_string(am_pm)
+
+                if time_obj.is_unknown() and assume_type is not None:
+                        time_obj.set_type(assume_type)
+
+                return time_obj
+        
+        @classmethod
+        def from_shortcut(cls, string):
+                &#34;&#34;&#34;
+                create a time object from a string
+                &#34;&#34;&#34;
+                logger.debug(&#34;creating time object from shortcut: &#34; + string)
+                if string is None:
+                        raise TypeError(&#34;Cannot create Time from None&#34;)
+                elif string == &#34;&#34;:
+                        raise ValueError(&#34;Cannot create Time from empty string&#34;)
+                        
+                string = string.lower()
+
+                if &#34;midnight&#34; in string:
+                        return cls(0,0,time_type=TimeType.MILITARY) 
+                elif &#34;noon&#34; in string:
+                        return cls(12,0,time_type=TimeType.MILITARY) 
+                # elif &#34;closed&#34; in string:
+                        # TODO: how to handle this???
+                
+                raise ValueError(&#34;Cannot match given shortcut string &#39;&#34; + string + &#34;&#39; to a known time shortcut pattern&#34;)
+
+        @classmethod
+        def from_parse_results(cls, result_dict):
+                time = None
+                if &#34;hour&#34; in result_dict:
+                        time = cls(result_dict.get(&#34;hour&#34;), result_dict.get(&#34;minute&#34;))
+
+                        if &#34;am_pm&#34; in result_dict:
+                                time.set_type_from_string(result_dict.get(&#34;am_pm&#34;))
+
+                elif &#34;time_shortcuts&#34; in result_dict:
+                        shortcut = result_dict.get(&#34;time_shortcuts&#34;)
+                        # this mix of lists and not lists being received is liekly due to a mix of values from asdict() and not asdict() being called
+                        if isinstance(shortcut, list):
+                                shortcut = shortcut[0]
+                        time = cls.from_shortcut(shortcut)
+                else:
+                        raise ValueError(&#34;No recognized keys found in provided parse results dict&#34;)
+                return time 
+
+        def __init__(self, hours, minutes, time_type=TimeType.UNKNOWN):
+                self.hours = hours
+                self.minutes = minutes or 0
+                self.time_type = time_type or TimeType.UNKNOWN
+
+                # automatically detect the time as military time if the hours are set to a value &gt; 12
+                if self.is_unknown() and self.hours &gt; 12:
+                        self.set_type(TimeType.MILITARY)
+
+        def get_type(self):
+                return self.time_type
+        
+        def get_hours(self):
+                return self.hours
+
+        def get_minutes(self):
+                return self.minutes
+        
+        def set_type(self, time_type):
+                self.time_type = time_type
+
+        def set_type_from_string(self, time_type_str):
+                if time_type_str is None and self.is_unknown():
+                        return # already unknown
+                elif &#34;p&#34; in time_type_str.lower():
+                        self.set_type(TimeType.PM)
+                elif &#34;a&#34; in time_type_str.lower():
+                        self.set_type(TimeType.AM)
+
+        def is_24_hr(self):
+                return self.time_type == TimeType.MILITARY
+
+        def is_unknown(self):
+                return self.time_type == TimeType.UNKNOWN
+        
+        def is_12_hour(self):
+                return not self.is_24_hour() and not self.is_unknown()
+
+        def is_am(self):
+                return self.time_type == TimeType.AM
+
+        def is_pm(self):
+                return self.time_type == TimeType.PM
+
+        def get_as_military_time(self):
+                hours = self.hours
+
+                if self.is_unknown():
+                        raise TypeError(&#34;Cannot convert a time of unknown type (AM, PM or 24H) without assuming its type.&#34;)
+
+                elif self.is_24_hr():
+                        return self
+                
+                elif self.is_am():
+                        pass
+                
+                elif self.is_pm():
+                        hours = (hours + 12) if hours &lt;= 11 else 12
+                
+                return Time(hours, self.minutes, time_type=TimeType.MILITARY)
+                        
+        
+        def __str__(self, format_str=&#39;{:d}:{:02d}&#39;):
+                return format_str.format(self.hours, self.minutes)
+
+        def __repr__(self):
+                return &#39;H{:d} M{:02d} T{}&#39;.format(self.hours, self.minutes, self.time_type.value)
+        
+        def __eq__(self, other):
+                if not isinstance(other, Time):
+                        # don&#39;t attempt to compare against unrelated types
+                        raise NotImplementedError()
+                return self.hours == other.hours and self.minutes == other.minutes and self.time_type == other.time_type</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="opening_hours.models.time.Time.hours"><code class="name">var <span class="ident">hours</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opening_hours.models.time.Time.minutes"><code class="name">var <span class="ident">minutes</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opening_hours.models.time.Time.time_type"><code class="name">var <span class="ident">time_type</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Static methods</h3>
+<dl>
+<dt id="opening_hours.models.time.Time.from_parse_results"><code class="name flex">
+<span>def <span class="ident">from_parse_results</span></span>(<span>result_dict)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def from_parse_results(cls, result_dict):
+        time = None
+        if &#34;hour&#34; in result_dict:
+                time = cls(result_dict.get(&#34;hour&#34;), result_dict.get(&#34;minute&#34;))
+
+                if &#34;am_pm&#34; in result_dict:
+                        time.set_type_from_string(result_dict.get(&#34;am_pm&#34;))
+
+        elif &#34;time_shortcuts&#34; in result_dict:
+                shortcut = result_dict.get(&#34;time_shortcuts&#34;)
+                # this mix of lists and not lists being received is liekly due to a mix of values from asdict() and not asdict() being called
+                if isinstance(shortcut, list):
+                        shortcut = shortcut[0]
+                time = cls.from_shortcut(shortcut)
+        else:
+                raise ValueError(&#34;No recognized keys found in provided parse results dict&#34;)
+        return time </code></pre>
+</details>
+</dd>
+<dt id="opening_hours.models.time.Time.from_shortcut"><code class="name flex">
+<span>def <span class="ident">from_shortcut</span></span>(<span>string)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>create a time object from a string</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def from_shortcut(cls, string):
+        &#34;&#34;&#34;
+        create a time object from a string
+        &#34;&#34;&#34;
+        logger.debug(&#34;creating time object from shortcut: &#34; + string)
+        if string is None:
+                raise TypeError(&#34;Cannot create Time from None&#34;)
+        elif string == &#34;&#34;:
+                raise ValueError(&#34;Cannot create Time from empty string&#34;)
+                
+        string = string.lower()
+
+        if &#34;midnight&#34; in string:
+                return cls(0,0,time_type=TimeType.MILITARY) 
+        elif &#34;noon&#34; in string:
+                return cls(12,0,time_type=TimeType.MILITARY) 
+        # elif &#34;closed&#34; in string:
+                # TODO: how to handle this???
+        
+        raise ValueError(&#34;Cannot match given shortcut string &#39;&#34; + string + &#34;&#39; to a known time shortcut pattern&#34;)</code></pre>
+</details>
+</dd>
+<dt id="opening_hours.models.time.Time.from_string"><code class="name flex">
+<span>def <span class="ident">from_string</span></span>(<span>string, assume_type=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>create a time object from a string</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def from_string(cls, string, assume_type=None):
+        &#34;&#34;&#34;
+        create a time object from a string
+        &#34;&#34;&#34;
+        logger.debug(&#34;creating time object from string: &#34; + string)
+        if string is None:
+                raise TypeError(&#34;Cannot create Time from None&#34;)
+        elif string == &#34;&#34;:
+                raise ValueError(&#34;Cannot create Time from empty string&#34;)
+        
+        result = clocktime.parseString(string)
+        hours = result.get(&#34;hour&#34;)
+        minutes = result.get(&#34;minute&#34;)
+        am_pm = result.get(&#34;am_pm&#34;)
+        
+        time_obj = cls(hours, minutes)
+        time_obj.set_type_from_string(am_pm)
+
+        if time_obj.is_unknown() and assume_type is not None:
+                time_obj.set_type(assume_type)
+
+        return time_obj</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="opening_hours.models.time.Time.get_as_military_time"><code class="name flex">
+<span>def <span class="ident">get_as_military_time</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_as_military_time(self):
+        hours = self.hours
+
+        if self.is_unknown():
+                raise TypeError(&#34;Cannot convert a time of unknown type (AM, PM or 24H) without assuming its type.&#34;)
+
+        elif self.is_24_hr():
+                return self
+        
+        elif self.is_am():
+                pass
+        
+        elif self.is_pm():
+                hours = (hours + 12) if hours &lt;= 11 else 12
+        
+        return Time(hours, self.minutes, time_type=TimeType.MILITARY)</code></pre>
+</details>
+</dd>
+<dt id="opening_hours.models.time.Time.get_hours"><code class="name flex">
+<span>def <span class="ident">get_hours</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_hours(self):
+        return self.hours</code></pre>
+</details>
+</dd>
+<dt id="opening_hours.models.time.Time.get_minutes"><code class="name flex">
+<span>def <span class="ident">get_minutes</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_minutes(self):
+        return self.minutes</code></pre>
+</details>
+</dd>
+<dt id="opening_hours.models.time.Time.get_type"><code class="name flex">
+<span>def <span class="ident">get_type</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_type(self):
+        return self.time_type</code></pre>
+</details>
+</dd>
+<dt id="opening_hours.models.time.Time.is_12_hour"><code class="name flex">
+<span>def <span class="ident">is_12_hour</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_12_hour(self):
+        return not self.is_24_hour() and not self.is_unknown()</code></pre>
+</details>
+</dd>
+<dt id="opening_hours.models.time.Time.is_24_hr"><code class="name flex">
+<span>def <span class="ident">is_24_hr</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_24_hr(self):
+        return self.time_type == TimeType.MILITARY</code></pre>
+</details>
+</dd>
+<dt id="opening_hours.models.time.Time.is_am"><code class="name flex">
+<span>def <span class="ident">is_am</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_am(self):
+        return self.time_type == TimeType.AM</code></pre>
+</details>
+</dd>
+<dt id="opening_hours.models.time.Time.is_pm"><code class="name flex">
+<span>def <span class="ident">is_pm</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_pm(self):
+        return self.time_type == TimeType.PM</code></pre>
+</details>
+</dd>
+<dt id="opening_hours.models.time.Time.is_unknown"><code class="name flex">
+<span>def <span class="ident">is_unknown</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_unknown(self):
+        return self.time_type == TimeType.UNKNOWN</code></pre>
+</details>
+</dd>
+<dt id="opening_hours.models.time.Time.set_type"><code class="name flex">
+<span>def <span class="ident">set_type</span></span>(<span>self, time_type)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_type(self, time_type):
+        self.time_type = time_type</code></pre>
+</details>
+</dd>
+<dt id="opening_hours.models.time.Time.set_type_from_string"><code class="name flex">
+<span>def <span class="ident">set_type_from_string</span></span>(<span>self, time_type_str)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_type_from_string(self, time_type_str):
+        if time_type_str is None and self.is_unknown():
+                return # already unknown
+        elif &#34;p&#34; in time_type_str.lower():
+                self.set_type(TimeType.PM)
+        elif &#34;a&#34; in time_type_str.lower():
+                self.set_type(TimeType.AM)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="opening_hours.models.time.TimeType"><code class="flex name class">
+<span>class <span class="ident">TimeType</span></span>
+<span>(</span><span>value, names=None, *, module=None, qualname=None, type=None, start=1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>An enumeration.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TimeType(enum.Enum):
+        UNKNOWN = None
+        AM = &#34;am&#34;
+        PM = &#34;pm&#34;
+        MILITARY = &#34;mil&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>enum.Enum</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="opening_hours.models.time.TimeType.AM"><code class="name">var <span class="ident">AM</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opening_hours.models.time.TimeType.MILITARY"><code class="name">var <span class="ident">MILITARY</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opening_hours.models.time.TimeType.PM"><code class="name">var <span class="ident">PM</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opening_hours.models.time.TimeType.UNKNOWN"><code class="name">var <span class="ident">UNKNOWN</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="opening_hours.models" href="index.html">opening_hours.models</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="opening_hours.models.time.Time" href="#opening_hours.models.time.Time">Time</a></code></h4>
+<ul class="">
+<li><code><a title="opening_hours.models.time.Time.from_parse_results" href="#opening_hours.models.time.Time.from_parse_results">from_parse_results</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.from_shortcut" href="#opening_hours.models.time.Time.from_shortcut">from_shortcut</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.from_string" href="#opening_hours.models.time.Time.from_string">from_string</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.get_as_military_time" href="#opening_hours.models.time.Time.get_as_military_time">get_as_military_time</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.get_hours" href="#opening_hours.models.time.Time.get_hours">get_hours</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.get_minutes" href="#opening_hours.models.time.Time.get_minutes">get_minutes</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.get_type" href="#opening_hours.models.time.Time.get_type">get_type</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.hours" href="#opening_hours.models.time.Time.hours">hours</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.is_12_hour" href="#opening_hours.models.time.Time.is_12_hour">is_12_hour</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.is_24_hr" href="#opening_hours.models.time.Time.is_24_hr">is_24_hr</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.is_am" href="#opening_hours.models.time.Time.is_am">is_am</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.is_pm" href="#opening_hours.models.time.Time.is_pm">is_pm</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.is_unknown" href="#opening_hours.models.time.Time.is_unknown">is_unknown</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.minutes" href="#opening_hours.models.time.Time.minutes">minutes</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.set_type" href="#opening_hours.models.time.Time.set_type">set_type</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.set_type_from_string" href="#opening_hours.models.time.Time.set_type_from_string">set_type_from_string</a></code></li>
+<li><code><a title="opening_hours.models.time.Time.time_type" href="#opening_hours.models.time.Time.time_type">time_type</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="opening_hours.models.time.TimeType" href="#opening_hours.models.time.TimeType">TimeType</a></code></h4>
+<ul class="">
+<li><code><a title="opening_hours.models.time.TimeType.AM" href="#opening_hours.models.time.TimeType.AM">AM</a></code></li>
+<li><code><a title="opening_hours.models.time.TimeType.MILITARY" href="#opening_hours.models.time.TimeType.MILITARY">MILITARY</a></code></li>
+<li><code><a title="opening_hours.models.time.TimeType.PM" href="#opening_hours.models.time.TimeType.PM">PM</a></code></li>
+<li><code><a title="opening_hours.models.time.TimeType.UNKNOWN" href="#opening_hours.models.time.TimeType.UNKNOWN">UNKNOWN</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
