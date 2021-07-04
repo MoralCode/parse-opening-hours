@@ -115,7 +115,7 @@ class Days():
 		for x in range(start_index, end_index+1):
 			#ensure the indices wrap around to the beginning of the week
 			day_index = x % 7
-			days.append(Day(week[day_index]))
+			days.append(week[day_index])
 	
 		return self.days
 
