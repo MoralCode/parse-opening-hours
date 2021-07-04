@@ -148,6 +148,6 @@ class Days():
 		if not isinstance(other, Days):
 			# don't attempt to compare against unrelated types
 			raise NotImplementedError()
-		return self.start_day == other.start_day and self.end_day == other.end_day 
+		return self.days == other.days
 
 
