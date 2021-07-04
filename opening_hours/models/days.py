@@ -111,7 +111,8 @@ class Days():
 		self.days = set(self._expand_day_range(start_day, end_day))
 		
 	def __str__(self):
-		return self.start_day.value + to + self.end_day.value
+		daystrings = [str(Day(d)) for d in self.days]
+		return "Days<" + ''.join(daystrings) + ">"
 
 	def _expand_day_range(self, start_day, end_day):
 		# if end_day is None:
