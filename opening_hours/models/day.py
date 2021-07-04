@@ -73,6 +73,9 @@ class Day():
 		else:
 			# don't attempt to compare against unrelated types
 			raise NotImplementedError()
+
+	def as_enum(self):
+		return self.day
 		
 
 
