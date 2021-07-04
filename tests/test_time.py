@@ -87,6 +87,17 @@ class TestTime(unittest.TestCase):
 		with self.assertRaises(ValueError):
 			Time.from_string("")
 
+	def test_from_shortcut_none(self):
+		with self.assertRaises(TypeError):
+			Time.from_shortcut(None)
+		
+		with self.assertRaises(ValueError):
+			Time.from_shortcut("")
+
+	def test_from_shortcut_unknown(self):
+		with self.assertRaises(ValueError):
+			Time.from_shortcut("i dont care")
+
 
 	def test_from_string_am(self):
 		times_9am = [
