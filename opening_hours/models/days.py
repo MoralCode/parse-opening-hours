@@ -10,8 +10,6 @@ class Days():
 	"weekdays"), iterate over the range of days to get a list of all the days
 	that are covered by this range
 	"""
-	start_day = None
-	end_day = None
 	days = set({})
 	#TODO: support days with exceptions (like "Monday to friday but not thurdsays")
 	@classmethod
@@ -97,16 +95,6 @@ class Days():
 			raise TypeError("Cannot create Days Object from value None")
 	
 		logger.debug("creating days from " + str(start_day) + " and " + str(end_day))
-
-
-		if isinstance(start_day, DaysEnum):
-			self.start_day = Day(start_day)
-
-		if isinstance(end_day, DaysEnum):
-			self.end_day = Day(end_day)
-
-		self.start_day = start_day
-		self.end_day = end_day
 
 		self.days = set(self._expand_day_range(start_day, end_day))
 		
