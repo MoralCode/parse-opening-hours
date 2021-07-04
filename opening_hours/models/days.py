@@ -12,7 +12,7 @@ class Days():
 	"""
 	start_day = None
 	end_day = None
-	days = ()
+	days = set({})
 	#TODO: support days with exceptions (like "Monday to friday but not thurdsays")
 	@classmethod
 	def from_shortcut_string(cls, days_string, assume_type=None):
