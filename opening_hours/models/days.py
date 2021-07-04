@@ -55,7 +55,7 @@ class Days():
 			
 	@classmethod
 	def from_parse_results(cls, result):
-		days = []
+		days = None
 
 		if "startday" in result:
 			logger.info("range date detected")
@@ -65,14 +65,27 @@ class Days():
 			logger.debug(end_day)
 			end_day = Day.from_string(end_day) if end_day is not None else end_day
 			days = cls(start_day, end_day)
-		elif "day" in result:
+		
+		if "day" in result:
 			logger.info("list date detected")
-			#TODO: have Days class support lists of individual days, as well as just ranges. as of now this is fine because both are iterable and give the same outputs when iterated over
-			days = [ Day.from_string(day) for day in result.get("day") ]
-		elif "day_shortcuts" in result:
+
+			for day in result.get("day"):
+				if days:
+					days.add(Day.from_string(day).as_enum())
+				else:
+					days = Days(Day.from_string(day), Day.from_string(day))
+		
+		if "day_shortcuts" in result:
 			logger.info("shortcut date detected")
-			days = cls.from_shortcut_string(result.get( "day_shortcuts")[0])
-		else:
+			shortcut_days = cls.from_shortcut_string(result.get( "day_shortcuts")[0])
+			for day in shortcut_days:
+				if days:
+					days.add(day)
+				else:
+					days = Days(day, day)
+				
+
+		if days is None:
 			logger.info("unspecified date detected ")
 			# logger.debug(vars(result))
 			# nothing specified, assumeit means every day
