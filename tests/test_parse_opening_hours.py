@@ -238,6 +238,7 @@ class TestHoursParsing(unittest.TestCase):
 			"Mon-Wed 9:00 - 5:00",
 			"M-W 9:00 - 5:00",
 			"Mon. & Tues. & Wed. 9:00 - 5:00",
+			"Mon. - Tues., Wed. 9:00 - 5:00",
 			"Monday through Wednesday 9:00 - 5:00",
 			"Monday to Wednesday 9:00 - 5:00",
 			"Monday \u2013 Wednesday 9:00 - 5:00",
