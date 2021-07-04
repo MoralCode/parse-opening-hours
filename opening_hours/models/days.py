@@ -98,12 +98,12 @@ class Days():
 	def __str__(self):
 		return self.start_day.value + to + self.end_day.value
 
-	def __iter__(self):
+	def _expand_day_range(self, start_day, end_day):
 		# if end_day is None:
 		# 	return [start_day]
 		week = list(DaysEnum)
-		start_index = week.index(self.start_day)
-		end_index = week.index(self.end_day)
+		start_index = week.index(start_day)
+		end_index = week.index(end_day)
 
 		if end_index < start_index:
 			# if the end day is sooner in the week than the start
@@ -115,7 +115,10 @@ class Days():
 			day_index = x % 7
 			days.append(Day(week[day_index]))
 	
-		return iter(days)
+		return self.days
+
+	def __iter__(self):
+		return self.days
 	
 	def __eq__(self, other):
 		if not isinstance(other, Days):
