@@ -124,13 +124,13 @@ class Days():
 			# if the end day is sooner in the week than the start
 			end_index += start_index
 
-		days = []
+		days = set({})
 		for x in range(start_index, end_index+1):
 			#ensure the indices wrap around to the beginning of the week
 			day_index = x % 7
-			days.append(week[day_index])
+			days.add(week[day_index])
 	
-		return self.days
+		return set(days)
 
 	def add(self, day):
 		if isinstance(day, DaysEnum):
