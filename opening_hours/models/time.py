@@ -123,7 +123,7 @@ class Time:
 		return self.time_type == TimeType.UNKNOWN
 	
 	def is_12_hour(self):
-		return not self.is_24_hour() and not self.is_unknown()
+		return not self.is_24_hr() and not self.is_unknown()
 
 	def is_am(self):
 		return self.time_type == TimeType.AM
