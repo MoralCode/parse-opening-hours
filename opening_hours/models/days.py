@@ -142,7 +142,7 @@ class Days():
 			raise NotImplementedError()
 
 	def __iter__(self):
-		return self.days
+		return iter(self.days)
 	
 	def __eq__(self, other):
 		if not isinstance(other, Days):
