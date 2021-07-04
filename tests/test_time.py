@@ -112,22 +112,22 @@ class TestTime(unittest.TestCase):
 		testTimeMil = Time(11,17,TimeType.MILITARY)
 		testTimePm = Time(11,17,TimeType.PM)
 		self.assertEqual(
-			testTimeMil.get_as_military_time().get_hours(),
+			testTimeMil.get_as_military_time().hours,
 			11
 		)
 		self.assertEqual(
-			testTimePm.get_as_military_time().get_hours(),
+			testTimePm.get_as_military_time().hours,
 			23
 		)
 
 	def test_noon_midnight_regression(self):
 		
 		self.assertEqual(
-			Time.from_string("12pm").get_as_military_time().get_hours(),
+			Time.from_string("12pm").get_as_military_time().hours,
 			12
 		)
 		self.assertEqual(
-			Time.from_string("12am").get_as_military_time().get_hours(),
+			Time.from_string("12am").get_as_military_time().hours,
 			0
 		)
 
