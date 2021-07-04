@@ -120,6 +120,18 @@ class TestTime(unittest.TestCase):
 			23
 		)
 
+	def test_getters(self):
+		time = Time(5,0,TimeType.AM)
+		self.assertEqual(time.get_hours(), 5)
+		self.assertEqual(time.get_minutes(), 0)
+		self.assertTrue(time.is_am())
+		self.assertTrue(time.is_12_hour())
+		self.assertFalse(time.is_pm())
+		self.assertFalse(time.is_24_hr())
+		self.assertFalse(time.is_unknown())
+		self.assertEqual(time.get_type(), TimeType.AM)
+
+
 	def test_noon_midnight_regression(self):
 		
 		self.assertEqual(
