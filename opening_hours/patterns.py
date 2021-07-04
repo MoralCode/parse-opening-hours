@@ -142,7 +142,7 @@ dateList = OneOrMore(day.setResultsName('day', listAllMatches=True) + Optional(l
 
 daterange = day.setResultsName('startday', listAllMatches=True) + range_separator + day.setResultsName('endday', listAllMatches=True)
 
-dates = Or([daterange, dateList, dateShortcuts])
+dates = Or([OneOrMore(Or([daterange, dateList]) + Optional(list_separator)), dateShortcuts])
 
 time = Group(Or([clocktime, time_shortcuts]))
 

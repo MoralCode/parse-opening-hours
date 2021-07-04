@@ -5,13 +5,13 @@ logger = logging.getLogger(__name__)
 
 class Days():
 	"""
-	This class represents a range of days (i.e monday to friday) and provides
-	some helpful methods to interperet these ranges from shortcuts (like
-	"weekdays"), iterate over the range of days to get a list of all the days
-	that are covered by this range
+	This class represents a set of days and provides
+	some helpful methods to interperet these sets from shortcuts (like
+	"weekdays"), iterate over the days, etc.
+
+
 	"""
-	start_day = None
-	end_day = None
+	days = set({})
 	#TODO: support days with exceptions (like "Monday to friday but not thurdsays")
 	@classmethod
 	def from_shortcut_string(cls, days_string, assume_type=None):
@@ -54,7 +54,7 @@ class Days():
 			
 	@classmethod
 	def from_parse_results(cls, result):
-		days = []
+		days = None
 
 		if "startday" in result:
 			logger.info("range date detected")
@@ -64,14 +64,27 @@ class Days():
 			logger.debug(end_day)
 			end_day = Day.from_string(end_day) if end_day is not None else end_day
 			days = cls(start_day, end_day)
-		elif "day" in result:
+		
+		if "day" in result:
 			logger.info("list date detected")
-			#TODO: have Days class support lists of individual days, as well as just ranges. as of now this is fine because both are iterable and give the same outputs when iterated over
-			days = [ Day.from_string(day) for day in result.get("day") ]
-		elif "day_shortcuts" in result:
+
+			for day in result.get("day"):
+				if days:
+					days.add(Day.from_string(day).as_enum())
+				else:
+					days = Days(Day.from_string(day), Day.from_string(day))
+		
+		if "day_shortcuts" in result:
 			logger.info("shortcut date detected")
-			days = cls.from_shortcut_string(result.get( "day_shortcuts")[0])
-		else:
+			shortcut_days = cls.from_shortcut_string(result.get( "day_shortcuts")[0])
+			for day in shortcut_days:
+				if days:
+					days.add(day)
+				else:
+					days = Days(day, day)
+				
+
+		if days is None:
 			logger.info("unspecified date detected ")
 			# logger.debug(vars(result))
 			# nothing specified, assumeit means every day
@@ -84,42 +97,51 @@ class Days():
 	
 		logger.debug("creating days from " + str(start_day) + " and " + str(end_day))
 
-
-		if isinstance(start_day, DaysEnum):
-			self.start_day = Day(start_day)
-
-		if isinstance(end_day, DaysEnum):
-			self.end_day = Day(end_day)
-
-		self.start_day = start_day
-		self.end_day = end_day
-	
+		self.days = set(self._expand_day_range(start_day, end_day))
+		
 	def __str__(self):
-		return self.start_day.value + to + self.end_day.value
+		daystrings = [str(Day(d)) for d in self.days]
+		return "Days<" + ''.join(daystrings) + ">"
 
-	def __iter__(self):
+	def _expand_day_range(self, start_day, end_day):
 		# if end_day is None:
 		# 	return [start_day]
 		week = list(DaysEnum)
-		start_index = week.index(self.start_day)
-		end_index = week.index(self.end_day)
+		start_index = week.index(start_day)
+		end_index = week.index(end_day)
 
 		if end_index < start_index:
 			# if the end day is sooner in the week than the start
 			end_index += start_index
 
-		days = []
+		days = set({})
 		for x in range(start_index, end_index+1):
 			#ensure the indices wrap around to the beginning of the week
 			day_index = x % 7
-			days.append(Day(week[day_index]))
+			days.add(week[day_index])
 	
-		return iter(days)
+		return set(days)
+
+	def add(self, day):
+		if isinstance(day, DaysEnum):
+			self.days.add(day)
+		elif isinstance(day, Day):
+			self.days.add(day.as_enum())
+		else:
+			# don't attempt to add unrelated types
+			raise NotImplementedError()
+
+	def __iter__(self):
+		return iter(self.sort())
+
+	def sort(self):
+		days = [Day(d) for d in self.days]
+		return sorted(days)
 	
 	def __eq__(self, other):
 		if not isinstance(other, Days):
 			# don't attempt to compare against unrelated types
 			raise NotImplementedError()
-		return self.start_day == other.start_day and self.end_day == other.end_day 
+		return self.days == other.days
 
 
