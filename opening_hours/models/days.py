@@ -108,7 +108,7 @@ class Days():
 		self.start_day = start_day
 		self.end_day = end_day
 
-		self.days = set(_expand_day_range(start_day, end_day))
+		self.days = set(self._expand_day_range(start_day, end_day))
 		
 	def __str__(self):
 		return self.start_day.value + to + self.end_day.value
