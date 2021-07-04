@@ -80,7 +80,7 @@ class TestTime(unittest.TestCase):
 		with self.assertRaises(ValueError):
 			Time.from_parse_results(test_dict)
 
-	def test_from_string_None(self):
+	def test_from_string_none(self):
 		with self.assertRaises(TypeError):
 			Time.from_string(None)
 		
