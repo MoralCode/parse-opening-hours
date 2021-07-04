@@ -52,6 +52,15 @@ class TestTime(unittest.TestCase):
 		self.assertEqual(test_time_dict.minutes, 0)
 
 		self.assertTrue(test_time_dict.is_pm())
+
+	def test_from_string_and_assumption(self):
+		test_time_dict = Time.from_string("5:00", assume_type=TimeType.AM)
+		self.assertEqual(
+			test_time_dict.hours,
+			5
+		)
+		self.assertEqual(test_time_dict.minutes, 0)
+		self.assertTrue(test_time_dict.is_am())
 	
 	def test_from_parse_shortcut(self):
 		test_dict = {
