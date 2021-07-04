@@ -111,7 +111,7 @@ class TestTime(unittest.TestCase):
 			23
 		)
 
-	def regression_test_noon_midnight(self):
+	def test_noon_midnight_regression(self):
 		
 		self.assertEqual(
 			Time.from_string("12pm").get_as_military_time().get_hours(),
