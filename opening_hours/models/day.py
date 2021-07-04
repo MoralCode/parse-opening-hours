@@ -74,6 +74,10 @@ class Day():
 			# don't attempt to compare against unrelated types
 			raise NotImplementedError()
 
+	def __lt__(self, other):
+		# p1 < p2 calls p1.__lt__(p2)
+		return list(DaysEnum).index(self.day) < list(DaysEnum).index(other.day)
+
 	def as_enum(self):
 		return self.day
 		
