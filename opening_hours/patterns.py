@@ -23,7 +23,7 @@ word_range_separators = Optional(space) + words_for_range + Optional(space)
 range_separator = Or([Char("–—‐-\u2013"), word_range_separators])#.suppress()
 
 word_list_separators = Optional(space) + oneOf("and") + Optional(space)
-list_separator = Or([Word(" ,+/"), word_list_separators])
+list_separator = Or([Word(" ,+/&"), word_list_separators])
 
 day_time_separators = Optional(Or([
 	Literal(":"),
