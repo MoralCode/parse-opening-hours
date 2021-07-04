@@ -119,6 +119,15 @@ class Days():
 	
 		return self.days
 
+	def add(self, day):
+		if isinstance(day, DaysEnum):
+			self.days.add(day)
+		elif isinstance(day, Day):
+			self.days.add(day.as_enum())
+		else:
+			# don't attempt to add unrelated types
+			raise NotImplementedError()
+
 	def __iter__(self):
 		return self.days
 	
