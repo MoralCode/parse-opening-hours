@@ -131,7 +131,11 @@ class Days():
 			raise NotImplementedError()
 
 	def __iter__(self):
-		return iter(self.days)
+		return iter(self.sort())
+
+	def sort(self):
+		days = [Day(d) for d in self.days]
+		return sorted(days)
 	
 	def __eq__(self, other):
 		if not isinstance(other, Days):
