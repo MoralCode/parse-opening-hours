@@ -54,6 +54,9 @@ class Days():
 			
 	@classmethod
 	def from_parse_results(cls, result):
+		if result is None:
+			raise TypeError("Cannot create Days Object from value None")
+
 		days = None
 
 		if "startday" in result:
@@ -94,6 +97,8 @@ class Days():
 	def __init__(self, start_day, end_day):
 		if start_day is None or end_day is None:
 			raise TypeError("Cannot create Days Object from value None")
+		if not start_day or not end_day:
+			raise TypeError("Cannot create Days Object from empty string")
 	
 		logger.debug("creating days from " + str(start_day) + " and " + str(end_day))
 

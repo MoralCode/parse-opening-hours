@@ -32,6 +32,9 @@ class OpeningHours():
 	@classmethod
 	def parse(cls, hours_string, assume_type=None):
 		"""This parse function allows an OpeningHours instance to be created from most arbitrary strings representing opening hours using pyparsing."""
+		if hours_string is None or hours_string == "":
+			# TODO
+			return cls(None, assume_type=None)
 
 		hours_string = normalize_string(hours_string)
 		# TODO: handle unicode confuseables
@@ -54,9 +57,12 @@ class OpeningHours():
 		self.openinghours = openinghours
 		self.assume_type = assume_type #temporary
 
-	def json(self, assume_type=None):
+	def json(self, assume_type=None, default=[]):
 		"""Converts the parsed results from pyparsing into the json output """
 		opening_hours_json = []
+
+		if not self.openinghours:
+			return default
 
 		# TODO: move parse days and parse times out of the json() function
 		days = Days.from_parse_results(self.openinghours)
