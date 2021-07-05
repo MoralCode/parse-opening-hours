@@ -31,7 +31,10 @@ day_time_separators = Optional(Or([
 	Literal(",")
 ])).suppress()
 
-plural = caselessWord("s'", max=2)
+plural = Or([
+	Optional("'") + CaselessLiteral("s"),
+	CaselessLiteral("s") + Optional("'")
+])
 possibly_dots = Optional(Char(".")).suppress()
 
 
