@@ -141,7 +141,8 @@ class Time:
 			return self
 		
 		elif self.is_am():
-			pass
+			# 12am should become 0:00 in military time
+			hours = hours if hours <= 11 else 0
 		
 		elif self.is_pm():
 			hours = (hours + 12) if hours <= 11 else 12
