@@ -52,6 +52,10 @@ When specifying a time without AM or PM indicators, you may get an error that re
 
 ## Tests and Coverage
 
-run pytet and generate coverage database `pipenv run pytest --cov=./`
+Use this command to run pytest and generate coverage data `pipenv run pytest --cov=./`
+To see all the logs during tests (for debugging. warning, there are a lot of them), add the `--log-cli-level=10 ` parameter
 
-show coverage report: `pipenv run coverage report`
+To show the coverage report: `pipenv run coverage report`
+
+To generate an HTML coverage report: `pipenv run coverage html`
+
