@@ -41,6 +41,12 @@ class TestDays(unittest.TestCase):
 			Days.from_shortcut_string(None)
 		with self.assertRaises(TypeError):
 			Days(None, None)
+		with self.assertRaises(TypeError):
+			Days.from_parse_results(None)
+
+	def test_create_from_empty(self):
+		with self.assertRaises(TypeError):
+			Days("", "")
 
 	def test_create_from_unknown(self):
 		with self.assertRaises(ValueError):
