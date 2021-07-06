@@ -42,7 +42,8 @@ This should give you the below output:
 ]
 ```
 
-This has been tested using Python 3.8.5
+This has been tested using Python 3.8.5 and should work on most relatively modern versions of python
+
 ### Documentation
 In addition to this README, there is some documentation generated from inline documentation comments. This is available at https://moralcode.github.io/parse-opening-hours/ 
 ### Environment variables
