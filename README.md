@@ -45,7 +45,13 @@ This should give you the below output:
 This has been tested using Python 3.8.5 and should work on most relatively modern versions of python
 
 ### Documentation
-In addition to this README, there is some documentation generated from inline documentation comments. This is available at https://moralcode.github.io/parse-opening-hours/ 
+There are a number of places to find documentation for this project:
+- This README file
+- The [inline docs webpage](https://moralcode.github.io/parse-opening-hours/) that is generated from inline doc comments
+- The [Docs](docs/) folder
+
+The documentation *should* line up with the current and/or planned features of this library
+
 ### Environment variables
 Setting the environment variable `OH_DEBUG` to a value of `Y` will set the root logging level to debug and will cause log entries to appear in stdout for debugging purposes
 
