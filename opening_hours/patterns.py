@@ -102,8 +102,15 @@ day_shortcuts = Combine(Or([
 days = OneOrMore(day)
 
 # the r is here because of https://stackoverflow.com/questions/50504500/deprecationwarning-invalid-escape-sequence-what-to-use-instead-of-d#50504635
-hour = Regex(r'[01]\d|2[0-3]|\d').setParseAction(pyparsing_common.convertToInteger).setResultsName("hour")
-minute = Regex(r'[0-5]\d').setParseAction(pyparsing_common.convertToInteger).setResultsName("minute")
+hour = Combine(Or([
+	Char("01") + Char(nums),
+	"2" + Char("0123"),
+	Char(nums)
+])).setParseAction(pyparsing_common.convertToInteger).setResultsName("hour")
+
+minute = Combine(
+	Char("012345") + Char(nums)
+).setParseAction(pyparsing_common.convertToInteger).setResultsName("minute")
 
 
 am_or_pm = Optional(Combine(Or([CaselessLiteral("A"), CaselessLiteral("P")]) + possibly_dots + Optional(CaselessLiteral("M")  + possibly_dots)).setResultsName('am_pm'))
