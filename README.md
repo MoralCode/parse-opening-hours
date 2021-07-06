@@ -7,6 +7,18 @@
 This library parses opening hours from various human-readable strings such as "Mon- Fri 9:00am - 5:30pm" into a more standard JSON format that can be processed more easily.
 
 ## Usage
+### What can/can't it do?
+
+This library can currently handle most opening hours strings where there is a single range of times for a set of days.
+
+For examples of what it can do, see the Changelog on the releases page or take a look at the unit tests.
+
+The goal is to eventually support more different formats of strings but as of now, opening hours containing these things may not be supported:
+- notes or arbitrary sentences such as "by appointment only"
+- Specific dates, such as "4/27/21 at 9am"
+- Lists of date-time opening hours, such as "Mon - Fri: 8am-2pm, Sat: 10am-2pm"
+- Opening hours formats that are in formats that arent commonly used by English-speakers in the United States
+
 ### Installation
 `pip install parse-opening-hours`
 
