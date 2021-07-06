@@ -32,7 +32,7 @@ print(OpeningHours.parse("Mon- Fri 9:00am - 5:30pm").json())
 ```
 
 This should give you the below output:
-```
+```json
 [
 	{'day': 'monday', 'opens': '9:00', 'closes': '17:30'},
 	{'day': 'tuesday', 'opens': '9:00', 'closes': '17:30'},
