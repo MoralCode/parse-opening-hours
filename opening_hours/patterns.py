@@ -139,13 +139,13 @@ time_shortcuts = Or([single_time_shortcut, time_range_shortcuts]).setResultsName
 
 clocktime = Combine(hour + time_separator + Optional(minute) + am_or_pm, adjacent=False)
 
-dateShortcuts = day_shortcuts.setResultsName('day_shortcuts', listAllMatches=True) + Optional(list_separator)
+dayShortcuts = day_shortcuts.setResultsName('day_shortcuts', listAllMatches=True) + Optional(list_separator)
 
-dateList = OneOrMore(day.setResultsName('day', listAllMatches=True) + Optional(list_separator))
+dayList = OneOrMore(day.setResultsName('day', listAllMatches=True) + Optional(list_separator))
 
-daterange = day.setResultsName('startday', listAllMatches=True) + range_separator + day.setResultsName('endday', listAllMatches=True)
+dayRange = day.setResultsName('startday', listAllMatches=True) + range_separator + day.setResultsName('endday', listAllMatches=True)
 
-dates = Or([OneOrMore(Or([daterange, dateList]) + Optional(list_separator)), dateShortcuts])
+dates = Or([OneOrMore(Or([dayRange, dayList]) + Optional(list_separator)), dayShortcuts])
 
 time = Group(Or([clocktime, time_shortcuts]))
 
