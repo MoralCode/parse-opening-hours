@@ -73,6 +73,15 @@ date_num = Combine(Or([
 date_word_num = Combine(date_num + Optional(day_suffix)).setResultsName("day")
 
 year_alone = Word(nums, exact=2)
+
+# Keep years limited to 1900-2099 as its unlikely to be needed and easy enough to change
+century = Or(["19", "20"])#.setParseAction(pyparsing_common.convertToInteger)
+
+year = Combine(
+	MatchFirst([
+		century + year_alone,
+		year_alone
+	])).setParseAction(pyparsing_common.convertToInteger).setResultsName("year")
 # TODO: use CaselessCloseMatch here once implemented to handle typos, particularly for the longer names
 day = Combine(Or([
 	MatchFirst([
