@@ -47,6 +47,15 @@ date_separator = Optional(",")
 time_separator = Optional(":")
 
 ymd_separator = Or([Char("/"), hyphens]).suppress()
+
+nonzero_num = Char("123456789")
+
+day_suffix = Or([
+	CaselessLiteral("rd"),
+	CaselessLiteral("st"),
+	CaselessLiteral("nd"),
+	CaselessLiteral("th"),
+]).suppress()
 # TODO: use CaselessCloseMatch here once implemented to handle typos, particularly for the longer names
 day = Combine(Or([
 	MatchFirst([
