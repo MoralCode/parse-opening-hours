@@ -82,6 +82,8 @@ year = Combine(
 		century + year_alone,
 		year_alone
 	])).setParseAction(pyparsing_common.convertToInteger).setResultsName("year")
+
+date_mdy = month_num + ymd_separator + date_num + Optional(ymd_separator + year)
 # TODO: use CaselessCloseMatch here once implemented to handle typos, particularly for the longer names
 day = Combine(Or([
 	MatchFirst([
