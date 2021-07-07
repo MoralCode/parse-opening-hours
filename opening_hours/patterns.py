@@ -69,6 +69,9 @@ date_num = Combine(Or([
 	nonzero_num
 ])).setParseAction(pyparsing_common.convertToInteger).setResultsName("day")
 
+# used for more natural language fayes "December 25th", "May 25"
+date_word_num = Combine(date_num + Optional(day_suffix)).setResultsName("day")
+
 year_alone = Word(nums, exact=2)
 # TODO: use CaselessCloseMatch here once implemented to handle typos, particularly for the longer names
 day = Combine(Or([
