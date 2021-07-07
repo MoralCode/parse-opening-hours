@@ -84,6 +84,14 @@ year = Combine(
 	])).setParseAction(pyparsing_common.convertToInteger).setResultsName("year")
 
 date_mdy = month_num + ymd_separator + date_num + Optional(ymd_separator + year)
+
+specific_date = Or([
+	pyparsing_common.iso8601_date,
+	date_mdy,
+	])
+	
+specific_dates = OneOrMore(specific_date + Optional(date_separator))
+
 # TODO: use CaselessCloseMatch here once implemented to handle typos, particularly for the longer names
 day = Combine(Or([
 	MatchFirst([
