@@ -44,6 +44,7 @@ possibly_dots = Optional(Char(".")).suppress()
 section_separator = Optional(",")
 time_separator = Optional(":")
 
+ymd_separator = Or([Char("/"), hyphens]).suppress()
 # TODO: use CaselessCloseMatch here once implemented to handle typos, particularly for the longer names
 day = Combine(Or([
 	MatchFirst([
