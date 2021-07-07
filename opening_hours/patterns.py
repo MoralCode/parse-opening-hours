@@ -56,6 +56,20 @@ day_suffix = Or([
 	CaselessLiteral("nd"),
 	CaselessLiteral("th"),
 ]).suppress()
+month_num = Combine(Or([
+	"0" + nonzero_num,
+	"1" + Char("012"),
+	nonzero_num
+])).setParseAction(pyparsing_common.convertToInteger).setResultsName("month")#, listAllMatches=True)
+
+# used for number-only dates such as in MM/DD/YYYY
+date_num = Combine(Or([
+	Char("012") + Char(nums),
+	"3" + Char("01"),
+	nonzero_num
+])).setParseAction(pyparsing_common.convertToInteger).setResultsName("day")
+
+year_alone = Word(nums, exact=2)
 # TODO: use CaselessCloseMatch here once implemented to handle typos, particularly for the longer names
 day = Combine(Or([
 	MatchFirst([
