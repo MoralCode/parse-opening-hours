@@ -12,6 +12,8 @@ useless_optional_prefixes = Optional(Or([
 	CaselessLiteral("Open")
 ])).suppress()
 
+hyphens = Char("–—‐-\u2013")
+
 words_for_range = Or([
 	caselessWord("to"),
 	caselessWord("thru"),
@@ -20,7 +22,7 @@ words_for_range = Or([
 	caselessWord("'til")
 ])
 word_range_separators = Optional(space) + words_for_range + Optional(space)
-range_separator = Or([Char("–—‐-\u2013"), word_range_separators])#.suppress()
+range_separator = Or([hyphens, word_range_separators])#.suppress()
 
 word_list_separators = Optional(space) + oneOf("and") + Optional(space)
 list_separator = Or([Char(",+/&"), word_list_separators])
