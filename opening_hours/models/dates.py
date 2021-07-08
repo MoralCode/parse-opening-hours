@@ -1,5 +1,4 @@
 import logging, os
-from dateutil.parser import *
 from datetime import datetime, date as dt_date
 
 logger = logging.getLogger(__name__)
@@ -68,8 +67,6 @@ class Dates():
 	def add(self, date):
 		if isinstance(date, dt_date):
 			self.dates.add(date)
-		elif isinstance(date, str):
-			self.dates.add(parse(date_str).date())
 		else:
 			# don't attempt to add unrelated types
 			raise NotImplementedError()
