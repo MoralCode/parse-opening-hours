@@ -61,8 +61,8 @@ class Dates():
 		self.dates = set({})
 		
 	def __str__(self):
-		daystrings = [str(Day(d)) for d in self.dates]
-		return "Dates<" + ''.join(daystrings) + ">"
+		daystrings = [d.isoformat() for d in self.dates]
+		return "Dates{" + ', '.join(daystrings) + "}"
 
 
 	def add(self, date):
