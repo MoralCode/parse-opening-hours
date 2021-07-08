@@ -23,7 +23,7 @@ class TestDates(unittest.TestCase):
 		test_str = "05/06/2021"
 		result = [datetime.date(2021, 5, 6)]
 		parsed = specific_dates.parseString(test_str)
-		self.assertEqual(list(Dates.from_parse_results(parsed).dates), result)
+		self.assertEqual(list(Dates.from_parse_results(parsed, assume_century=20).dates), result)
 
 
 # def test_single_day_from_parse_results(self):
