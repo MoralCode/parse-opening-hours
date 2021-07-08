@@ -75,10 +75,7 @@ class Dates():
 			raise NotImplementedError()
 
 	def __iter__(self):
-		return iter(self.sort())
-
-	def sort(self):
-		return sorted(self.dates)
+		return iter(self.dates)
 	
 	def __eq__(self, other):
 		if not isinstance(other, Dates):
