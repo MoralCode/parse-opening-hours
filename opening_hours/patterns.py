@@ -90,7 +90,7 @@ specific_date = Group(Or([
 	date_mdy,
 	]))
 	
-specific_dates = OneOrMore(specific_date + Optional(date_separator))
+specific_dates = OneOrMore(specific_date.setResultsName("date", listAllMatches=True) + Optional(date_separator))
 
 # TODO: use CaselessCloseMatch here once implemented to handle typos, particularly for the longer names
 day = Combine(Or([
