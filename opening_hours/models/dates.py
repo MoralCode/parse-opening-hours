@@ -1,5 +1,6 @@
 import logging, os
 from datetime import datetime, date as dt_date
+from opening_hours.helpers import month_str_to_int
 
 logger = logging.getLogger(__name__)
 
@@ -38,13 +39,15 @@ class Dates():
 			if isinstance(datevalues, list):
 				for date in datevalues:
 					year = int(date.get("year"))
+					month = date.get("month") or month_str_to_int(date.get("month_str"))
+					month = int(month)
 					if year < 1000 and assume_century:
 						year = (assume_century*100) + year
 
 					datesclass.add(
 						dt_date(
 							year=year,
-							month=int(date.get("month")),
+							month=month,
 							day=int(date.get("day"))
 						)
 					)
