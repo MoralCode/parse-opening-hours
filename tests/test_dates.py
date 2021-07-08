@@ -44,15 +44,21 @@ class TestDates(unittest.TestCase):
 		
 
 
-# def test_single_day_from_parse_results(self):
-# 		test_str = [
-# 			"05/06/2021",
-# 			"05/06/21",
-# 		]
-# 		result = [datetime.date(2021, 5, 6)]
-# 		for test in test_str:
-# 			parsed = specific_dates.parseString(test)
-# 			self.assertEqual(list(Dates.from_parse_results(parsed).dates), result)
+	def test_single_day_formats_from_parse_results(self):
+		test_str = [
+			"05/06/2021",
+			"05-06-2021",
+			"2021-05-06",
+			"May 6, 2021",
+			"May 6 2021",
+			"May 6th, 2021",
+			"May 6th 2021",
+		]
+		result = [datetime.date(2021, 5, 6)]
+		for test in test_str:
+			logger.debug(test)
+			parsed = specific_dates.parseString(test)
+			self.assertEqual(list(Dates.from_parse_results(parsed).dates), result)
 
 	# def test_allweek_shortcuts(self):
 	# 	# TODO: implement assumption of pm if end time <= start time
