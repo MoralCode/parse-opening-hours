@@ -28,6 +28,16 @@ class TestDates(unittest.TestCase):
 		result = [datetime.date(2021, 5, 6)]
 		parsed = specific_dates.parseString(test_str)
 		self.assertEqual(list(Dates.from_parse_results(parsed, assume_century=20).dates), result)
+	
+	def test_equals(self):
+		dat_1 = Dates()
+		self.assertEqual(Dates(), dat_1)
+		dt_date = datetime.date(2021,5,5)
+		dat_1.add(dt_date)
+		self.assertNotEqual(Dates(), dat_1)
+		with self.assertRaises(NotImplementedError):
+			Dates() == dt_date
+		
 
 
 # def test_single_day_from_parse_results(self):
