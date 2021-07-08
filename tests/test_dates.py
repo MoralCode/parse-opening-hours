@@ -7,6 +7,10 @@ import datetime
 
 class TestDates(unittest.TestCase):
 
+	def test_single_day_from_date(self):
+		result = [datetime.date(2021, 5, 6)]
+		self.assertEqual(list(Dates.from_date(result[0]).dates), result)
+
 	def test_single_day_from_parse_results(self):
 		test_str = "05/06/2021"
 		result = [datetime.date(2021, 5, 6)]
