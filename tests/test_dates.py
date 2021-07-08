@@ -17,7 +17,7 @@ class TestDates(unittest.TestCase):
 		test_str = "05/06/20, 05/07/2020"
 		result = [datetime.date(20, 5, 6), datetime.date(2020, 5, 7)]
 		parsed = specific_dates.parseString(test_str)
-		self.assertEqual(list(Dates.from_parse_results(parsed).dates), result)
+		self.assertEqual(Dates.from_parse_results(parsed).dates, set(result))
 
 	def test_cntury_assumption_from_parse_results(self):
 		test_str = "05/06/2021"
