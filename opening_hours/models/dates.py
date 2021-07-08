@@ -38,18 +38,17 @@ class Dates():
 		if "date" in result:
 			datevalues = result.asDict().get("date")
 			if isinstance(datevalues, list):
-				datevalues = [_dmy_dict_to_date(d) for d in datevalues]
 				# logger.debug(datevalues)
 				for date in datevalues:
-					year = int(dmy_dict.get("year"))
+					year = int(date.get("year"))
 					if year < 1000 and assume_century:
 						year = (assume_century*100) + year
 
 					datesclass.add(
 						dt_date(
 							year=year,
-							month=int(dmy_dict.get("month")),
-							day=int(dmy_dict.get("day"))
+							month=int(date.get("month")),
+							day=int(date.get("day"))
 						)
 					)
 
