@@ -85,9 +85,36 @@ year = Combine(
 
 date_mdy = month_num + ymd_separator + date_num + Optional(ymd_separator + year)
 
+def create_month_text_parser(month_short, month_rest, month_num):
+	secondhalf = Or([possibly_dots, CaselessLiteral(month_rest)]) if month_rest else empty
+	return Combine(
+			CaselessLiteral(month_short) + secondhalf
+		)#.setParseAction(replaceWith(month_num or 0)),
+
+
+month_words = Or([
+	create_month_text_parser("Jan", "uary", 1),
+	create_month_text_parser("Feb", "ruary", 2),
+	create_month_text_parser("Mar", "ch", 3),
+	create_month_text_parser("Apr", "il", 4),
+	create_month_text_parser("May", None, 5),
+	create_month_text_parser("Jun", "e", 6),
+	create_month_text_parser("Jul", "y", 7),
+	create_month_text_parser("Aug", "ust", 8),
+	create_month_text_parser("Sept", "ember", 9),
+	create_month_text_parser("Oct", "ober", 10),
+	create_month_text_parser("Nov", "ember", 11),
+	create_month_text_parser("Dec", "ember", 12)
+]).setResultsName("month_str")
+
+#December 25th, 20XX
+date_spelled = month_words + date_word_num + Optional(day_suffix) + year_word_separator + year
+
+
 specific_date = Group(Or([
 	pyparsing_common.iso8601_date,
 	date_mdy,
+	date_spelled
 	]))
 	
 specific_dates = OneOrMore(specific_date.setResultsName("date", listAllMatches=True) + Optional(date_separator))
