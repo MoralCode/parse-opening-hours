@@ -11,7 +11,7 @@ class Dates():
 	"""
 	dates = set({})
 	@classmethod
-	def from_datetime(cls, datetime):
+	def from_date(cls, datetime):
 		"""
 		create a Dates object from a datetime
 		"""
