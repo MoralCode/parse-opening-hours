@@ -85,10 +85,10 @@ year = Combine(
 
 date_mdy = month_num + ymd_separator + date_num + Optional(ymd_separator + year)
 
-specific_date = Or([
+specific_date = Group(Or([
 	pyparsing_common.iso8601_date,
 	date_mdy,
-	])
+	]))
 	
 specific_dates = OneOrMore(specific_date + Optional(date_separator))
 
