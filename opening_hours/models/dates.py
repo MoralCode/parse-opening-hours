@@ -21,7 +21,6 @@ class Dates():
 			
 	@classmethod
 	def from_parse_results(cls, result, assume_century=None):
-		logger.debug(vars(result))
 		if result is None:
 			raise TypeError("Cannot create Dates Object from value None")
 
@@ -38,7 +37,6 @@ class Dates():
 		if "date" in result:
 			datevalues = result.asDict().get("date")
 			if isinstance(datevalues, list):
-				# logger.debug(datevalues)
 				for date in datevalues:
 					year = int(date.get("year"))
 					if year < 1000 and assume_century:
