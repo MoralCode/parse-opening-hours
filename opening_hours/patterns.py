@@ -70,7 +70,7 @@ date_num = Combine(Or([
 ])).setParseAction(pyparsing_common.convertToInteger).setResultsName("day")
 
 # used for more natural language fayes "December 25th", "May 25"
-date_word_num = Combine(date_num + Optional(day_suffix)).setResultsName("day")
+date_word_num = Combine(date_num + Optional(day_suffix))
 
 year_alone = Word(nums, exact=2)
 
