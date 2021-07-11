@@ -38,10 +38,11 @@ class Dates():
 			datevalues = result.asDict().get("date")
 			if isinstance(datevalues, list):
 				for date in datevalues:
-					year = int(date.get("year"))
+					year = date.get("year")
+					year = int(year) if year else None
 					month = date.get("month") or month_str_to_int(date.get("month_str"))
 					month = int(month)
-					if year < 1000 and assume_century:
+					if year and year < 1000 and assume_century:
 						year = (assume_century*100) + year
 
 					datesclass.add(
