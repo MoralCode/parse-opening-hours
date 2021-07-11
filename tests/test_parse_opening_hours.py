@@ -412,6 +412,25 @@ class TestHoursParsing(unittest.TestCase):
 			notestest
 		)
 
+	def test_single_date(self):
+		# TODO: implement assumption of pm if end time <= start time
+		input_strings = [
+			"Monday 9:00 - 5:00",
+			"Mon 9:00 - 5:00",
+			"M 9:00 - 5:00",
+			"Monday 9:00-5:00",
+			"Mon 9:00-5:00",
+			"M 9:00-5:00",
+			"Monday 9 - 5",
+			"Mon 9 - 5",
+			"M 9 - 5",
+			"Monday 9-5",
+			"Mon 9-5",
+			"M 9-5"
+		]
+		expected_result = [ self.mon_9_to_5 ]
+		self.run_tests(input_strings,expected_result, assume_type=TimeType.AM)
+
 	def run_tests(self, input_strings, expected_result, **kwargs):
 		for input_str in input_strings:
 			logger.debug("Testing String: " + input_str)
