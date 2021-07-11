@@ -47,7 +47,7 @@ class OpeningHours():
 			logger.debug(p)
 
 		openhours = [] 
-		hrs = opening_hours_format.parseString(hours_string)
+		hrs = opening_hours_format.parseString(hours_string).asDict()
 		hrs = hrs.get("opening_hours")
 		
 		for hr in hrs:
