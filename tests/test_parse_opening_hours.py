@@ -439,6 +439,7 @@ class TestHoursParsing(unittest.TestCase):
 		}
 		input_strings = [
 			"Monday 9:00 - 5:00, Wednesday 10:00 - 14:00",
+			"Monday: 9:00 - 5:00; Wednesday: 10:00 - 14:00",
 			# "Monday and Wednesday 9:00 - 5:00",
 			# "Monday, Wednesday 9:00 - 5:00",
 			# "Monday/Wednesday 9:00 - 5:00",
