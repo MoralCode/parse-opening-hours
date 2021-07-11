@@ -24,9 +24,6 @@ class Dates():
 		if result is None:
 			raise TypeError("Cannot create Dates Object from value None")
 
-		def _dmy_dict_to_date(dmy_dict):
-			return 
-
 		dates = None
 
 		datesclass = cls()
