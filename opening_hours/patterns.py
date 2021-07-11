@@ -41,7 +41,10 @@ possibly_dots = Optional(Char(".")).suppress()
 
 
 #TODO: support multiple sections like M 8am-2pm, W 9am-2pm
-section_separator = Optional(",")
+section_separator = Optional(Or([
+	",",
+	";"
+]))
 year_word_separator = Optional(",")
 date_separator = Optional(",")
 time_separator = Optional(":")
