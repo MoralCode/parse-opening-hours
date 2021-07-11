@@ -60,6 +60,24 @@ class TestDates(unittest.TestCase):
 			parsed = specific_dates.parseString(test)
 			self.assertEqual(list(Dates.from_parse_results(parsed).dates), result)
 
+	def test_single_day_assume_year(self):
+		test_str = [
+			"May 6th",
+		]
+		result = [datetime.date(2021, 5, 6)]
+		for test in test_str:
+			logger.debug(test)
+			parsed = specific_dates.parseString(test)
+			self.assertEqual(list(Dates.from_parse_results(parsed, assume_year=2021).dates), result)
+	
+	def test_single_day_assume_year_empty(self):
+	
+		result = [datetime.date(2021, 5, 6)]
+		
+		parsed = specific_dates.parseString("May 6th")
+		with self.assertRaises(TypeError):
+			Dates.from_parse_results(parsed)
+
 	# def test_allweek_shortcuts(self):
 	# 	# TODO: implement assumption of pm if end time <= start time
 	# 	input_strings = [
