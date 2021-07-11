@@ -11,10 +11,7 @@
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 from opening_hours.patterns import *
-from opening_hours.models.day import Day, DaysEnum
-from opening_hours.models.days import Days
-from opening_hours.models.time import Time, TimeType
-from opening_hours.models.times import Times
+from opening_hours.models.openinghour import OpeningHour
 from opening_hours.helpers import normalize_string
 import os
 import logging
@@ -49,8 +46,14 @@ class OpeningHours():
 		for p in pattern.scanString(hours_string):
 			logger.debug(p)
 
-
-		return cls(opening_hours_format.parseString(hours_string), assume_type=assume_type)
+		openhours = [] 
+		hrs = opening_hours_format.parseString(hours_string)
+		hrs = hrs.get("opening_hours")
+		
+		for hr in hrs:
+			openhours.append(OpeningHour.from_parse_results(hr))
+		logger.debug(openhours)
+		return cls(openhours, assume_type=assume_type)
 
 	
 	def __init__(self, openinghours, assume_type=None):
@@ -65,9 +68,9 @@ class OpeningHours():
 			return default
 
 		# TODO: move parse days and parse times out of the json() function
-		days = Days.from_parse_results(self.openinghours)
+		days = self.openinghours.days
 		
-		times = Times.from_parse_results(self.openinghours, assume_type=assume_type or self.assume_type)
+		times = self.openinghours.times
 		
 
 		for day in days:
