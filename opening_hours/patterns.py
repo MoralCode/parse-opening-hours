@@ -12,6 +12,8 @@ useless_optional_prefixes = Optional(Or([
 	CaselessLiteral("Open")
 ])).suppress()
 
+hyphens = Char("–—‐-\u2013")
+
 words_for_range = Or([
 	caselessWord("to"),
 	caselessWord("thru"),
@@ -20,7 +22,7 @@ words_for_range = Or([
 	caselessWord("'til")
 ])
 word_range_separators = Optional(space) + words_for_range + Optional(space)
-range_separator = Or([Char("–—‐-\u2013"), word_range_separators])#.suppress()
+range_separator = Or([hyphens, word_range_separators])#.suppress()
 
 word_list_separators = Optional(space) + oneOf("and") + Optional(space)
 list_separator = Or([Char(",+/&"), word_list_separators])
@@ -39,8 +41,86 @@ possibly_dots = Optional(Char(".")).suppress()
 
 
 #TODO: support multiple sections like M 8am-2pm, W 9am-2pm
-section_separator = Optional(",")
+section_separator = Optional(Or([
+	",",
+	";"
+]))
+year_word_separator = Optional(",")
+date_separator = Optional(",")
 time_separator = Optional(":")
+
+ymd_separator = Or([Char("/"), hyphens]).suppress()
+
+nonzero_num = Char("123456789")
+
+day_suffix = Or([
+	CaselessLiteral("rd"),
+	CaselessLiteral("st"),
+	CaselessLiteral("nd"),
+	CaselessLiteral("th"),
+]).suppress()
+month_num = Combine(Or([
+	"0" + nonzero_num,
+	"1" + Char("012"),
+	nonzero_num
+])).setParseAction(pyparsing_common.convertToInteger).setResultsName("month")#, listAllMatches=True)
+
+# used for number-only dates such as in MM/DD/YYYY
+date_num = Combine(Or([
+	Char("012") + Char(nums),
+	"3" + Char("01"),
+	nonzero_num
+])).setParseAction(pyparsing_common.convertToInteger).setResultsName("day")
+
+# used for more natural language fayes "December 25th", "May 25"
+date_word_num = Combine(date_num + Optional(day_suffix))
+
+year_alone = Word(nums, exact=2)
+
+# Keep years limited to 1900-2099 as its unlikely to be needed and easy enough to change
+century = Or(["19", "20"])#.setParseAction(pyparsing_common.convertToInteger)
+
+year = Combine(
+	MatchFirst([
+		century + year_alone,
+		year_alone
+	])).setParseAction(pyparsing_common.convertToInteger).setResultsName("year")
+
+date_mdy = month_num + ymd_separator + date_num + Optional(ymd_separator + year)
+
+def create_month_text_parser(month_short, month_rest, month_num):
+	secondhalf = Or([possibly_dots, CaselessLiteral(month_rest)]) if month_rest else empty
+	return Combine(
+			CaselessLiteral(month_short) + secondhalf
+		)#.setParseAction(replaceWith(month_num or 0)),
+
+
+month_words = Or([
+	create_month_text_parser("Jan", "uary", 1),
+	create_month_text_parser("Feb", "ruary", 2),
+	create_month_text_parser("Mar", "ch", 3),
+	create_month_text_parser("Apr", "il", 4),
+	create_month_text_parser("May", None, 5),
+	create_month_text_parser("Jun", "e", 6),
+	create_month_text_parser("Jul", "y", 7),
+	create_month_text_parser("Aug", "ust", 8),
+	create_month_text_parser("Sept", "ember", 9),
+	create_month_text_parser("Oct", "ober", 10),
+	create_month_text_parser("Nov", "ember", 11),
+	create_month_text_parser("Dec", "ember", 12)
+]).setResultsName("month_str")
+
+#December 25th, 20XX
+date_spelled = month_words + date_word_num + Optional(day_suffix) + Optional(year_word_separator + year)
+
+
+specific_date = Group(Or([
+	pyparsing_common.iso8601_date,
+	date_mdy,
+	date_spelled
+	]))
+	
+specific_dates = OneOrMore(specific_date.setResultsName("date", listAllMatches=True) + Optional(date_separator))
 
 # TODO: use CaselessCloseMatch here once implemented to handle typos, particularly for the longer names
 day = Combine(Or([
@@ -158,10 +238,13 @@ time = Group(Or([clocktime, time_shortcuts]))
 
 timerange = time.setResultsName('starttime', listAllMatches=True) + Optional(range_separator + time.setResultsName('endtime', listAllMatches=True))
 
-opening_hours_format = Or([
-	useless_optional_prefixes + OneOrMore(Optional(dates) + day_time_separators + timerange),
-	useless_optional_prefixes + OneOrMore(timerange + dates)
-])	
+
+opening_hour = Or([
+	Optional(dates) + day_time_separators + timerange,
+	timerange + dates
+])
+
+opening_hours_format = useless_optional_prefixes + OneOrMore(Group(opening_hour).setResultsName('opening_hours', listAllMatches=True) + section_separator)
 
 note = Optional(Group(OneOrMore(caselessWord(alphas + " "), stopOn=opening_hours_format)).setResultsName('note', listAllMatches=True))
 

@@ -35,7 +35,7 @@ class Times():
 		This is primarily for internal use and is helpful when combined with the parse() functions of this or other objects.
 		"""
 		# assumes that all three (hours, minutes, am_pm) are the same length
-		res_dct = result.asDict()
+		res_dct = result
 		logger.debug(res_dct)
 		if "starttime" in res_dct and "endtime" in res_dct: 
 			logger.info("time range detected")
@@ -61,7 +61,7 @@ class Times():
 			return cls.from_shortcut_string(result.get("time_shortcuts")[0])
 		else:
 			logger.info("unspecified time pattern detected")
-			logger.debug(vars(result))
+			logger.debug(result)
 			# nothing specified, assumeit means every day
 			return cls(Time(0, 0, TimeType.AM), Time(11, 59, TimeType.PM))
 

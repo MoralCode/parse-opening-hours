@@ -253,6 +253,8 @@ class TestHoursParsing(unittest.TestCase):
 			"Mon. Tues. Wed. 9:00 - 5:00",
 			"Monday through Wednesday 9:00 - 5:00",
 			"Monday to Wednesday 9:00 - 5:00",
+			"Monday-Wednesday 9:00 - 5:00",
+			"Monday-Wednesday9:00-5:00",
 			"Monday \u2013 Wednesday 9:00 - 5:00",
 			"9 am to 5:00 pm Mondays through Wednesdays",
 			"09:00AM-05:00PM Mon-Wed"
@@ -409,6 +411,43 @@ class TestHoursParsing(unittest.TestCase):
 			create_entry("monday", "9:00", "17:00", notes="hi"),
 			notestest
 		)
+
+	def test_single_date(self):
+		# TODO: implement assumption of pm if end time <= start time
+		input_strings = [
+			"Monday 9:00 - 5:00",
+			"Mon 9:00 - 5:00",
+			"M 9:00 - 5:00",
+			"Monday 9:00-5:00",
+			"Mon 9:00-5:00",
+			"M 9:00-5:00",
+			"Monday 9 - 5",
+			"Mon 9 - 5",
+			"M 9 - 5",
+			"Monday 9-5",
+			"Mon 9-5",
+			"M 9-5"
+		]
+		expected_result = [ self.mon_9_to_5 ]
+		self.run_tests(input_strings,expected_result, assume_type=TimeType.AM)
+
+	def test_multiple_hours_list(self):
+		wed_10_to_2 = {
+			"day": "wednesday",
+			"opens": "10:00",
+			"closes": "14:00"
+		}
+		input_strings = [
+			"Monday 9:00 - 5:00, Wednesday 10:00 - 14:00",
+			"Monday: 9:00 - 5:00; Wednesday: 10:00 - 14:00",
+			# "Monday and Wednesday 9:00 - 5:00",
+			# "Monday, Wednesday 9:00 - 5:00",
+			# "Monday/Wednesday 9:00 - 5:00",
+			# "Monday+Wednesday 9:00 - 5:00",
+			# "Monday & Wednesday 9:00 - 5:00",
+		]
+		expected_result = [ self.mon_9_to_5, wed_10_to_2 ]
+		self.run_tests(input_strings, expected_result, assume_type=TimeType.AM)
 
 	def run_tests(self, input_strings, expected_result, **kwargs):
 		for input_str in input_strings:

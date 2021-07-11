@@ -11,10 +11,7 @@
 
 from pyparsing import Word, alphas, nums, oneOf, Optional, Or, OneOrMore, Char
 from opening_hours.patterns import *
-from opening_hours.models.day import Day, DaysEnum
-from opening_hours.models.days import Days
-from opening_hours.models.time import Time, TimeType
-from opening_hours.models.times import Times
+from opening_hours.models.openinghour import OpeningHour
 from opening_hours.helpers import normalize_string
 import os
 import logging
@@ -49,8 +46,14 @@ class OpeningHours():
 		for p in pattern.scanString(hours_string):
 			logger.debug(p)
 
-
-		return cls(opening_hours_format.parseString(hours_string), assume_type=assume_type)
+		openhours = [] 
+		hrs = opening_hours_format.parseString(hours_string).asDict()
+		hrs = hrs.get("opening_hours")
+		
+		for hr in hrs:
+			openhours.append(OpeningHour.from_parse_results(hr, assume_type=assume_type))
+		logger.debug(openhours)
+		return cls(openhours, assume_type=assume_type)
 
 	
 	def __init__(self, openinghours, assume_type=None):
@@ -63,22 +66,20 @@ class OpeningHours():
 
 		if not self.openinghours:
 			return default
-
+		
 		# TODO: move parse days and parse times out of the json() function
-		days = Days.from_parse_results(self.openinghours)
-		
-		times = Times.from_parse_results(self.openinghours, assume_type=assume_type or self.assume_type)
-		
-
-		for day in days:
-			opening_hours_json.append(
-				create_entry(
-					str(day),
-					str(times.get_start_time().get_as_military_time()),
-					str(times.get_end_time().get_as_military_time())
+		logger.debug("converting to json")
+		for openinghour in self.openinghours:
+			days = openinghour.days
+			times = openinghour.times
+			for day in days:
+				opening_hours_json.append(
+					create_entry(
+						str(day),
+						str(times.get_start_time().get_as_military_time()),
+						str(times.get_end_time().get_as_military_time())
+					)
 				)
-			)
-
 		return opening_hours_json
 
 	# TODO: normalize function to return the opening hours string as a string in a consistent, predictable format
