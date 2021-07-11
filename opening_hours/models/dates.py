@@ -20,7 +20,7 @@ class Dates():
 		return result
 			
 	@classmethod
-	def from_parse_results(cls, result, assume_century=None):
+	def from_parse_results(cls, result, assume_century=None, assume_year=None):
 		if result is None:
 			raise TypeError("Cannot create Dates Object from value None")
 
@@ -39,11 +39,13 @@ class Dates():
 			if isinstance(datevalues, list):
 				for date in datevalues:
 					year = date.get("year")
-					year = int(year) if year else None
+					year = int(year) if year else assume_year
 					month = date.get("month") or month_str_to_int(date.get("month_str"))
 					month = int(month)
 					if year and year < 1000 and assume_century:
 						year = (assume_century*100) + year
+					elif not year:
+						raise TypeError("Year could not be parsed from date and one was not provided in the assume_year parameter")
 
 					datesclass.add(
 						dt_date(
