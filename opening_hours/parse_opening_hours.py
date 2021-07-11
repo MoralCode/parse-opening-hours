@@ -51,7 +51,7 @@ class OpeningHours():
 		hrs = hrs.get("opening_hours")
 		
 		for hr in hrs:
-			openhours.append(OpeningHour.from_parse_results(hr))
+			openhours.append(OpeningHour.from_parse_results(hr, assume_type=assume_type))
 		logger.debug(openhours)
 		return cls(openhours, assume_type=assume_type)
 
