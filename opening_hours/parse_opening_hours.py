@@ -66,22 +66,20 @@ class OpeningHours():
 
 		if not self.openinghours:
 			return default
-
+		
 		# TODO: move parse days and parse times out of the json() function
-		days = self.openinghours.days
-		
-		times = self.openinghours.times
-		
-
-		for day in days:
-			opening_hours_json.append(
-				create_entry(
-					str(day),
-					str(times.get_start_time().get_as_military_time()),
-					str(times.get_end_time().get_as_military_time())
+		logger.debug("converting to json")
+		for openinghour in self.openinghours:
+			days = openinghour.days
+			times = openinghour.times
+			for day in days:
+				opening_hours_json.append(
+					create_entry(
+						str(day),
+						str(times.get_start_time().get_as_military_time()),
+						str(times.get_end_time().get_as_military_time())
+					)
 				)
-			)
-
 		return opening_hours_json
 
 	# TODO: normalize function to return the opening hours string as a string in a consistent, predictable format
