@@ -432,7 +432,7 @@ class TestHoursParsing(unittest.TestCase):
 		self.run_tests(input_strings,expected_result, assume_type=TimeType.AM)
 
 	def test_multiple_hours_list(self):
-		wed_10_to_2 = wed_9_to_5 = {
+		wed_10_to_2 = {
 			"day": "wednesday",
 			"opens": "10:00",
 			"closes": "14:00"
@@ -445,7 +445,7 @@ class TestHoursParsing(unittest.TestCase):
 			# "Monday+Wednesday 9:00 - 5:00",
 			# "Monday & Wednesday 9:00 - 5:00",
 		]
-		expected_result = [ self.mon_9_to_5, self.wed_9_to_5 ]
+		expected_result = [ self.mon_9_to_5, wed_10_to_2 ]
 		self.run_tests(input_strings, expected_result, assume_type=TimeType.AM)
 
 	def run_tests(self, input_strings, expected_result, **kwargs):
