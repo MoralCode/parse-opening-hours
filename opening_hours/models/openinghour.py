@@ -26,11 +26,11 @@ class OpeningHour():
 	def from_parse_results(cls, parse_results, assume_type=None):
 		days = Days.from_parse_results(parse_results)
 
-		days = Dates.from_parse_results(parse_results)
+		dates = Dates.from_parse_results(parse_results)
 		
 		times = Times.from_parse_results(parse_results, assume_type=assume_type)
 
-		return cls(days, times)
+		return cls(days, dates, times)
 
 
 	def __init__(self, days, dates, times):
