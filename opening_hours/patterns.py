@@ -108,7 +108,7 @@ month_words = Or([
 ]).setResultsName("month_str")
 
 #December 25th, 20XX
-date_spelled = month_words + date_word_num + Optional(day_suffix) + year_word_separator + year
+date_spelled = month_words + date_word_num + Optional(day_suffix) + Optional(year_word_separator + year)
 
 
 specific_date = Group(Or([
