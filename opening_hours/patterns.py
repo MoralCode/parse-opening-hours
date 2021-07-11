@@ -238,10 +238,13 @@ time = Group(Or([clocktime, time_shortcuts]))
 
 timerange = time.setResultsName('starttime', listAllMatches=True) + Optional(range_separator + time.setResultsName('endtime', listAllMatches=True))
 
-opening_hours_format = useless_optional_prefixes + OneOrMore(Or([
+
+opening_hour = Or([
 	Optional(dates) + day_time_separators + timerange,
 	timerange + dates
-]) + section_separator)
+])
+
+opening_hours_format = useless_optional_prefixes + OneOrMore(Group(opening_hour).setResultsName('opening_hours', listAllMatches=True) + section_separator)
 
 note = Optional(Group(OneOrMore(caselessWord(alphas + " "), stopOn=opening_hours_format)).setResultsName('note', listAllMatches=True))
 
