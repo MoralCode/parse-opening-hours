@@ -53,38 +53,37 @@ class TestDays(unittest.TestCase):
 		with self.assertRaises(ValueError):
 			Days.from_shortcut_string("cheeseburger")
 	
-	# def test_from_parse_regular(self):
-	# 	test_dict = {
-	# 		"hour": 5,
-	# 		"minute": 0,
-	# 		"am_pm": "PM"
-	# 	}
-	# 	test_days_dict = Time.from_parse_results(test_dict)
-	# 	self.assertEqual(
-	# 		test_time_dict.hours,
-	# 		5
-	# 	)
-	# 	self.assertEqual(test_time_dict.minutes, 0)
+	def test_from_parse_regular(self):
+		test_dict = {
+			"day": ["Monday"]
+		}
+		test_days = Days.from_parse_results(test_dict)
+		self.assertEqual(test_days.days, set(self.to_enum_list(Days(DaysEnum.MONDAY, DaysEnum.MONDAY))))
 
-	# 	self.assertTrue(test_time_dict.is_pm())
+	def test_from_parse_range(self):
+		test_dict = {
+			"startday": ["Monday"],
+			"endday": ["Friday"],
+
+		}
+		test_days = Days.from_parse_results(test_dict)
+		self.assertEqual(test_days.days, set(self.to_enum_list(self.workweek)))
 	
-	# def test_from_parse_shortcut(self):
-	# 	test_dict = {
-	# 		"time_shortcuts": "noon"
-	# 	}
-	# 	test_days_dict = Days.from_parse_results(test_dict)
-	# 	self.assertEqual(
-	# 		test_days_dict.hours,
-	# 		12
-	# 	)
-	# 	self.assertEqual(test_days_dict.minutes, 0)
+	def test_from_parse_shortcut(self):
+		test_dict = {
+			"day_shortcuts": ["Weekdays"]
+		}
+		test_days = Days.from_parse_results(test_dict)
+		self.assertEqual(test_days.days, set(self.to_enum_list(self.workweek)))
 
-	# def test_from_parse_unknown(self):
-	# 	test_dict = {
-	# 		"unknown": "dont care"
-	# 	}
-	# 	with self.assertRaises(ValueError):
-	# 		Days.from_parse_results(test_dict)
+	def test_from_parse_unknown(self):
+		test_dict = {
+			"unknown": "dont care"
+		}
+		ds_obj = Days.from_parse_results(test_dict)
+		self.assertEqual(ds_obj.days, set(self.to_enum_list(self.fullweek)))
+		# with self.assertRaises(ValueError):
+		# 	Days.from_parse_results(test_dict)
 
 	def test_workweek(self):
 		input_strings = [
@@ -118,6 +117,8 @@ class TestDays(unittest.TestCase):
 		for input_str in input_strings:
 			print("Testing String: '", input_str)
 			self.assertEqual(list(Days.from_shortcut_string(input_str, **kwargs)), expected_result)
-
+			
+	def to_enum_list(self, lis):
+		return [d.as_enum() for d in lis]
 if __name__ == '__main__':
 	unittest.main()
