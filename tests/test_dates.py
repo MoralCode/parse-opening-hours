@@ -21,6 +21,10 @@ class TestDates(unittest.TestCase):
 		parsed = specific_dates.parseString(test_str)
 		self.assertEqual(list(Dates.from_parse_results(parsed).dates), result)
 
+	def test_none_from_parse_results(self):
+		with self.assertRaises(TypeError):
+			Dates.from_parse_results(None)
+
 	def test_multi_day_from_parse_results(self):
 		test_str = "05/06/20, 05/07/2020"
 		result = [datetime.date(20, 5, 6), datetime.date(2020, 5, 7)]
