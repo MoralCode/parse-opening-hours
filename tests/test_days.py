@@ -27,6 +27,7 @@ class TestDays(unittest.TestCase):
 			"7 days a week",
 			"7 days",
 			"Every Day",
+			"Everyday",
 			"",# no date present, just a time -> assume all week
 			"daily",
 			"24/7",
