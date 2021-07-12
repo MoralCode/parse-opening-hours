@@ -52,8 +52,6 @@ class Dates():
 						)
 					)
 
-			elif isinstance(datevalues, str):
-				datesclass.add(datevalues)
 		
 		return datesclass
 
