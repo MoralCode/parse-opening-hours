@@ -32,7 +32,7 @@ class TestDates(unittest.TestCase):
 		self.assertEqual(Dates.from_parse_results(parsed).dates, set(result))
 
 	def test_century_assumption_from_parse_results(self):
-		test_str = "05/06/2021"
+		test_str = "05/06/21"
 		result = [datetime.date(2021, 5, 6)]
 		parsed = specific_dates.parseString(test_str)
 		self.assertEqual(list(Dates.from_parse_results(parsed, assume_century=20).dates), result)
