@@ -82,6 +82,17 @@ class TestDates(unittest.TestCase):
 		with self.assertRaises(TypeError):
 			Dates.from_parse_results(parsed)
 
+	def test_add(self):
+		dt_testdate = datetime.date(2021, 5, 6)
+		result = []
+		
+		ts = Dates()
+		ts.add(dt_testdate)
+		self.assertEqual(ts.dates, set({dt_testdate}))
+
+		with self.assertRaises(NotImplementedError):
+			ts.add("not a date")
+
 	# def test_allweek_shortcuts(self):
 	# 	# TODO: implement assumption of pm if end time <= start time
 	# 	input_strings = [
