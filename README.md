@@ -68,3 +68,11 @@ To show the coverage report: `pipenv run coverage report`
 
 To generate an HTML coverage report: `pipenv run coverage html`
 
+### Stress Test
+This library has also been tested with an extensive sample of real-world opening hours data from real COVID vaccine locations.
+
+This test can be found at https://github.com/MoralCode/stresstest-opening-hours
+
+This is more of a benchmark towards the goal of getting as much coverage as reasonable of the GISCORPS dataset (or at least the sample thats there). This also helps provide a bit of a roadmap for what to parse next since the script prints out all the cases it couldnt parse, allowing patterns to be found to support large chunks of the data at once.
+
+If you have other datasets you want this parser to support/be tested against, feel free to submit them to that repository.
